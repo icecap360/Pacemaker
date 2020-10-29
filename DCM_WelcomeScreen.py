@@ -1,5 +1,6 @@
 from tkinter import *
 
+
 userDatabase=[]
 #functions to Login and Create newUser
 def checkLogin():
@@ -26,7 +27,7 @@ def createNewUser():
         return
     else:
         userDatabase.append((userNew.get(),passwordNew.get()))
-        createUserStatus= Label(welcomeScreen, text="Use Created")
+        createUserStatus= Label(welcomeScreen, text="User Created")
         createUserStatus.grid(row= 8, column= 2)
         return
 
