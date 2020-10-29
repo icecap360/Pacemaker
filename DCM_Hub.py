@@ -58,4 +58,6 @@ VVILink.grid(row=5, column=0)
 
 SettingsLink.grid(row=6, column=0, pady= 20)
 
+PaceNowLink.grid(row= 2, column= 2)
+
 mainloop()
