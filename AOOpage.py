@@ -50,7 +50,12 @@ AOOpage.title("AOO Pacing Mode")
 AOOpage.geometry("500x500")
 
 # Create Labels
-AOOpageLabel= Label(AOOpage, text="AOO Pacing Mode", font=(None,50,'underline'))
+AOOpageLabel= Label(AOOpage, text="AOO Pacing Mode", font=(None,20,'underline'))
+
+LowRL_L = Label(AOOpage, text = "Lower Rate Limit", font =(None,12))
+UpRL_L = Label(AOOpage, text = "Upper Rate Limit", font =(None,12))
+AtrialAmp_L = Label(AOOpage, text = "Atrial Amplitude", font =(None,12))
+AtrialPW_L = Label(AOOpage, text = "Atrial Pulse Width", font =(None,12))
 
 # Create Entries
 LowRL_E = Entry(AOOpage, width=20)
@@ -72,18 +77,23 @@ AtrialAmp_B = Button(AOOpage, text="Update", command=changeLowRL)
 AtrialPW_B = Button(AOOpage, text="Update", command=changeLowRL)
 
 # Organize objects
-AOOpageLabel.grid=(row= 0, column= 1)
+AOOpageLabel.grid(row= 1, column= 1)
 
-LowRL_E.grid=(row= 0, column= 0)
-LowRL_B.grid=(row= 0, column= 0)
+LowRL_L.grid(row= 2, column= 0)
+LowRL_E.grid(row= 2, column= 1)
+LowRL_B.grid(row= 2, column= 2)
 
-UpRL_E.grid=(row= 0, column= 0)
-UpRL_B.grid=(row= 0, column= 0)
+UpRL_L.grid(row= 3, column= 0)
+UpRL_E.grid(row= 3, column= 1)
+UpRL_B.grid(row= 3, column= 2)
 
-AtrialAmp_E.grid=(row= 0, column= 0)
-AtrialAmp_B.grid=(row= 0, column= 0)
+AtrialAmp_L.grid(row= 4, column= 0)
+AtrialAmp_E.grid(row= 4, column= 1)
+AtrialAmp_B.grid(row= 4, column= 2)
 
-AtrialPW_E.grid=(row= 0, column= 0)
-AtrialPW_B.grid=(row= 0, column= 0)
+AtrialPW_L.grid(row= 5, column= 0)
+AtrialPW_E.grid(row= 5, column= 1)
+AtrialPW_B.grid(row= 5, column= 2)
 
 mainloop()
+
