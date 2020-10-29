@@ -47,4 +47,3 @@ Logo.grid(row=4, column=0)
 
 
 mainloop()
-
