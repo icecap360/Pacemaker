@@ -1,4 +1,4 @@
-#VII Pacing
+#VVI Pacing
 from tkinter import *
 
 # Variables needed
@@ -12,13 +12,13 @@ VRP = 320
 Hyst = 0
 RateSmo = 3
 
-# Create VII Page
+# Create VVI Page
 VIIpage = Tk()
-VIIpage.title("VII Pacing Mode")
+VIIpage.title("VVI Pacing Mode")
 VIIpage.geometry("800x400")
 
 # Create Labels
-VIIpageLabel= Label(VIIpage, text="VII Pacing Mode", font=(None,20,'underline'))
+VIIpageLabel= Label(VIIpage, text="VVI Pacing Mode", font=(None,20,'underline'))
 
 LowRL_L = Label(VIIpage, text = "Lower Rate Limit (ppm)", font =(None,12))
 UpRL_L = Label(VIIpage, text = "Upper Rate Limit (ppm)", font =(None,12))
