@@ -1,4 +1,4 @@
-#AII Pacing
+#AAI Pacing
 from tkinter import *
 
 # Variables needed
@@ -13,13 +13,13 @@ PVARP = 250
 Hyst = 0
 RateSmo = 3
 
-# Create AII Page
+# Create AAI Page
 AIIpage = Tk()
-AIIpage.title("AII Pacing Mode")
+AIIpage.title("AAI Pacing Mode")
 AIIpage.geometry("800x400")
 
 # Create Labels
-AIIpageLabel= Label(AIIpage, text="AII Pacing Mode", font=(None,20,'underline'))
+AIIpageLabel= Label(AIIpage, text="AAI Pacing Mode", font=(None,20,'underline'))
 
 LowRL_L = Label(AIIpage, text = "Lower Rate Limit (ppm)", font =(None,12))
 UpRL_L = Label(AIIpage, text = "Upper Rate Limit (ppm)", font =(None,12))
