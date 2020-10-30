@@ -7,7 +7,7 @@ UpRL = 120
 VentAmp = 2.5
 VentPW = 0.6
 
-# Create AOO Page
+# Create VOO Page
 VOOpage = Tk()
 VOOpage.title("VOO Pacing Mode")
 VOOpage.geometry("800x400")
