@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import ImageTk, Image
+import DCM_WelcomeScreen
 
 def openSettings():
     #Functions
@@ -46,6 +47,8 @@ def openSettings():
 
     Logo.grid(row=4, column=0)
 
+ #Statues Bar
+    statusLabel= Label(settingsScreen, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
+    statusLabel.grid(row=7,columnspan=3)
 
     mainloop()
-
