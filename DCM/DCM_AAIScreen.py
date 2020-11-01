@@ -1,5 +1,6 @@
 #AII Pacing
 from tkinter import *
+import DCM_WelcomeScreen
 
 def openAAI():
     # Variables needed
@@ -202,5 +203,8 @@ def openAAI():
     Hyst_V.grid(row= 10, column= 1)
     Hyst_B.grid(row= 10, column= 2)
 
+    #Statues Bar
+    statusLabel= Label(AIIpage, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
+    statusLabel.grid(row=10,columnspan=3)
 
     mainloop()

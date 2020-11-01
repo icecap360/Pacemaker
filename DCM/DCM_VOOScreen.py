@@ -1,5 +1,6 @@
 #VOO Pacing
 from tkinter import *
+import DCM_WelcomeScreen
 
 def openVOO():
     # Variables needed
@@ -98,5 +99,9 @@ def openVOO():
     VentPW_V.grid(row= 5, column= 1)
     VentPW_E.grid(row= 5, column= 2)
     VentPW_B.grid(row= 5, column= 3)
+
+    #Statues Bar
+    statusLabel= Label(VOOpage, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
+    statusLabel.grid(row=7,columnspan=3)
 
     mainloop()

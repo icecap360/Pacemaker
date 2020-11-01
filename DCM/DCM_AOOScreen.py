@@ -1,5 +1,6 @@
 #AOO Pacing
 from tkinter import *
+import DCM_WelcomeScreen
 
 def openAOO():
     # Variables needed
@@ -98,5 +99,9 @@ def openAOO():
     AtrialPW_V.grid(row= 5, column= 1)
     AtrialPW_E.grid(row= 5, column= 2)
     AtrialPW_B.grid(row= 5, column= 3)
+
+    #Statues Bar
+    statusLabel= Label(AOOpage, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
+    statusLabel.grid(row=7,columnspan=3)
 
     mainloop()

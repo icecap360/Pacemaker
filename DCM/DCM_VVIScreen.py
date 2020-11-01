@@ -1,5 +1,6 @@
 #VVI Pacing
 from tkinter import *
+import DCM_WelcomeScreen
 
 def openVVI():
     # Variables needed
@@ -183,5 +184,8 @@ def openVVI():
     Hyst_V.grid(row= 9, column= 1)
     Hyst_B.grid(row= 9, column= 2)
 
+    #Statues Bar
+    statusLabel= Label(VIIpage, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
+    statusLabel.grid(row=10,columnspan=3)
 
     mainloop()
