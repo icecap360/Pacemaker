@@ -90,7 +90,7 @@ def changeUpRL():
     except:
         UpRL_V.config(text = "Invalid Value")
     
-def changeAtrialAmp():
+def changeAtrAmp():
     try:
         #check variable range
         AtrialAmp = float(AtrialAmp_E.get())
@@ -107,7 +107,7 @@ def changeAtrialAmp():
     except:
         AtrialAmp_V.config(text = "Invalid Value")
     
-def changeAtrialPW():
+def changeAtrPW():
     try:
         #check variable range
         AtrialPW = float(AtrialPW_E.get())
@@ -140,8 +140,8 @@ AtrialPW_E.insert(0, "Enter New Value")
 # Create Buttons
 LowRL_B = Button(AOOpage, text="Update", command=changeLowRL)
 UpRL_B = Button(AOOpage, text="Update", command=changeUpRL)
-AtrialAmp_B = Button(AOOpage, text="Update", command=changeAtrialAmp)
-AtrialPW_B = Button(AOOpage, text="Update", command=changeAtrialPW)
+AtrialAmp_B = Button(AOOpage, text="Update", command=changeAtrAmp)
+AtrialPW_B = Button(AOOpage, text="Update", command=changeAtrPW)
 
 # Organize objects
 AOOpageLabel.grid(row= 1, column= 1)
