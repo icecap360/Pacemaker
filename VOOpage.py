@@ -2,10 +2,37 @@
 from tkinter import *
 
 # Variables needed
-LowRL = 60
-UpRL = 120
-VentAmp = 2.5
-VentPW = 0.6
+LowRL_F = open("LowRL.txt", "r")
+try:
+    LowRL = LowRL_F.readline()
+except:
+    LowRL = 60 #Default value
+finally:
+    LowRL_F.close()
+    
+UpRL_F = open("UpRL.txt", "r")
+try:
+    UpRL = UpRL_F.readline()
+except:
+    UpRL = 120 #Default value
+finally:
+    UpRL_F.close()
+
+VentAmp_F = open("VentAmp.txt", "r")
+try:
+    VentAmp = VentAmp_F.readline()
+except:
+    VentAmp = 3.5 #Default value
+finally:
+    VentAmp_F.close()
+    
+VentPW_F = open("VentPW.txt", "r")
+try:
+    VentPW = VentPW_F.readline()
+except:
+    VentPW = 0.4 #Default value
+finally:
+    VentPW_F.close()
 
 # Create VOO Page
 VOOpage = Tk()
@@ -29,32 +56,71 @@ VentPW_V = Label(VOOpage, text = VentPW, font =(None,12))
 # Button Functions
 def changeLowRL():
     try:
+        #check variable range
         LowRL = int(LowRL_E.get())
-        LowRL_V.config(text = LowRL)
+        if (LowRL < 30):
+            LowRL_V.config(text = "Value too low")
+        elif (LowRL > 175):
+            LowRL_V.config(text = "Value too high")
+        else:
+            LowRL_V.config(text = LowRL)
+            #write to file
+            LowRL_F = open("LowRL.txt", "w")
+            LowRL_F.write(LowRL_E.get())
+            LowRL_F.close()
     except:
         LowRL_V.config(text = "Invalid Value")
 
 def changeUpRL():
     try:
+        #check variable range
         UpRL = int(UpRL_E.get())
-        UpRL_V.config(text = UpRL)
+        if (UpRL < 50):
+            UpRL_V.config(text = "Value too low")
+        elif (UpRL > 175):
+            UpRL_V.config(text = "Value too high")
+        else:
+            UpRL_V.config(text = UpRL)
+            #write to file
+            UpRL_F = open("UpRL.txt", "w")
+            UpRL_F.write(UpRL_E.get())
+            UpRL_F.close()
     except:
         UpRL_V.config(text = "Invalid Value")
     
 def changeVentAmp():
     try:
+        #check variable range
         VentAmp = float(VentAmp_E.get())
-        VentAmp_V.config(text = VentAmp)
+        if (VentAmp < 0.5):
+            VentAmp_V.config(text = "Value too low")
+        elif (VentAmp > 7.0):
+            VentAmp_V.config(text = "Value too high")
+        else:
+            VentAmp_V.config(text = VentAmp)
+            #write to file
+            VentAmp_F = open("VentAmp.txt", "w")
+            VentAmp_F.write(VentAmp_E.get())
+            VentAmp_F.close()
     except:
         VentAmp_V.config(text = "Invalid Value")
-    
+        
 def changeVentPW():
     try:
+        #check variable range
         VentPW = float(VentPW_E.get())
-        VentPW_V.config(text = VentPW)
+        if (VentPW < 0.05):
+            VentPW_V.config(text = "Value too low")
+        elif (VentPW > 1.9):
+            VentPW_V.config(text = "Value too high")
+        else:
+            VentPW_V.config(text = VentPW)
+            #write to file
+            VentPW_F = open("VentPW.txt", "w")
+            VentPW_F.write(VentPW_E.get())
+            VentPW_F.close()
     except:
         VentPW_V.config(text = "Invalid Value")
-
 
 # Create Entries
 LowRL_E = Entry(VOOpage, width=20)
