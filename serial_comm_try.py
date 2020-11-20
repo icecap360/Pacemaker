@@ -9,15 +9,24 @@ for p in list_ports.comports():
 		break
 port_name = port.device
 with serial.Serial(port=port_name, baudrate=baudrate) as device:
-	dat = [1,62,1,1,1,1,1,1,1,1]
+	test_code = [10]
+	params = [1,2,3,4,5,6,7,8,9,10]
+	dat = test_code+params
+	dat = serial.to_bytes(dat)
 	bytes_written = device.write(dat)
-	time.sleep(2)
-	bytes_read = device.read(2)
-	bytes_read = device.read(2) 
+
+with serial.Serial(port=port_name, baudrate=baudrate) as device:
+	bytes_read = device.read(len(params))
+	#bytes_read2 = device.read(bytes_written) 
 	#we must read twice, if you read just once you get the old result, 
 	#I tried adding some delay as well, but 
 	
-	device.close()
-print('bytes_read', bytes_read)
-print(dat)
-print('bytes_written', bytes_written)
+print('Data to write')
+for d in dat:
+	print(d, end=' ')
+print()
+print('According to the simulink' 
+	' parameters you set, we wrote', bytes_written,'bytes')
+print('These are the bytes we read')
+for b in bytes_read:
+	print(b, end=' ')
