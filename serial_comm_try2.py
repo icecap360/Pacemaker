@@ -1,4 +1,5 @@
 import serial
+import struct
 import time
 from serial.tools import list_ports
 import itertools
@@ -11,11 +12,12 @@ for p in list_ports.comports():
 port_name = port.device
 with serial.Serial(port=port_name, baudrate=baudrate) as device:
 	test_code = [10]
-	#params_uint8 = [1,2,3,4,5,6,7,8,9,10]
-	#params_uint16 = list(itertools.chain(*[[9,8],[7,6],[5,4],[3,2]]))
-	#dat = test_code+params_uint8+params_uint16
-	dat = test_code+[i for i in range(18)]
-	dat = serial.to_bytes(dat)
+	params_uint8 = [1,2,3,4,5,6,7,8,9,10]
+	params_uint16 = list(itertools.chain(*[[9,8],[7,6],[5,4],[3,2]]))
+	dat = test_code+params_uint8+params_uint16
+	print(len(dat))
+	dat = struct.pack("<"+"B"*19,*dat)
+	#dat = serial.to_bytes(dat)
 	bytes_written = device.write(dat)
 print('Data to write')
 for d in dat:
@@ -25,6 +27,7 @@ print('According to the simulink parameters you set, we wrote', bytes_written,'b
 
 with serial.Serial(port=port_name, baudrate=baudrate) as device:
 	bytes_read = device.read(18)
+	bytes_read = struct.unpack("B"*18, bytes_read)
 	#bytes_read2 = device.read(bytes_written) 
 	#we must read twice, if you read just once you get the old result, 
 	#I tried adding some delay as well, but 
