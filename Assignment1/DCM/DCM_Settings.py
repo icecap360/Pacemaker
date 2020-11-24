@@ -46,5 +46,10 @@ def openSettings():
 
     Logo.grid(row=4, column=0)
 
+    #Statues Bar
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(settingsScreen, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
 
     mainloop()

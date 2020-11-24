@@ -13,7 +13,7 @@ def openHub():
     #create main hub
     mainHub= Toplevel()
     mainHub.title("DCM HUB")
-    mainHub.geometry("350x300")
+    mainHub.geometry("450x300")
 
     # create Labels
     mainHubLabel= Label(mainHub, text="Main Hub", font=(None, 50, 'underline'))
@@ -40,8 +40,10 @@ def openHub():
     PaceNowLink.grid(row= 2, column= 2)
 
     #Statues Bar
-    #statusLabel= Label(mainHub, text="User: "+ user +"\tConnection Status: "+conectionStatus)
-    #statusLabel.grid(row=7,columnspan=3)
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(mainHub, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
 
     mainloop()
 

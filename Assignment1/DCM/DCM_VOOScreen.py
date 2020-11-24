@@ -166,4 +166,10 @@ def openVOO():
     VentPW_E.grid(row= 5, column= 2)
     VentPW_B.grid(row= 5, column= 3)
 
+    #Statues Bar
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(VOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+
     mainloop()

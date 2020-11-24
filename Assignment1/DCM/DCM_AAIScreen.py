@@ -349,5 +349,10 @@ def openAAI():
     Hyst_V.grid(row= 10, column= 1)
     Hyst_B.grid(row= 10, column= 2)
 
+    #Statues Bar
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(AIIpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
 
     mainloop()

@@ -7,6 +7,7 @@ def openWelcome():
     #functions to Login and Create newUser
     def checkLogin(userCheck,pw):
         userDatabase= open("userDatabase.txt","r")
+        user= open("currentUser.txt", "w")
         for row in userDatabase:
             field = row.split(",")
             username = field[0]
@@ -14,9 +15,10 @@ def openWelcome():
             lastchar = len(password)-1
             password = password[0:lastchar]
             if userCheck == username and pw == password:
-                user=userCheck
-                openHub()
+                user.write(userCheck)
+                user.close()
                 userDatabase.close()
+                openHub()
                 return
             else:
                 loginStatus= Label(welcomeScreen, text="Username or Password incorrect")
