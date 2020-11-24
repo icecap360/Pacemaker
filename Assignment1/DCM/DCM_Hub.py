@@ -6,10 +6,37 @@ from DCM_AAIScreen import openAAI
 from DCM_VVIScreen import openVVI
 
 def openHub():
+    
+    #functions created to not raise an error
     def Pace():
         #Program to pace
 
         return
+    def openDOO():
+        #open DOO
+
+        return
+    def openAAIR():
+        #open AAIR
+
+        return
+    def openVVIR():
+        #open VVIR
+
+        return
+    def openAOOR():
+        #open AOOR
+
+        return
+    def openVOOR():
+        #open VOOR
+
+        return
+    def openDOOR():
+        #open DOOR
+
+        return
+
     #create main hub
     mainHub= Toplevel()
     mainHub.title("DCM HUB")
@@ -23,6 +50,12 @@ def openHub():
     VOOLink= Button(mainHub, text="VOO", command= openVOO)
     AAILink= Button(mainHub, text="AAI", command= openAAI)
     VVILink= Button(mainHub, text="VVI", command= openVVI)
+    DOOLink= Button(mainHub, text="DOO", command= openDOO)
+    AOORLink= Button(mainHub, text="AOOR", command= openAOOR)
+    VOORLink= Button(mainHub, text="VOOR", command= openVOOR)
+    AAIRLink= Button(mainHub, text="AAIR", command= openAAIR)
+    VVIRLink= Button(mainHub, text="VVIR", command= openVVIR)
+    DOORLink= Button(mainHub, text="DOOR", command= openDOOR)
 
     SettingsLink= Button(mainHub, text="Settings", command= openSettings)
 
@@ -34,8 +67,15 @@ def openHub():
     VOOLink.grid(row=3, column=0)
     AAILink.grid(row=4, column=0)
     VVILink.grid(row=5, column=0)
+    DOOLink.grid(row=6, column=0)
 
-    SettingsLink.grid(row=6, column=0, pady= 20)
+    AOORLink.grid(row=2,column=1)
+    VOORLink.grid(row=3,column=1)
+    AAIRLink.grid(row=4,column=1)
+    VVIRLink.grid(row=5,column=1)
+    DOORLink.grid(row=6,column=1)
+
+    SettingsLink.grid(row=7, column=0, pady= 20)
 
     PaceNowLink.grid(row= 2, column= 2)
 
