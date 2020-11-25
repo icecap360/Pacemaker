@@ -4,6 +4,9 @@ from DCM_AOOScreen import openAOO
 from DCM_VOOScreen import openVOO
 from DCM_AAIScreen import openAAI
 from DCM_VVIScreen import openVVI
+from DCM_Check_Connection import checkConnection
+import threading
+import sys
 
 def openHub():
     
@@ -36,6 +39,7 @@ def openHub():
         #open DOOR
 
         return
+
 
     #create main hub
     mainHub= Toplevel()
@@ -80,10 +84,21 @@ def openHub():
     PaceNowLink.grid(row= 2, column= 2)
 
     #Statues Bar
-    user=open("currentUser.txt","r")
-    connectionStatus=""
-    statusLabel= Label(mainHub, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
-    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+ 
+    def statusCreate():
+            while(True):
+                try:
+                    user=open("currentUser.txt","r")
+                    connectionStatus=checkConnection()
+                    statusLabel= Label(mainHub, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
+                    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                except TclError:
+                    sys.exit()
+
+
+    statusBar = threading.Thread(target=statusCreate, args=())
+    statusBar.setDaemon(True)
+    statusBar.start()
 
     mainloop()
-
+    

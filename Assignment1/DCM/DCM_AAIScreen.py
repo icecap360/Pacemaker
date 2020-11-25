@@ -1,6 +1,9 @@
 #AII Pacing
 from tkinter import *
 import DCM_WelcomeScreen
+import threading
+import sys
+from DCM_Check_Connection import checkConnection
 
 def openAAI():
     # Variables needed
@@ -77,7 +80,7 @@ def openAAI():
         Hyst_F.close()
 
     # Create AAI Page
-    AIIpage = Tk()
+    AIIpage = Toplevel()
     AIIpage.title("AAI Pacing Mode")
     AIIpage.geometry("800x400")
 
@@ -350,9 +353,20 @@ def openAAI():
     Hyst_B.grid(row= 10, column= 2)
 
     #Statues Bar
-    user=open("currentUser.txt","r")
-    connectionStatus=""
-    statusLabel= Label(AIIpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
-    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+ 
+    def statusCreate():
+            while(True):
+                try:
+                    user=open("currentUser.txt","r")
+                    connectionStatus=checkConnection()
+                    statusLabel= Label(AIIpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
+                    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                except TclError:
+                    sys.exit()
+
+
+    statusBar = threading.Thread(target=statusCreate, args=())
+    statusBar.setDaemon(True)
+    statusBar.start()
 
     mainloop()

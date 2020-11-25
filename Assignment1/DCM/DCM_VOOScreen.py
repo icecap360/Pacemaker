@@ -1,6 +1,9 @@
 #VOO Pacing
 from tkinter import *
 import DCM_WelcomeScreen
+import threading 
+import sys
+from DCM_Check_Connection import checkConnection
 
 def openVOO():
     # Variables needed
@@ -37,7 +40,7 @@ def openVOO():
         VentPW_F.close()
 
     # Create VOO Page
-    VOOpage = Tk()
+    VOOpage = Toplevel()
     VOOpage.title("VOO Pacing Mode")
     VOOpage.geometry("800x400")
 
@@ -167,9 +170,20 @@ def openVOO():
     VentPW_B.grid(row= 5, column= 3)
 
     #Statues Bar
-    user=open("currentUser.txt","r")
-    connectionStatus=""
-    statusLabel= Label(VOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
-    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+ 
+    def statusCreate():
+            while(True):
+                try:
+                    user=open("currentUser.txt","r")
+                    connectionStatus=checkConnection()
+                    statusLabel= Label(VOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
+                    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                except TclError:
+                    sys.exit()
+
+
+    statusBar = threading.Thread(target=statusCreate, args=())
+    statusBar.setDaemon(True)
+    statusBar.start()
 
     mainloop()
