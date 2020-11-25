@@ -9,12 +9,12 @@ for p in list_ports.comports():
 		break
 port_name = port.device
 print('here')
-test_code, set_code, echo_code = 10,85,34
+test_code, set_code, echo_code = 69,7,21
 
 def echo_params():
 	### ECHO_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		dat = [test_code, echo_code] + [i for i in range(20)]
+		dat = [test_code, echo_code] + [i for i in range(84)]
 		dat = serial.to_bytes(dat)
 		bytes_written = device.write(dat)
 		print('done writing ECHO_PARAMS')
@@ -22,21 +22,22 @@ def echo_params():
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		dat = [test_code, set_code] + [i for i in range(20)]
+		dat = [test_code, set_code] + [i for i in range(84)]
 		dat = serial.to_bytes(dat)
 		bytes_written = device.write(dat)
 		print('SET_PARAMS complete, written ', bytes_written, 'bytes')
 
 def read_params(n):
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
+		print('beginning read')
 		bytes_read = device.read(n)
 		print('bytes_read')
 		for byt in bytes_read:
 			print(byt)
 
-set_params()
+#set_params()
 #echo_params()
-#read_params(20)
+read_params(1)
 
 ###PROBLEMS
 
