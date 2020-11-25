@@ -9,36 +9,42 @@ for p in list_ports.comports():
 		break
 port_name = port.device
 print('here')
+test_code, set_code, echo_code = 10,85,34
 
-with serial.Serial(port=port_name, baudrate=baudrate) as device:
-	
-	### SET_PARAMS
-	dat = [10,20,1,1,1, 0,60, 0,60, 25,25,25, 0,33, 25,25,25,0,33, 25, 0,33]
-	dat = serial.to_bytes(dat)
-	bytes_written = device.write(dat)
-	print('done writing SET_PARAMS, written a total number of ', bytes_written, 'bytes')
-	
+def echo_params():
 	### ECHO_PARAMS
-	dat = [10,30,1,1,1, 0,60, 0,60, 25,25,25, 0,33, 25,25,25,0,33, 25, 0,33]
-	dat = serial.to_bytes(dat)
-	bytes_written = device.write(dat)
-	print('done writing ECHO_PARAMS')
-	bytes_read = device.read(20)
-	serial.send_break(0.25)
+	with serial.Serial(port=port_name, baudrate=baudrate) as device:
+		dat = [test_code, echo_code] + [i for i in range(20)]
+		dat = serial.to_bytes(dat)
+		bytes_written = device.write(dat)
+		print('done writing ECHO_PARAMS')
 
-	print('bytes_read')
-	for byt in bytes_read:
-		print(byt)
+def set_params():
+	### SET_PARAMS
+	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
+		dat = [test_code, set_code] + [i for i in range(20)]
+		dat = serial.to_bytes(dat)
+		bytes_written = device.write(dat)
+		print('SET_PARAMS complete, written ', bytes_written, 'bytes')
 
-	###PROBLEMS
+def read_params(n):
+	with serial.Serial(port=port_name, baudrate=baudrate) as device:
+		bytes_read = device.read(n)
+		print('bytes_read')
+		for byt in bytes_read:
+			print(byt)
 
-	#Program gets stuck at device.read()
+set_params()
+#echo_params()
+#read_params(20)
 
-	#Warning: Edit-time syntax highlighting disabled for performance on State SET_PARAMS. Character count 1085 exceeds 1000.
-	#Consider using a MATLAB Function.
+###PROBLEMS
 
-	#Sometimes to actually get the serial port to read the new data we must read twice, if you read just once you get the old result, 
-	#I tried adding some delay as well, but unfortunately that did not work 
+#Program gets stuck at device.read()
+
+#Warning: Edit-time syntax highlighting disabled for performance on State SET_PARAMS. Character count 1085 exceeds 1000.
+#Consider using a MATLAB Function.
+
+#Sometimes to actually get the serial port to read the new data we must read twice, if you read just once you get the old result, 
+#I tried adding some delay as well, but unfortunately that did not work 
 	
-	device.close()
-print('bytes_written', bytes_written)

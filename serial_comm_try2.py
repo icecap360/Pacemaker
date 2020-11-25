@@ -1,8 +1,6 @@
 import serial
-import struct
 import time
 from serial.tools import list_ports
-import itertools
 port = None
 baudrate = 115200
 for p in list_ports.comports():
@@ -10,27 +8,41 @@ for p in list_ports.comports():
 		port = p
 		break
 port_name = port.device
+print('here')
+test_code, set_code, echo_code = 10,85,34
 with serial.Serial(port=port_name, baudrate=baudrate) as device:
-	test_code = [10]
-	params_uint8 = [1,2,3,4,5,6,7,8,9,10]
-	params_uint16 = list(itertools.chain(*[[9,8],[7,6],[5,4],[3,2]]))
-	dat = test_code+params_uint8+params_uint16
-	print(len(dat))
-	dat = struct.pack("<"+"B"*19,*dat)
-	#dat = serial.to_bytes(dat)
-	bytes_written = device.write(dat)
-print('Data to write')
-for d in dat:
-	print(d, end=' ')
-print()
-print('According to the simulink parameters you set, we wrote', bytes_written,'bytes')
+	
+	### SET_PARAMS
 
-with serial.Serial(port=port_name, baudrate=baudrate) as device:
-	bytes_read = device.read(18)
-	bytes_read = struct.unpack("B"*18, bytes_read)
-	#bytes_read2 = device.read(bytes_written) 
-	#we must read twice, if you read just once you get the old result, 
-	#I tried adding some delay as well, but 
-print('These are the bytes we read (the test_code is not read)')
-for b in bytes_read:
-	print(b, end=' ')
+	dat = [test_code, set_code] + [i for i in range(20)]
+	dat = serial.to_bytes(dat)
+	print(dat[1])
+
+	bytes_written = device.write(dat)
+	print('SET_PARAMS complete, written ', bytes_written, 'bytes')
+	"""
+
+	### ECHO_PARAMS
+	dat = [test_code, echo_code]
+	dat = serial.to_bytes(dat)
+	bytes_written = device.write(dat)
+	print('done writing ECHO_PARAMS')
+
+	bytes_read = device.read(1)
+
+	print('bytes_read')
+	for byt in bytes_read:
+		print(byt)
+
+	###PROBLEMS
+
+	#Program gets stuck at device.read()
+
+	#Warning: Edit-time syntax highlighting disabled for performance on State SET_PARAMS. Character count 1085 exceeds 1000.
+	#Consider using a MATLAB Function.
+
+	#Sometimes to actually get the serial port to read the new data we must read twice, if you read just once you get the old result, 
+	#I tried adding some delay as well, but unfortunately that did not work 
+	
+	device.close()
+"""

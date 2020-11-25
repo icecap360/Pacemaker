@@ -17,17 +17,20 @@ with serial.Serial(port=port_name, baudrate=baudrate) as device:
 	dat = test_code+[i for i in range(18)]
 	dat = serial.to_bytes(dat)
 	bytes_written = device.write(dat)
+	device.write(serial.to_bytes([55]))
 print('Data to write')
 for d in dat:
 	print(d, end=' ')
 print()
 print('According to the simulink parameters you set, we wrote', bytes_written,'bytes')
 
+"""
 with serial.Serial(port=port_name, baudrate=baudrate) as device:
-	bytes_read = device.read(18)
+	bytes_read = device.read(2)
 	#bytes_read2 = device.read(bytes_written) 
 	#we must read twice, if you read just once you get the old result, 
 	#I tried adding some delay as well, but 
 print('These are the bytes we read (the test_code is not read)')
 for b in bytes_read:
 	print(b, end=' ')
+"""
