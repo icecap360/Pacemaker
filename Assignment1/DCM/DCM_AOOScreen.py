@@ -3,11 +3,38 @@ from tkinter import *
 import DCM_WelcomeScreen
 
 def openAOO():
-    # Variables needed
-    LowRL = 60
-    UpRL = 120
-    AtrialAmp = 3.5
-    AtrialPW = 0.4
+    # Initialize variables
+    LowRL_F = open("LowRL.txt", "r")
+    try:
+        LowRL = LowRL_F.readline()
+    except:
+        LowRL = 60 #Default value
+    finally:
+        LowRL_F.close()
+        
+    UpRL_F = open("UpRL.txt", "r")
+    try:
+        UpRL = UpRL_F.readline()
+    except:
+        UpRL = 120 #Default value
+    finally:
+        UpRL_F.close()
+
+    AtrialAmp_F = open("AtrialAmp.txt", "r")
+    try:
+        AtrialAmp = AtrialAmp_F.readline()
+    except:
+        AtrialAmp = 3.5 #Default value
+    finally:
+        AtrialAmp_F.close()
+        
+    AtrialPW_F = open("AtrialPW.txt", "r")
+    try:
+        AtrialPW = AtrialPW_F.readline()
+    except:
+        AtrialPW = 0.4 #Default value
+    finally:
+        AtrialPW_F.close()
 
     # Create AOO Page
     AOOpage = Tk()
@@ -31,32 +58,71 @@ def openAOO():
     # Button Functions
     def changeLowRL():
         try:
+            #check variable range
             LowRL = int(LowRL_E.get())
-            LowRL_V.config(text = LowRL)
+            if (LowRL < 30):
+                LowRL_V.config(text = "Value too low")
+            elif (LowRL > 175):
+                LowRL_V.config(text = "Value too high")
+            else:
+                LowRL_V.config(text = LowRL)
+                #write to file
+                LowRL_F = open("LowRL.txt", "w")
+                LowRL_F.write(LowRL_E.get())
+                LowRL_F.close()
         except:
             LowRL_V.config(text = "Invalid Value")
 
     def changeUpRL():
         try:
+            #check variable range
             UpRL = int(UpRL_E.get())
-            UpRL_V.config(text = UpRL)
+            if (UpRL < 50):
+                UpRL_V.config(text = "Value too low")
+            elif (UpRL > 175):
+                UpRL_V.config(text = "Value too high")
+            else:
+                UpRL_V.config(text = UpRL)
+                #write to file
+                UpRL_F = open("UpRL.txt", "w")
+                UpRL_F.write(UpRL_E.get())
+                UpRL_F.close()
         except:
             UpRL_V.config(text = "Invalid Value")
         
-    def changeAtrialAmp():
+    def changeAtrAmp():
         try:
+            #check variable range
             AtrialAmp = float(AtrialAmp_E.get())
-            AtrialAmp_V.config(text = AtrialAmp)
+            if (AtrialAmp < 0.5):
+                AtrialAmp_V.config(text = "Value too low")
+            elif (AtrialAmp > 7.0):
+                AtrialAmp_V.config(text = "Value too high")
+            else:
+                AtrialAmp_V.config(text = AtrialAmp)
+                #write to file
+                AtrialAmp_F = open("AtrialAmp.txt", "w")
+                AtrialAmp_F.write(AtrialAmp_E.get())
+                AtrialAmp_F.close()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
         
-    def changeAtrialPW():
+    def changeAtrPW():
         try:
+            #check variable range
             AtrialPW = float(AtrialPW_E.get())
-            AtrialPW_V.config(text = AtrialPW)
+            if (AtrialPW < 0.05):
+                AtrialPW_V.config(text = "Value too low")
+            elif (AtrialPW > 1.9):
+                AtrialPW_V.config(text = "Value too high")
+            else:
+                AtrialPW_V.config(text = AtrialPW)
+                #write to file
+                AtrialPW_F = open("AtrialPW.txt", "w")
+                AtrialPW_F.write(AtrialPW_E.get())
+                AtrialPW_F.close()
         except:
             AtrialPW_V.config(text = "Invalid Value")
-
 
     # Create Entries
     LowRL_E = Entry(AOOpage, width=20)
@@ -74,8 +140,8 @@ def openAOO():
     # Create Buttons
     LowRL_B = Button(AOOpage, text="Update", command=changeLowRL)
     UpRL_B = Button(AOOpage, text="Update", command=changeUpRL)
-    AtrialAmp_B = Button(AOOpage, text="Update", command=changeAtrialAmp)
-    AtrialPW_B = Button(AOOpage, text="Update", command=changeAtrialPW)
+    AtrialAmp_B = Button(AOOpage, text="Update", command=changeAtrAmp)
+    AtrialPW_B = Button(AOOpage, text="Update", command=changeAtrPW)
 
     # Organize objects
     AOOpageLabel.grid(row= 1, column= 1)
@@ -101,7 +167,9 @@ def openAOO():
     AtrialPW_B.grid(row= 5, column= 3)
 
     #Statues Bar
-    statusLabel= Label(AOOpage, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
-    statusLabel.grid(row=7,columnspan=3)
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(AOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
 
     mainloop()

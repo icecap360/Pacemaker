@@ -4,16 +4,77 @@ import DCM_WelcomeScreen
 
 def openAAI():
     # Variables needed
-    LowRL = 60
-    UpRL = 120
-    AtrAmp = 3.5
-    AtrPW = 0.4
+    LowRL_F = open("LowRL.txt", "r")
+    try:
+        LowRL = LowRL_F.readline()
+    except:
+        LowRL = 60 #Default value
+    finally:
+        LowRL_F.close()
+        
+    UpRL_F = open("UpRL.txt", "r")
+    try:
+        UpRL = UpRL_F.readline()
+    except:
+        UpRL = 120 #Default value
+    finally:
+        UpRL_F.close()
 
-    AtrSens = .75
-    ARP = 250
-    PVARP = 250
-    Hyst = 0
-    RateSmo = 3
+    AtrAmp_F = open("AtrialAmp.txt", "r")
+    try:
+        AtrAmp = AtrAmp_F.readline()
+    except:
+        AtrAmp = 3.5 #Default value
+    finally:
+        AtrAmp_F.close()
+        
+    AtrPW_F = open("AtrialPW.txt", "r")
+    try:
+        AtrPW = AtrPW_F.readline()
+    except:
+        AtrPW = 0.4 #Default value
+    finally:
+        AtrPW_F.close()
+
+    AtrSens_F = open("AtrSens.txt", "r")
+    try:
+        AtrSens = AtrSens_F.readline()
+    except:
+        AtrSens = 2.5 #Default value
+    finally:
+        AtrSens_F.close()
+
+    ARP_F = open("ARP.txt", "r")
+    try:
+        ARP = ARP_F.readline()
+    except:
+        ARP = 250 #Default value
+    finally:
+        ARP_F.close()
+
+    PVARP_F = open("PVARP.txt", "r")
+    try:
+        PVARP = PVARP_F.readline()
+    except:
+        PVARP = 250 #Default value
+    finally:
+        PVARP_F.close()
+        
+    RateSmo_F = open("RateSmo.txt", "r")
+    try:
+        RateSmo = RateSmo_F.readline()
+    except:
+        RateSmo = 3 #Default value
+    finally:
+        RateSmo_F.close()
+
+    Hyst_F = open("Hyst.txt", "r")
+    try:
+        Hyst = int(Hyst_F.readline())
+    except:
+        Hyst = 0 #Default value
+    finally:
+        Hyst_F.close()
 
     # Create AAI Page
     AIIpage = Tk()
@@ -49,29 +110,69 @@ def openAAI():
     # Button Functions
     def changeLowRL():
         try:
+            #check variable range
             LowRL = int(LowRL_E.get())
-            LowRL_V.config(text = LowRL)
+            if (LowRL < 30):
+                LowRL_V.config(text = "Value too low")
+            elif (LowRL > 175):
+                LowRL_V.config(text = "Value too high")
+            else:
+                LowRL_V.config(text = LowRL)
+                #write to file
+                LowRL_F = open("LowRL.txt", "w")
+                LowRL_F.write(LowRL_E.get())
+                LowRL_F.close()
         except:
             LowRL_V.config(text = "Invalid Value")
 
     def changeUpRL():
         try:
+            #check variable range
             UpRL = int(UpRL_E.get())
-            UpRL_V.config(text = UpRL)
+            if (UpRL < 50):
+                UpRL_V.config(text = "Value too low")
+            elif (UpRL > 175):
+                UpRL_V.config(text = "Value too high")
+            else:
+                UpRL_V.config(text = UpRL)
+                #write to file
+                UpRL_F = open("UpRL.txt", "w")
+                UpRL_F.write(UpRL_E.get())
+                UpRL_F.close()
         except:
             UpRL_V.config(text = "Invalid Value")
         
     def changeAtrAmp():
         try:
+            #check variable range
             AtrAmp = float(AtrAmp_E.get())
-            AtrAmp_V.config(text = AtrAmp)
+            if (AtrAmp < 0.5):
+                AtrAmp_V.config(text = "Value too low")
+            elif (AtrAmp > 7.0):
+                AtrAmp_V.config(text = "Value too high")
+            else:
+                AtrAmp_V.config(text = AtrAmp)
+                #write to file
+                AtrAmp_F = open("AtrialAmp.txt", "w")
+                AtrAmp_F.write(AtrAmp_E.get())
+                AtrAmp_F.close()
         except:
-            AtrAmp_V.config(text = "Invalid Value")
+            AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
         try:
+            #check variable range
             AtrPW = float(AtrPW_E.get())
-            AtrPW_V.config(text = AtrPW)
+            if (AtrPW < 0.05):
+                AtrPW_V.config(text = "Value too low")
+            elif (AtrPW > 1.9):
+                AtrPW_V.config(text = "Value too high")
+            else:
+                AtrPW_V.config(text = AtrPW)
+                #write to file
+                AtrPW_F = open("AtrialPW.txt", "w")
+                AtrPW_F.write(AtrPW_E.get())
+                AtrPW_F.close()
         except:
             AtrPW_V.config(text = "Invalid Value")
 
@@ -79,29 +180,69 @@ def openAAI():
 
     def changeAtrSens():
         try:
+            #check variable range
             AtrSens = float(AtrSens_E.get())
-            AtrSens_V.config(text = AtrSens)
+            if (AtrSens < 0.25):
+                AtrSens_V.config(text = "Value too low")
+            elif (AtrSens > 0.75):
+                AtrSens_V.config(text = "Value too high")
+            else:
+                AtrSens_V.config(text = AtrSens)
+                #write to file
+                AtrSens_F = open("AtrSens.txt", "w")
+                AtrSens_F.write(AtrSens_E.get())
+                AtrSens_F.close()
         except:
             AtrSens_V.config(text = "Invalid Value")
 
     def changeARP():
         try:
+            #check variable range
             ARP = int(ARP_E.get())
-            ARP_V.config(text = ARP)
+            if (ARP < 150):
+                ARP_V.config(text = "Value too low")
+            elif (ARP > 500):
+                ARP_V.config(text = "Value too high")
+            else:
+                ARP_V.config(text = ARP)
+                #write to file
+                ARP_F = open("ARP.txt", "w")
+                ARP_F.write(ARP_E.get())
+                ARP_F.close()
         except:
             ARP_V.config(text = "Invalid Value")
 
     def changePVARP():
         try:
+            #check variable range
             PVARP = int(PVARP_E.get())
-            PVARP_V.config(text = PVARP)
+            if (PVARP < 150):
+                PVARP_V.config(text = "Value too low")
+            elif (PVARP > 500):
+                PVARP_V.config(text = "Value too high")
+            else:
+                PVARP_V.config(text = PVARP)
+                #write to file
+                PVARP_F = open("PVARP.txt", "w")
+                PVARP_F.write(PVARP_E.get())
+                PVARP_F.close()
         except:
             PVARP_V.config(text = "Invalid Value")
             
     def changeRateSmo():
         try:
+            #check variable range
             RateSmo = int(RateSmo_E.get())
-            RateSmo_V.config(text = RateSmo)
+            if (RateSmo < 0):
+                RateSmo_V.config(text = "Value too low")
+            elif (RateSmo > 21):
+                RateSmo_V.config(text = "Value too high")
+            else:
+                RateSmo_V.config(text = RateSmo)
+                #write to file
+                RateSmo_F = open("RateSmo.txt", "w")
+                RateSmo_F.write(RateSmo_E.get())
+                RateSmo_F.close()
         except:
             RateSmo_V.config(text = "Invalid Value")
 
@@ -110,10 +251,15 @@ def openAAI():
         if (Hyst):
             Hyst = 0
             Hyst_V.config(text="Disabled")
-
+            Hyst_F = open("Hyst.txt", "w")
+            Hyst_F.write("0")
+            Hyst_F.close()
         else:
             Hyst = 1
             Hyst_V.config(text="Enabled")
+            Hyst_F = open("Hyst.txt", "w")
+            Hyst_F.write("1")
+            Hyst_F.close()
 
 
     # Create Entries
@@ -204,7 +350,9 @@ def openAAI():
     Hyst_B.grid(row= 10, column= 2)
 
     #Statues Bar
-    statusLabel= Label(AIIpage, text="User: "+ DCM_WelcomeScreen.user +"\tConnection Status: "+DCM_WelcomeScreen.conectionStatus)
-    statusLabel.grid(row=10,columnspan=3)
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(AIIpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
 
     mainloop()

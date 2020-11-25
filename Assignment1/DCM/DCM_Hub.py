@@ -1,63 +1,89 @@
 from tkinter import *
+from DCM_Settings import openSettings
+from DCM_AOOScreen import openAOO
+from DCM_VOOScreen import openVOO
+from DCM_AAIScreen import openAAI
+from DCM_VVIScreen import openVVI
 
-#Button Functions
-def openAOO():
-    # Pacing screen screen 
-
-    return
-
-def openVOO():
-    # Pacing screen screen 
+def openHub():
     
-    return
+    #functions created to not raise an error
+    def Pace():
+        #Program to pace
 
-def openAAI():
-    # Pacing screen screen 
-    
-    return
+        return
+    def openDOO():
+        #open DOO
 
-def openVVI():
-    # Pacing screen screen 
-    
-    return
+        return
+    def openAAIR():
+        #open AAIR
 
-def openSettings():
-    # Settings screen screen 
-    
-    return
+        return
+    def openVVIR():
+        #open VVIR
 
-def Pace():
-    #Program to pace
+        return
+    def openAOOR():
+        #open AOOR
 
-    return
+        return
+    def openVOOR():
+        #open VOOR
 
-#create main hub
-mainHub= Tk()
-mainHub.title("DCM HUB")
-mainHub.geometry("350x300")
+        return
+    def openDOOR():
+        #open DOOR
 
-# create Labels
-mainHubLabel= Label(mainHub, text="Main Hub", font=(None, 50, 'underline'))
+        return
 
-# create Buttons
-AOOLink= Button(mainHub, text="AOO", command= openAOO)
-VOOLink= Button(mainHub, text="VOO", command= openVOO)
-AAILink= Button(mainHub, text="AAI", command= openAAI)
-VVILink= Button(mainHub, text="VVI", command= openVVI)
+    #create main hub
+    mainHub= Toplevel()
+    mainHub.title("DCM HUB")
+    mainHub.geometry("450x300")
 
-SettingsLink= Button(mainHub, text="Settings")
+    # create Labels
+    mainHubLabel= Label(mainHub, text="Main Hub", font=(None, 50, 'underline'))
 
-PaceNowLink= Button(mainHub, text="Pace Now", command= Pace)
+    # create Buttons
+    AOOLink= Button(mainHub, text="AOO", command= openAOO)
+    VOOLink= Button(mainHub, text="VOO", command= openVOO)
+    AAILink= Button(mainHub, text="AAI", command= openAAI)
+    VVILink= Button(mainHub, text="VVI", command= openVVI)
+    DOOLink= Button(mainHub, text="DOO", command= openDOO)
+    AOORLink= Button(mainHub, text="AOOR", command= openAOOR)
+    VOORLink= Button(mainHub, text="VOOR", command= openVOOR)
+    AAIRLink= Button(mainHub, text="AAIR", command= openAAIR)
+    VVIRLink= Button(mainHub, text="VVIR", command= openVVIR)
+    DOORLink= Button(mainHub, text="DOOR", command= openDOOR)
 
-# organize objects 
-mainHubLabel.grid(row= 0, column= 1)
-AOOLink.grid(row=2, column=0)
-VOOLink.grid(row=3, column=0)
-AAILink.grid(row=4, column=0)
-VVILink.grid(row=5, column=0)
+    SettingsLink= Button(mainHub, text="Settings", command= openSettings)
 
-SettingsLink.grid(row=6, column=0, pady= 20)
+    PaceNowLink= Button(mainHub, text="Pace Now", command= Pace)
 
-PaceNowLink.grid(row= 2, column= 2)
+    # organize objects 
+    mainHubLabel.grid(row= 0, column= 1)
+    AOOLink.grid(row=2, column=0)
+    VOOLink.grid(row=3, column=0)
+    AAILink.grid(row=4, column=0)
+    VVILink.grid(row=5, column=0)
+    DOOLink.grid(row=6, column=0)
 
-mainloop()
+    AOORLink.grid(row=2,column=1)
+    VOORLink.grid(row=3,column=1)
+    AAIRLink.grid(row=4,column=1)
+    VVIRLink.grid(row=5,column=1)
+    DOORLink.grid(row=6,column=1)
+
+    SettingsLink.grid(row=7, column=0, pady= 20)
+
+    PaceNowLink.grid(row= 2, column= 2)
+
+    #Statues Bar
+    user=open("currentUser.txt","r")
+    connectionStatus=""
+    statusLabel= Label(mainHub, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
+    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+
+    mainloop()
+
