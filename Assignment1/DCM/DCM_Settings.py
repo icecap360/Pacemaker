@@ -3,6 +3,7 @@ import threading
 from PIL import ImageTk, Image
 from DCM_Check_Connection import checkConnection
 import sys
+import time
 
 def openSettings():
     #Functions
@@ -58,6 +59,7 @@ def openSettings():
                     connectionStatus=checkConnection()
                     statusLabel= Label(settingsScreen, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
                     statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                    time.sleep(5000)
                 except TclError:
                     sys.exit()
 

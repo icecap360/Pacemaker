@@ -3,6 +3,7 @@ from tkinter import *
 import DCM_WelcomeScreen
 import threading 
 import sys
+import time
 from DCM_Check_Connection import checkConnection
 
 def openVOO():
@@ -178,6 +179,7 @@ def openVOO():
                     connectionStatus=checkConnection()
                     statusLabel= Label(VOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
                     statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                    time.sleep(5000)
                 except TclError:
                     sys.exit()
 

@@ -4,40 +4,23 @@ from DCM_AOOScreen import openAOO
 from DCM_VOOScreen import openVOO
 from DCM_AAIScreen import openAAI
 from DCM_VVIScreen import openVVI
+from DCM_DOOScreen import openDOO
+from DCM_AOORScreen import openAOOR
+from DCM_VOORScreen import openVOOR
+from DCM_AAIRScreen import openAAIR
+from DCM_VVIRScreen import openVVIR
+from DCM_DOORScreen import openDOOR
 from DCM_Egram import openEgram
 from DCM_Check_Connection import checkConnection
 import threading
 import sys
+import time
 
 def openHub():
     
     #functions created to not raise an error
     def Pace():
         #Program to pace
-
-        return
-    def openDOO():
-        #open DOO
-
-        return
-    def openAAIR():
-        #open AAIR
-
-        return
-    def openVVIR():
-        #open VVIR
-
-        return
-    def openAOOR():
-        #open AOOR
-
-        return
-    def openVOOR():
-        #open VOOR
-
-        return
-    def openDOOR():
-        #open DOOR
 
         return
 
@@ -96,6 +79,7 @@ def openHub():
                     connectionStatus=checkConnection()
                     statusLabel= Label(mainHub, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
                     statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                    time.sleep(5000)
                 except TclError:
                     sys.exit()
 
