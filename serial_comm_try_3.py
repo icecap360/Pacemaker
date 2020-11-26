@@ -16,16 +16,17 @@ def echo_params():
 	### ECHO_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
 		params = [1,0,0,3.5,10,4.0,3.5,10,4.0,0,500,50,200,200,200]
-		params = struct.pack("<"+"BBB"+"fBf"*2+"H"*5, *params)
-		dat = serial.to_bytes([test_code, set_code]) + params
+		params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
+		dat = serial.to_bytes([test_code, echo_code]) + params
 		bytes_written = device.write(dat)
 		print('done writing ECHO_PARAMS')
 
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [1,0,0,3.5,10,4.0,3.5,10,4.0,0,500,50,200,200,200]
-		params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
+		params = [1,0,0,80,10,80,80,10,80,0,500,50,200,200,200]
+		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
+		params = struct.pack("<"+"B"*10+"H"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
 		bytes_written = device.write(dat)
 		print('SET_PARAMS complete, written ', bytes_written, 'bytes')
