@@ -4,6 +4,7 @@ from DCM_AOOScreen import openAOO
 from DCM_VOOScreen import openVOO
 from DCM_AAIScreen import openAAI
 from DCM_VVIScreen import openVVI
+from DCM_Egram import openEgram
 from DCM_Check_Connection import checkConnection
 import threading
 import sys
@@ -44,7 +45,7 @@ def openHub():
     #create main hub
     mainHub= Toplevel()
     mainHub.title("DCM HUB")
-    mainHub.geometry("450x300")
+    mainHub.geometry("500x300")
 
     # create Labels
     mainHubLabel= Label(mainHub, text="Main Hub", font=(None, 50, 'underline'))
@@ -65,6 +66,8 @@ def openHub():
 
     PaceNowLink= Button(mainHub, text="Pace Now", command= Pace)
 
+    egramLink = Button(mainHub, text="Electrograms", command= openEgram)
+
     # organize objects 
     mainHubLabel.grid(row= 0, column= 1)
     AOOLink.grid(row=2, column=0)
@@ -82,6 +85,7 @@ def openHub():
     SettingsLink.grid(row=7, column=0, pady= 20)
 
     PaceNowLink.grid(row= 2, column= 2)
+    egramLink.grid(row=2, column=3)
 
     #Statues Bar
  
