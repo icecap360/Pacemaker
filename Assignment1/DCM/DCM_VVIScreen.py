@@ -1,6 +1,9 @@
 #VVI Pacing
 from tkinter import *
 import DCM_WelcomeScreen
+import threading
+import sys
+from DCM_Check_Connection import checkConnection
 
 def openVVI():
     # Variables needed
@@ -69,7 +72,7 @@ def openVVI():
         Hyst_F.close()
 
     # Create VVI Page
-    VIIpage = Tk()
+    VIIpage = Toplevel()
     VIIpage.title("VVI Pacing Mode")
     VIIpage.geometry("800x400")
 
@@ -315,9 +318,20 @@ def openVVI():
     Hyst_B.grid(row= 9, column= 2)
 
     #Statues Bar
-    user=open("currentUser.txt","r")
-    connectionStatus=""
-    statusLabel= Label(VIIpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
-    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+ 
+    def statusCreate():
+            while(True):
+                try:
+                    user=open("currentUser.txt","r")
+                    connectionStatus=checkConnection()
+                    statusLabel= Label(VIIpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
+                    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                except TclError:
+                    sys.exit()
+
+
+    statusBar = threading.Thread(target=statusCreate, args=())
+    statusBar.setDaemon(True)
+    statusBar.start()
 
     mainloop()

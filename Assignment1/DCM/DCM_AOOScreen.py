@@ -1,6 +1,9 @@
 #AOO Pacing
 from tkinter import *
 import DCM_WelcomeScreen
+import threading
+import sys
+from DCM_Check_Connection import checkConnection
 
 def openAOO():
     # Initialize variables
@@ -37,7 +40,7 @@ def openAOO():
         AtrialPW_F.close()
 
     # Create AOO Page
-    AOOpage = Tk()
+    AOOpage = Toplevel()
     AOOpage.title("AOO Pacing Mode")
     AOOpage.geometry("800x400")
 
@@ -167,9 +170,20 @@ def openAOO():
     AtrialPW_B.grid(row= 5, column= 3)
 
     #Statues Bar
-    user=open("currentUser.txt","r")
-    connectionStatus=""
-    statusLabel= Label(AOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus)
-    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+ 
+    def statusCreate():
+            while(True):
+                try:
+                    user=open("currentUser.txt","r")
+                    connectionStatus=checkConnection()
+                    statusLabel= Label(AOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
+                    statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
+                except TclError:
+                    sys.exit()
+
+
+    statusBar = threading.Thread(target=statusCreate, args=())
+    statusBar.setDaemon(True)
+    statusBar.start()
 
     mainloop()
