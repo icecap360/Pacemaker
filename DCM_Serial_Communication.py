@@ -1,6 +1,7 @@
 import serial
 import time
 from serial.tools import list_ports
+import struct
 port = None
 baudrate = 115200
 for p in list_ports.comports():
@@ -14,8 +15,9 @@ test_code, set_code, echo_code = 10,20,30
 def echo_params():
 	### ECHO_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		dat = [test_code, echo_code] + [i for i in range(20)]
-		dat = serial.to_bytes(dat)
+		params = [1,0,0,35,10,40,35,10,40,0,60,50,200,200,200]
+		params = struct.pack("<"+"B"*10+"H"*5, *params)
+		dat = serial.to_bytes([test_code, set_code]) + params
 		bytes_written = device.write(dat)
 		print('done writing ECHO_PARAMS')
 
