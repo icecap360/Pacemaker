@@ -3,63 +3,49 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 time=0
+modeM=""
 
 def openEgram():
-    def vPlot(i):
+    def Plot(mode):
         #plot v egram
-        y1,y2,x= dataGet()
+        global modeM
+        if(modeM=="vPlot"):
+            y1,y2,x= dataGet()
 
-        plt.cla()
-        plt.plot(x,y1, label="Ventricle")
+            plt.cla()
+            plt.plot(x,y1, label="Ventricle")
 
-        plt.legend(loc='upper left')
+            plt.legend(loc='upper left')
+        elif(modeM=="aPlot"):
+            y1,y2,x= dataGet()
+
+            plt.cla()
+            plt.plot(x,y2, label= "Atrium")
+
+            plt.legend(loc='upper left')
+        elif(modeM=="bPlot"):
+            y1,y2,x= dataGet()
+
+            plt.cla()
+            plt.plot(x,y1, label="Ventricle")
+            plt.plot(x,y2, label="Atrium")
+
+            plt.legend(loc='upper left')
 
         return
-    def vOpen():
+    def Open(mode):
         #opens vPlot
+        global modeM
+        if (mode=="vPlot"):
+            modeM="vPlot"
+        elif (mode=="aPlot"):
+            modeM="aPlot"
+        elif(mode=="bPlot"):
+            modeM="bPlot"
+
         plt.style.use('fivethirtyeight')
 
-        plot= FuncAnimation(plt.gcf(), vPlot, interval=1000)# change interval to what needed 
-
-        plt.tight_layout()
-        plt.show()
-
-        return
-    def aPlot(i):
-        #plot a egram
-        y1,y2,x= dataGet()
-
-        plt.cla()
-        plt.plot(x,y2, label= "Atrium")
-
-        plt.legend(loc='upper left')
-
-        return
-    def aOpen():
-        #opens aPlot
-        plt.style.use('fivethirtyeight')
-
-        plot= FuncAnimation(plt.gcf(), aPlot, interval=1000)# change interval to what needed 
-
-        plt.tight_layout()
-        plt.show()
-
-        return 
-    def bPlot(i):
-        #plot both egram
-        y1,y2,x= dataGet()
-
-        plt.cla()
-        plt.plot(x,y1, label="Ventricle")
-        plt.plot(x,y2, label="Atrium")
-
-        plt.legend(loc='upper left')
-
-        return
-    def bOpen():
-        plt.style.use('fivethirtyeight')
-
-        plot= FuncAnimation(plt.gcf(), bPlot, interval=1000)# change interval to what needed 
+        plot= FuncAnimation(plt.gcf(), Plot, interval=1000)# change interval to what needed 
 
         plt.tight_layout()
         plt.show()
@@ -86,9 +72,9 @@ def openEgram():
     egramLabel= Label(egramScreen, text="Electrogram", font=(None,30, 'underline'))
 
     #creating Buttons
-    vEgram= Button(egramScreen,text="Ventricle Egram", command= vOpen)
-    aEgram= Button(egramScreen, text="Atrium Egram", command= aOpen)
-    bEgram= Button(egramScreen, text="Both Egram", command=bOpen)
+    vEgram= Button(egramScreen,text="Ventricle Egram", command= lambda: Open("vPlot"))
+    aEgram= Button(egramScreen, text="Atrium Egram", command= lambda: Open("aPlot"))
+    bEgram= Button(egramScreen, text="Both Egram", command= lambda: Open("bPlot"))
 
     #organizing objects
     egramLabel.grid(row=0,column=1)
