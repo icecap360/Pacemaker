@@ -15,16 +15,15 @@ test_code, set_code, echo_code = 10,20,30
 def echo_params():
 	### ECHO_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		params = [1,0,0,3.5,10,4.0,3.5,10,4.0,0,500,50,200,200,200]
-		params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
+		params = [1]
+		params = struct.pack("<B", *params)
 		dat = serial.to_bytes([test_code, echo_code]) + params
 		bytes_written = device.write(dat)
 		print('done writing ECHO_PARAMS')
-
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [1,0,0,80,10,80,80,10,80,0,500,50,200,200,200]
+		params = [3,0,0,80,10,80,80,10,80,0,500,50,200,200,200]
 		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
 		params = struct.pack("<"+"B"*10+"H"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
@@ -32,17 +31,20 @@ def set_params():
 		print('SET_PARAMS complete, written ', bytes_written, 'bytes')
 	for i in dat:
 		print(i, end=' ')
+	print()
 def read_params(n):
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
 		print('beginning read')
 		bytes_read = device.read(n)
+		#bytes_read = struct.unpack("<Bf",bytes_read)
+		bytes_read=struct.unpack("<BB",bytes_read)
 		print('bytes_read')
 		for byt in bytes_read:
-			print(byt)
+			print(byt, end=' ')
 
 set_params()
-#echo_params()
-#read_params(1)
+echo_params()
+read_params(2)
 
 ###PROBLEMS
 
