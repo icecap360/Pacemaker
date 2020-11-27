@@ -5,21 +5,14 @@ import struct
 port = None
 baudrate = 115200
 for p in list_ports.comports():
-	if 'J-Link' in p.__str__():
+	if 'JLink' in p.__str__():
 		port = p
+		print("port selected "+ p.__str__())
 		break
 port_name = port.device
 print('here')
 test_code, set_code, echo_code = 10,20,30
 
-def echo_params():
-	### ECHO_PARAMS
-	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		params = [1]
-		params = struct.pack("<B", *params)
-		dat = serial.to_bytes([test_code, echo_code]) + params
-		bytes_written = device.write(dat)
-		print('done writing ECHO_PARAMS')
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
@@ -32,10 +25,23 @@ def set_params():
 	for i in dat:
 		print(i, end=' ')
 	print()
-def read_params(n):
+
+def echo_params(n):
+	### ECHO_PARAMS
+	with serial.Serial(port=port_name, baudrate=baudrate) as device:
+		params = [n]
+		params = struct.pack("<B", *params)
+		dat = serial.to_bytes([test_code, echo_code]) + params
+		for i in dat:
+			print(i, end = ' ')
+		print()
+		bytes_written = device.write(dat)
+		print('done writing ECHO_PARAMS')
+
+def read_params(len_read, param_number):
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
 		print('beginning read')
-		bytes_read = device.read(n)
+		bytes_read = device.read(len_read)
 		#bytes_read = struct.unpack("<Bf",bytes_read)
 		bytes_read=struct.unpack("<BB",bytes_read)
 		print('bytes_read')
@@ -43,8 +49,8 @@ def read_params(n):
 			print(byt, end=' ')
 
 set_params()
-echo_params()
-read_params(2)
+echo_params(2)
+read_params(2,1)
 
 ###PROBLEMS
 
