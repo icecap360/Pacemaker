@@ -1,4 +1,4 @@
-#AOO Pacing
+#DOO Pacing
 from tkinter import *
 import DCM_WelcomeScreen
 import threading
@@ -6,7 +6,7 @@ import sys
 import time
 from DCM_Check_Connection import checkConnection
 
-def openAOO():
+def openDOO():
     # Initialize variables
     LowRL_F = open("LowRL.txt", "r")
     try:
@@ -39,25 +39,44 @@ def openAOO():
         AtrialPW = 0.4 #Default value
     finally:
         AtrialPW_F.close()
+        
+    VentAmp_F = open("VentAmp.txt", "r")
+    try:
+        VentAmp = VentAmp_F.readline()
+    except:
+        VentAmp = 3.5 #Default value
+    finally:
+        VentAmp_F.close()
+        
+    VentPW_F = open("VentPW.txt", "r")
+    try:
+        VentPW = VentPW_F.readline()
+    except:
+        VentPW = 0.4 #Default value
+    finally:
+        VentPW_F.close()
 
     # Create AOO Page
-    AOOpage = Toplevel()
-    AOOpage.title("AOO Pacing Mode")
-    AOOpage.geometry("800x400")
+    DOOPage = Toplevel()
+    DOOPage.title("DOO Pacing Mode")
+    DOOPage.geometry("800x400")
 
     # Create Labels
-    AOOpageLabel= Label(AOOpage, text="AOO Pacing Mode", font=(None,20,'underline'))
+    DOOPageLabel= Label(DOOPage, text="DOO Pacing Mode", font=(None,20,'underline'))
 
-    LowRL_L = Label(AOOpage, text = "Lower Rate Limit (ppm)", font =(None,12))
-    UpRL_L = Label(AOOpage, text = "Upper Rate Limit (ppm)", font =(None,12))
-    AtrialAmp_L = Label(AOOpage, text = "Atrial Amplitude (V)", font =(None,12))
-    AtrialPW_L = Label(AOOpage, text = "Atrial Pulse Width (ms)", font =(None,12))
+    LowRL_L = Label(DOOPage, text = "Lower Rate Limit (ppm)", font =(None,12))
+    UpRL_L = Label(DOOPage, text = "Upper Rate Limit (ppm)", font =(None,12))
+    AtrialAmp_L = Label(DOOPage, text = "Atrial Amplitude (V)", font =(None,12))
+    AtrialPW_L = Label(DOOPage, text = "Atrial Pulse Width (ms)", font =(None,12))
+    VentAmp_L = Label(DOOPage, text = "Ventricular Amplitude (V)", font =(None,12))
+    VentPW_L = Label(DOOPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
 
-    LowRL_V = Label(AOOpage, text = LowRL, font =(None,12))
-    UpRL_V = Label(AOOpage, text = UpRL, font =(None,12))
-    AtrialAmp_V = Label(AOOpage, text = AtrialAmp, font =(None,12))
-    AtrialPW_V = Label(AOOpage, text = AtrialPW, font =(None,12))
-
+    LowRL_V = Label(DOOPage, text = LowRL, font =(None,12))
+    UpRL_V = Label(DOOPage, text = UpRL, font =(None,12))
+    AtrialAmp_V = Label(DOOPage, text = AtrialAmp, font =(None,12))
+    AtrialPW_V = Label(DOOPage, text = AtrialPW, font =(None,12))
+    VentAmp_V = Label(DOOPage, text = VentAmp, font =(None,12))
+    VentPW_V = Label(DOOPage, text = VentPW, font =(None,12))
 
     # Button Functions
     def changeLowRL():
@@ -127,28 +146,70 @@ def openAOO():
                 AtrialPW_F.close()
         except:
             AtrialPW_V.config(text = "Invalid Value")
+    
+    def changeVentAmp():
+        try:
+            #check variable range
+            VentAmp = float(VentAmp_E.get())
+            if (VentAmp < 0.5):
+                VentAmp_V.config(text = "Value too low")
+            elif (VentAmp > 7.0):
+                VentAmp_V.config(text = "Value too high")
+            else:
+                VentAmp_V.config(text = VentAmp)
+                #write to file
+                VentAmp_F = open("VentAmp.txt", "w")
+                VentAmp_F.write(VentAmp_E.get())
+                VentAmp_F.close()
+        except:
+            VentAmp_V.config(text = "Invalid Value")
+            
+    def changeVentPW():
+        try:
+            #check variable range
+            VentPW = float(VentPW_E.get())
+            if (VentPW < 0.05):
+                VentPW_V.config(text = "Value too low")
+            elif (VentPW > 1.9):
+                VentPW_V.config(text = "Value too high")
+            else:
+                VentPW_V.config(text = VentPW)
+                #write to file
+                VentPW_F = open("VentPW.txt", "w")
+                VentPW_F.write(VentPW_E.get())
+                VentPW_F.close()
+        except:
+            VentPW_V.config(text = "Invalid Value")
 
     # Create Entries
-    LowRL_E = Entry(AOOpage, width=20)
+    LowRL_E = Entry(DOOPage, width=20)
     LowRL_E.insert(0, "Enter New Value")
 
-    UpRL_E = Entry(AOOpage, width=20)
+    UpRL_E = Entry(DOOPage, width=20)
     UpRL_E.insert(0, "Enter New Value")
 
-    AtrialAmp_E = Entry(AOOpage, width=20)
+    AtrialAmp_E = Entry(DOOPage, width=20)
     AtrialAmp_E.insert(0, "Enter New Value")
 
-    AtrialPW_E = Entry(AOOpage, width=20)
+    AtrialPW_E = Entry(DOOPage, width=20)
     AtrialPW_E.insert(0, "Enter New Value")
 
+    VentAmp_E = Entry(DOOPage, width=20)
+    VentAmp_E.insert(0, "Enter New Value")
+
+    VentPW_E = Entry(DOOPage, width=20)
+    VentPW_E.insert(0, "Enter New Value")
+
     # Create Buttons
-    LowRL_B = Button(AOOpage, text="Update", command=changeLowRL)
-    UpRL_B = Button(AOOpage, text="Update", command=changeUpRL)
-    AtrialAmp_B = Button(AOOpage, text="Update", command=changeAtrAmp)
-    AtrialPW_B = Button(AOOpage, text="Update", command=changeAtrPW)
+    LowRL_B = Button(DOOPage, text="Update", command=changeLowRL)
+    UpRL_B = Button(DOOPage, text="Update", command=changeUpRL)
+    AtrialAmp_B = Button(DOOPage, text="Update", command=changeAtrAmp)
+    AtrialPW_B = Button(DOOPage, text="Update", command=changeAtrPW)
+    VentAmp_B = Button(DOOPage, text="Update", command=changeVentAmp)
+    VentPW_B = Button(DOOPage, text="Update", command=changeVentPW)
 
     # Organize objects
-    AOOpageLabel.grid(row= 1, column= 1)
+    DOOPageLabel.grid(row= 1, column= 1)
 
     LowRL_L.grid(row= 2, column= 0)
     LowRL_V.grid(row= 2, column= 1)
@@ -170,6 +231,17 @@ def openAOO():
     AtrialPW_E.grid(row= 5, column= 2)
     AtrialPW_B.grid(row= 5, column= 3)
 
+    VentAmp_L.grid(row= 6, column= 0)
+    VentAmp_V.grid(row= 6, column= 1)
+    VentAmp_E.grid(row= 6, column= 2)
+    VentAmp_B.grid(row= 6, column= 3)
+
+    VentPW_L.grid(row= 7, column= 0)
+    VentPW_V.grid(row= 7, column= 1)
+    VentPW_E.grid(row= 7, column= 2)
+    VentPW_B.grid(row= 7, column= 3)
+
+
     #Statues Bar
  
     def statusCreate():
@@ -177,7 +249,7 @@ def openAOO():
                 try:
                     user=open("currentUser.txt","r")
                     connectionStatus=checkConnection()
-                    statusLabel= Label(AOOpage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
+                    statusLabel= Label(DOOPage, text="User: "+ user.read() +"            Connection Status: "+connectionStatus+"                ")
                     statusLabel.place(relx=0.0, rely=1.0, anchor="sw")
                     time.sleep(5000)
                 except TclError:

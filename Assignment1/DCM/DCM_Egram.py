@@ -82,3 +82,5 @@ def openEgram():
     vEgram.grid(row=2,column=0)
     aEgram.grid(row=2,column=1)
     bEgram.grid(row=2,column=2)
+
+    mainloop()

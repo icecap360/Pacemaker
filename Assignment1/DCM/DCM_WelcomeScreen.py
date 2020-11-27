@@ -20,11 +20,11 @@ def openWelcome():
                 userDatabase.close()
                 openHub()
                 return
-            else:
-                loginStatus= Label(welcomeScreen, text="Username or Password incorrect")
-                loginStatus.grid(row= 4, column= 2)
-                userDatabase.close()
-                return
+        loginStatus= Label(welcomeScreen, text="Username or Password incorrect")
+        loginStatus.grid(row= 4, column= 2)
+        userDatabase.close()
+        return
+                
 
     def createNewUser():
         userDatabase = open("userDatabase.txt","r")
