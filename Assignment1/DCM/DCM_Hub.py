@@ -24,7 +24,6 @@ def openHub():
 
         return
 
-
     #create main hub
     mainHub= Toplevel()
     mainHub.title("DCM HUB")

@@ -5,7 +5,7 @@ import struct
 port = None
 baudrate = 115200
 for p in list_ports.comports():
-	if 'JLink' in p.__str__():
+	if 'J-Link' in p.__str__():
 		port = p
 		break
 port_name = port.device
