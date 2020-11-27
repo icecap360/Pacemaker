@@ -7,24 +7,25 @@ baudrate = 115200
 for p in list_ports.comports():
 	if 'JLink' in p.__str__():
 		port = p
-		print("port selected "+ p.__str__())
 		break
 port_name = port.device
-print('here')
+print('port selected as'+port_name)
 test_code, set_code, echo_code = 10,20,30
 
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [3,0,0,80,10,80,80,10,80,0,500,50,200,200,200]
+		params = [3,0,0,80,10,80,80,10,80,0,500,100,200,200,200]
 		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
 		params = struct.pack("<"+"B"*10+"H"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
 		bytes_written = device.write(dat)
-		print('SET_PARAMS complete, written ', bytes_written, 'bytes')
+		print("set written: ")
 	for i in dat:
 		print(i, end=' ')
 	print()
+	print('SET_PARAMS complete, written ', bytes_written, 'bytes')
+
 
 def echo_params(n):
 	### ECHO_PARAMS
@@ -32,25 +33,26 @@ def echo_params(n):
 		params = [n]
 		params = struct.pack("<B", *params)
 		dat = serial.to_bytes([test_code, echo_code]) + params
+		print("echo written: ")
 		for i in dat:
 			print(i, end = ' ')
 		print()
 		bytes_written = device.write(dat)
 		print('done writing ECHO_PARAMS')
 
-def read_params(len_read, param_number):
+def read_params(len_read):
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
 		print('beginning read')
 		bytes_read = device.read(len_read)
 		#bytes_read = struct.unpack("<Bf",bytes_read)
-		bytes_read=struct.unpack("<BB",bytes_read)
+		bytes_read=struct.unpack("<BH",bytes_read)
 		print('bytes_read')
 		for byt in bytes_read:
 			print(byt, end=' ')
 
 set_params()
-echo_params(2)
-read_params(2,1)
+echo_params(12)
+read_params(3)
 
 ###PROBLEMS
 
