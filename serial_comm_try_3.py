@@ -48,14 +48,14 @@ def read_params(len_read):
 		print('beginning read')
 		bytes_read = device.read(len_read)
 		#bytes_read = struct.unpack("<Bf",bytes_read)
-		bytes_read=struct.unpack("<BH",bytes_read)
+		bytes_read=struct.unpack("<BB",bytes_read)
 		print('bytes_read')
 		for byt in bytes_read:
 			print(byt, end=' ')
 
 set_params()
-echo_params(22)
-read_params(3)
+echo_params(4)
+read_params(2)
 
 ###PROBLEMS
 
