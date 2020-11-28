@@ -31,7 +31,7 @@ def set_params():
 def echo_params(n):
 	### ECHO_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		params = [n]+[i for i in range(num_bytes_sent-3)]
+		params = [n]+[0 for i in range(num_bytes_sent-3)]
 		params = struct.pack("<"+"B"*len(params), *params)
 		dat = serial.to_bytes([test_code, echo_code]) + params
 		print("echo written: ")
@@ -39,7 +39,7 @@ def echo_params(n):
 			print(i, end = ' ')
 		print()
 		bytes_written = device.write(dat)
-		print('done writing ECHO_PARAMS')
+		print('done writing ECHO_PARAMS', bytes_written)
 
 def read_params(len_read):
 	#the serial port can send anywhere from 2 to 5 bytes, it is the reponsibility of the 
@@ -53,9 +53,9 @@ def read_params(len_read):
 		for byt in bytes_read:
 			print(byt, end=' ')
 
-#set_params()
-echo_params(14)
-#read_params(2)
+set_params()
+echo_params(20)
+read_params(2)
 
 ###PROBLEMS
 
