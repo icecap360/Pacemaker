@@ -4,7 +4,7 @@ from serial.tools import list_ports
 import struct
 port = None
 baudrate = 115200
-num_bytes_sent = 26
+num_bytes_sent = 27
 for p in list_ports.comports():
 	if 'JLink' in p.__str__():
 		port = p
@@ -16,9 +16,9 @@ test_code, set_code, echo_code = 10,20,30
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [1,1,2,80,10,60,80,10,60,0,500,100,200,200,200, 1,1,1,1]
+		params = [1,1,2,80,10,60,80,10,60,0,500,100,200,200,200, 1,1,1,1,1]
 		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
-		params = struct.pack("<"+"B"*10+"H"*5+"B"*4, *params)
+		params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
 		bytes_written = device.write(dat)
 		print("set written: ")
@@ -48,14 +48,14 @@ def read_params(len_read):
 		print('beginning read')
 		bytes_read = device.read(len_read)
 		#bytes_read = struct.unpack("<Bf",bytes_read)
-		bytes_read=struct.unpack("<BB",bytes_read)
+		bytes_read=struct.unpack("<BH",bytes_read)
 		print('bytes_read')
 		for byt in bytes_read:
 			print(byt, end=' ')
 
 set_params()
-echo_params(3)
-read_params(2)
+echo_params(14)
+read_params(3)
 ###PROBLEMS
 
 #Program gets stuck at device.read()
