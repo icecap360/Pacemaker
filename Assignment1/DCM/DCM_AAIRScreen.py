@@ -88,14 +88,6 @@ def openAAIR():
     finally:
         maxSensorRate_F.close()
 
-    actThreshold_F = open("actThreshold.txt", "r")
-    try:
-        actThreshold = actThreshold_F.readline()
-    except:
-        actThreshold = "Med" #Default value
-    finally:
-        actThreshold_F.close()
-
     reactTime_F = open("reactTime.txt", "r")
     try:
         reactTime = reactTime_F.readline()
@@ -133,7 +125,6 @@ def openAAIR():
     AtrAmp_L = Label(AAIRPage, text = "Atrial Amplitude (V)", font =(None,12))
     AtrPW_L = Label(AAIRPage, text = "Atrial Pulse Width (ms)", font =(None,12))
     maxSensorRate_L= Label(AAIRPage, text="Maximum Sensor Rate (ppm)", font=(None,12))
-    actThreshold_L= Label(AAIRPage, text="Activity Threshold", font=(None,12))
     reactTime_L= Label(AAIRPage, text="Reaction Time (s)", font=(None,12))
     respFactor_L= Label(AAIRPage, text="Responce Factor ", font=(None,12))
     recoveryTime_L= Label(AAIRPage, text="Recovery Time (min)", font=(None,12))
@@ -143,7 +134,6 @@ def openAAIR():
     AtrAmp_V = Label(AAIRPage, text = AtrAmp, font =(None,12))
     AtrPW_V = Label(AAIRPage, text = AtrPW, font =(None,12))
     maxSensorRate_V= Label(AAIRPage, text=maxSensorRate, font=(None,12))
-    actThreshold_V= Label(AAIRPage, text=actThreshold, font=(None,12))
     reactTime_V= Label(AAIRPage, text=reactTime, font=(None,12))
     respFactor_V= Label(AAIRPage, text=respFactor, font=(None,12))
     recoveryTime_V= Label(AAIRPage, text=recoveryTime, font=(None,12))
@@ -332,19 +322,6 @@ def openAAIR():
         except:
             maxSensorRate_V.config(text = "Invalid Value")
     
-    def changeactThreshold():
-        try:
-            #check variable range
-            actThreshold = actThreshold_E.get()
-            if (actThreshold in ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High", "V-High")):
-                actThreshold_V.config(text = actThreshold)
-                #write to file
-                actThreshold_F = open("actThreshold.txt", "w")
-                actThreshold_F.write(actThreshold_E.get())
-                actThreshold_F.close()
-        except:
-            AtrialPW_V.config(text = "Invalid Value")
-    
     def changereactTime():
         try:
             #check variable range
@@ -426,9 +403,6 @@ def openAAIR():
     maxSensorRate_E= Entry(AAIRPage, width=20)
     maxSensorRate_E.insert(0, "Enter New Value")
 
-    actThreshold_E= Entry(AAIRPage, width=20)
-    actThreshold_E.insert(0, "Enter New Value")
-
     reactTime_E= Entry(AAIRPage, width=20)
     reactTime_E.insert(0, "Enter New Value")
 
@@ -450,7 +424,6 @@ def openAAIR():
     RateSmo_B = Button(AAIRPage, text="Update", command=changeRateSmo)
     Hyst_B = Button(AAIRPage, text="Toggle", command=changeHyst)
     maxSensorRate_B= Button(AAIRPage, text="Update", command=changemaxSensorRate)
-    actThreshold_B= Button(AAIRPage, text="Update", command=changeactThreshold)
     reactTime_B= Button(AAIRPage, text="Update", command=changereactTime)
     respFactor_B= Button(AAIRPage, text="Update", command=changerespFactor)
     recoveryTime_B= Button(AAIRPage, text="Update", command=changerecoveryTime)
@@ -508,11 +481,6 @@ def openAAIR():
     maxSensorRate_V.grid(row= 11, column= 1)
     maxSensorRate_E.grid(row= 11, column= 2)
     maxSensorRate_B.grid(row= 11, column= 3)
-
-    actThreshold_L.grid(row= 12, column= 0)
-    actThreshold_V.grid(row= 12, column= 1)
-    actThreshold_E.grid(row= 12, column= 2)
-    actThreshold_B.grid(row= 12, column= 3)
 
     reactTime_L.grid(row= 13, column= 0)
     reactTime_V.grid(row= 13, column= 1)
