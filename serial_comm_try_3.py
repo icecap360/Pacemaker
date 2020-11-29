@@ -16,7 +16,7 @@ test_code, set_code, echo_code = 10,20,30
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [2,0,0,80,10,80,80,10,80,0,500,100,200,200,200, 1,1,1,1,1]
+		params = [3,0,0,80,10,80,80,10,80,0,500,100,200,200,200, 1,1,1,1,1]
 		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
 		params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
@@ -56,7 +56,6 @@ def read_params(len_read):
 set_params()
 echo_params(21)
 read_params(3)
-
 ###PROBLEMS
 
 #Program gets stuck at device.read()
