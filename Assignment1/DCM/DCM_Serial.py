@@ -36,14 +36,24 @@ def echo_params(n):
         dat = serial.to_bytes([test_code, echo_code]) + params
         bytes_written = device.write(dat)
 
-
-# def read_params(len_read):
-# 	#the serial port can send anywhere from 2 to 5 bytes, it is the reponsibility of the 
-# 	#implementers to not only read the correct number of bytes but also unpack the bytes correctly
-# 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-# 		bytes_read = device.read(len_read)
-# 		bytes_read=struct.unpack("<BB",bytes_read)
-#         data = []
-# 		for byt in bytes_read:
-# 			data.append(byt)
-#         return data
+def read_params8(len_read):
+		#the serial port can send anywhere from 2 to 5 bytes, it is the reponsibility of the 
+		#implementers to not only read the correct number of bytes but also unpack the bytes correctly
+		with serial.Serial(port=port_name, baudrate=baudrate) as device:
+			bytes_read = device.read(len_read)
+			bytes_read=struct.unpack("<BB",bytes_read)
+			data = []
+			for byt in bytes_read:
+				data.append(byt)
+			return data
+        
+def read_params16(len_read):
+	#the serial port can send anywhere from 2 to 5 bytes, it is the reponsibility of the 
+	#implementers to not only read the correct number of bytes but also unpack the bytes correctly
+	with serial.Serial(port=port_name, baudrate=baudrate) as device:
+		bytes_read = device.read(len_read)
+		bytes_read=struct.unpack("<BH",bytes_read)
+		data = []
+		for byt in bytes_read:
+			data.append(byt)
+		return data
