@@ -64,14 +64,6 @@ def openDOOR():
     finally:
         maxSensorRate_F.close()
 
-    actThreshold_F = open("actThreshold.txt", "r")
-    try:
-        actThreshold = actThreshold_F.readline()
-    except:
-        actThreshold = "Med" #Default value
-    finally:
-        actThreshold_F.close()
-
     reactTime_F = open("reactTime.txt", "r")
     try:
         reactTime = reactTime_F.readline()
@@ -110,8 +102,7 @@ def openDOOR():
     AtrialPW_L = Label(DOORPage, text = "Atrial Pulse Width (ms)", font =(None,12))
     VentAmp_L = Label(DOORPage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(DOORPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
-    maxSensorRate_L= Label(DOORPage, text="Maximum Sensor Rate (ppm)", font=(None,12))
-    actThreshold_L= Label(DOORPage, text="Activity Threshold", font=(None,12))
+    maxSensorRate_L= Label(DOORPage, text="Max Sensor Rate", font=(None,12))
     reactTime_L= Label(DOORPage, text="Reaction Time (s)", font=(None,12))
     respFactor_L= Label(DOORPage, text="Responce Factor ", font=(None,12))
     recoveryTime_L= Label(DOORPage, text="Recovery Time (min)", font=(None,12))
@@ -123,7 +114,6 @@ def openDOOR():
     VentAmp_V = Label(DOORPage, text = VentAmp, font =(None,12))
     VentPW_V = Label(DOORPage, text = VentPW, font =(None,12))
     maxSensorRate_V= Label(DOORPage, text=maxSensorRate, font=(None,12))
-    actThreshold_V= Label(DOORPage, text=actThreshold, font=(None,12))
     reactTime_V= Label(DOORPage, text=reactTime, font=(None,12))
     respFactor_V= Label(DOORPage, text=respFactor, font=(None,12))
     recoveryTime_V= Label(DOORPage, text=recoveryTime, font=(None,12))
@@ -248,19 +238,6 @@ def openDOOR():
         except:
             maxSensorRate_V.config(text = "Invalid Value")
     
-    def changeactThreshold():
-        try:
-            #check variable range
-            actThreshold = actThreshold_E.get()
-            if (actThreshold in ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High", "V-High")):
-                actThreshold_V.config(text = actThreshold)
-                #write to file
-                actThreshold_F = open("actThreshold.txt", "w")
-                actThreshold_F.write(actThreshold_E.get())
-                actThreshold_F.close()
-        except:
-            AtrialPW_V.config(text = "Invalid Value")
-    
     def changereactTime():
         try:
             #check variable range
@@ -334,9 +311,6 @@ def openDOOR():
     maxSensorRate_E= Entry(DOORPage, width=20)
     maxSensorRate_E.insert(0, "Enter New Value")
 
-    actThreshold_E= Entry(DOORPage, width=20)
-    actThreshold_E.insert(0, "Enter New Value")
-
     reactTime_E= Entry(DOORPage, width=20)
     reactTime_E.insert(0, "Enter New Value")
 
@@ -354,7 +328,6 @@ def openDOOR():
     VentAmp_B = Button(DOORPage, text="Update", command=changeVentAmp)
     VentPW_B = Button(DOORPage, text="Update", command=changeVentPW)
     maxSensorRate_B= Button(DOORPage, text="Update", command=changemaxSensorRate)
-    actThreshold_B= Button(DOORPage, text="Update", command=changeactThreshold)
     reactTime_B= Button(DOORPage, text="Update", command=changereactTime)
     respFactor_B= Button(DOORPage, text="Update", command=changerespFactor)
     recoveryTime_B= Button(DOORPage, text="Update", command=changerecoveryTime)
@@ -398,25 +371,20 @@ def openDOOR():
     maxSensorRate_E.grid(row= 8, column= 2)
     maxSensorRate_B.grid(row= 8, column= 3)
 
-    actThreshold_L.grid(row= 9, column= 0)
-    actThreshold_V.grid(row= 9, column= 1)
-    actThreshold_E.grid(row= 9, column= 2)
-    actThreshold_B.grid(row= 9, column= 3)
+    reactTime_L.grid(row= 9, column= 0)
+    reactTime_V.grid(row= 9, column= 1)
+    reactTime_E.grid(row= 9, column= 2)
+    reactTime_B.grid(row= 9, column= 3)
 
-    reactTime_L.grid(row= 10, column= 0)
-    reactTime_V.grid(row= 10, column= 1)
-    reactTime_E.grid(row= 10, column= 2)
-    reactTime_B.grid(row= 10, column= 3)
+    respFactor_L.grid(row= 10, column= 0)
+    respFactor_V.grid(row= 10, column= 1)
+    respFactor_E.grid(row= 10, column= 2)
+    respFactor_B.grid(row= 10, column= 3)
 
-    respFactor_L.grid(row= 11, column= 0)
-    respFactor_V.grid(row= 11, column= 1)
-    respFactor_E.grid(row= 11, column= 2)
-    respFactor_B.grid(row= 11, column= 3)
-
-    recoveryTime_L.grid(row= 12, column= 0)
-    recoveryTime_V.grid(row= 12, column= 1)
-    recoveryTime_E.grid(row= 12, column= 2)
-    recoveryTime_B.grid(row= 12, column= 3)
+    recoveryTime_L.grid(row= 11, column= 0)
+    recoveryTime_V.grid(row= 11, column= 1)
+    recoveryTime_E.grid(row= 11, column= 2)
+    recoveryTime_B.grid(row= 11, column= 3)
 
     #Statues Bar
  

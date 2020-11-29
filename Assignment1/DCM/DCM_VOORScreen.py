@@ -48,14 +48,6 @@ def openVOOR():
     finally:
         maxSensorRate_F.close()
 
-    actThreshold_F = open("actThreshold.txt", "r")
-    try:
-        actThreshold = actThreshold_F.readline()
-    except:
-        actThreshold = "Med" #Default value
-    finally:
-        actThreshold_F.close()
-
     reactTime_F = open("reactTime.txt", "r")
     try:
         reactTime = reactTime_F.readline()
@@ -93,7 +85,6 @@ def openVOOR():
     VentAmp_L = Label(VOORPage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(VOORPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
     maxSensorRate_L= Label(VOORPage, text="Maximum Sensor Rate (ppm)", font=(None,12))
-    actThreshold_L= Label(VOORPage, text="Activity Threshold", font=(None,12))
     reactTime_L= Label(VOORPage, text="Reaction Time (s)", font=(None,12))
     respFactor_L= Label(VOORPage, text="Responce Factor ", font=(None,12))
     recoveryTime_L= Label(VOORPage, text="Recovery Time (min)", font=(None,12))
@@ -103,7 +94,6 @@ def openVOOR():
     VentAmp_V = Label(VOORPage, text = VentAmp, font =(None,12))
     VentPW_V = Label(VOORPage, text = VentPW, font =(None,12))
     maxSensorRate_V= Label(VOORPage, text=maxSensorRate, font=(None,12))
-    actThreshold_V= Label(VOORPage, text=actThreshold, font=(None,12))
     reactTime_V= Label(VOORPage, text=reactTime, font=(None,12))
     respFactor_V= Label(VOORPage, text=respFactor, font=(None,12))
     recoveryTime_V= Label(VOORPage, text=recoveryTime, font=(None,12))
@@ -194,19 +184,6 @@ def openVOOR():
         except:
             maxSensorRate_V.config(text = "Invalid Value")
     
-    def changeactThreshold():
-        try:
-            #check variable range
-            actThreshold = actThreshold_E.get()
-            if (actThreshold in ("V-Low", "Low", "Med-Low", "Med", "Med-High", "High", "V-High")):
-                actThreshold_V.config(text = actThreshold)
-                #write to file
-                actThreshold_F = open("actThreshold.txt", "w")
-                actThreshold_F.write(actThreshold_E.get())
-                actThreshold_F.close()
-        except:
-            AtrialPW_V.config(text = "Invalid Value")
-    
     def changereactTime():
         try:
             #check variable range
@@ -274,9 +251,6 @@ def openVOOR():
     maxSensorRate_E= Entry(VOORPage, width=20)
     maxSensorRate_E.insert(0, "Enter New Value")
 
-    actThreshold_E= Entry(VOORPage, width=20)
-    actThreshold_E.insert(0, "Enter New Value")
-
     reactTime_E= Entry(VOORPage, width=20)
     reactTime_E.insert(0, "Enter New Value")
 
@@ -292,7 +266,6 @@ def openVOOR():
     VentAmp_B = Button(VOORPage, text="Update", command=changeVentAmp)
     VentPW_B = Button(VOORPage, text="Update", command=changeVentPW)
     maxSensorRate_B= Button(VOORPage, text="Update", command=changemaxSensorRate)
-    actThreshold_B= Button(VOORPage, text="Update", command=changeactThreshold)
     reactTime_B= Button(VOORPage, text="Update", command=changereactTime)
     respFactor_B= Button(VOORPage, text="Update", command=changerespFactor)
     recoveryTime_B= Button(VOORPage, text="Update", command=changerecoveryTime)
@@ -325,11 +298,6 @@ def openVOOR():
     maxSensorRate_V.grid(row= 6, column= 1)
     maxSensorRate_E.grid(row= 6, column= 2)
     maxSensorRate_B.grid(row= 6, column= 3)
-
-    actThreshold_L.grid(row= 7, column= 0)
-    actThreshold_V.grid(row= 7, column= 1)
-    actThreshold_E.grid(row= 7, column= 2)
-    actThreshold_B.grid(row= 7, column= 3)
 
     reactTime_L.grid(row= 8, column= 0)
     reactTime_V.grid(row= 8, column= 1)
