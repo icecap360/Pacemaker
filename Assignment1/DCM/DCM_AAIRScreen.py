@@ -247,10 +247,10 @@ def openAAIR():
     LowRL_V = Label(AAIRPage, text = LowRL, font =(None,12))
     AtrAmp_V = Label(AAIRPage, text = AtrAmp, font =(None,12))
     AtrPW_V = Label(AAIRPage, text = AtrPW, font =(None,12))
-    maxSensorRate_V= Label(AAIRPage, text=maxSensorRate, font=(None,12))
-    reactTime_V= Label(AAIRPage, text=reactTime, font=(None,12))
-    respFactor_V= Label(AAIRPage, text=respFactor, font=(None,12))
-    recoveryTime_V= Label(AAIRPage, text=recoveryTime, font=(None,12))
+    maxSensorRate_V= Label(AAIRPage, text=MaxSR, font=(None,12))
+    reactTime_V= Label(AAIRPage, text=ReacTime, font=(None,12))
+    respFactor_V= Label(AAIRPage, text=RespF, font=(None,12))
+    recoveryTime_V= Label(AAIRPage, text=RecTime, font=(None,12))
 
     #Additional Labels
     AtrSens_L = Label(AAIRPage, text = "Atrial Sensitivity (mV)", font =(None,12))
@@ -372,13 +372,13 @@ def openAAIR():
     def changereactTime():
         try:
             #check variable range
-            reacTime = int(reactTime_E.get())
-            if (reacTime < 10):
-                reacTime_V.config(text = "Value too low")
-            elif (reactTime > 50):
+            ReacTime = int(reactTime_E.get())
+            if (ReacTime < 10):
+                reactTime_V.config(text = "Value too low")
+            elif (ReacTime > 50):
                 reactTime_V.config(text = "Value too high")
             else:
-                reactTime_V.config(text = reacTime)
+                reactTime_V.config(text = ReacTime)
                 set_params()
         except:
             reactTime_V.config(text = "Invalid Value")
@@ -386,13 +386,13 @@ def openAAIR():
     def changerespFactor():
         try:
             #check variable range
-            respF = int(respFactor_E.get())
-            if (respF < 1):
+            RespF = int(respFactor_E.get())
+            if (RespF < 1):
                 respFactor_V.config(text = "Value too low")
-            elif (respF > 16):
+            elif (RespF > 16):
                 respFactor_V.config(text = "Value too high")
             else:
-                respFactor_V.config(text = respF)
+                respFactor_V.config(text = RespF)
                 set_params()
         except:
             respFactor_V.config(text = "Invalid Value")
@@ -400,13 +400,13 @@ def openAAIR():
     def changerecoveryTime():
         try:
             #check variable range
-            recTime = int(recoveryTime_E.get())
-            if (recTime < 2):
+            RecTime = int(recoveryTime_E.get())
+            if (RecTime < 2):
                 recoveryTime_V.config(text = "Value too low")
-            elif (recTime > 16):
+            elif (RecTime > 16):
                 recoveryTime_V.config(text = "Value too high")
             else:
-                recoveryTime_V.config(text = recTime)
+                recoveryTime_V.config(text = RecTime)
                 set_params()
         except:
             recoveryTime_V.config(text = "Invalid Value")
