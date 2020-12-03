@@ -13,10 +13,32 @@ port_name = port.device
 print('port selected as'+port_name)
 test_code, set_code, echo_code = 10,20,30
 
+chamber_paced = 1
+chamber_sensed = 1
+mode_response = 2
+vent_amp = 5
+vent_pw = 30
+vent_sens = 4
+atr_amp = 5
+atr_pw = 30
+atr_sens = 4
+hyster = 0
+lrl = int(60000/150)
+avdelay = 300
+vrp = 250
+arp = 100
+hyst_escape_int=1000
+msr = 120
+mode_adaptivity = 0
+react_time=30
+response_factor=8
+recovery_time=30
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [1,1,2,80,10,60,80,10,60,0,500,100,200,200,200, 1,1,1,1,1]
+		params = [chamber_paced, chamber_sensed, mode_response, int(vent_amp*20), 
+		vent_pw, int(vent_sens*20), int(atr_amp*20), atr_pw, int(atr_sens*20), hyster, lrl, avdelay, vrp, arp, 
+		hyst_escape_int, msr, mode_adaptivity, react_time, response_factor, recovery_time]
 		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
 		params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
@@ -54,7 +76,7 @@ def read_params(len_read):
 			print(byt, end=' ')
 
 set_params()
-echo_params(14)
+echo_params(11)
 read_params(3)
 ###PROBLEMS
 

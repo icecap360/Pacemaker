@@ -1,0 +1,81 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   9 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "is_active_c2_Assignment2_incase_unofficial"\
+      Description  "StateIsActive"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "is_c2_Assignment2_incase_unofficial"\
+      Description  "StateActiveChild"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "is_DUAL_MODES"\
+      Description  "StateActiveChild"\
+      SFName       ""\
+      Path         "DUAL_MODES"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "is_NON_DUAL_MODES"\
+      Description  "StateActiveChild"\
+      SFName       ""\
+      Path         "NON_DUAL_MODES"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "HIGH"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "HIGH"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "LOW"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "LOW"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "Pace_Interval"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "Pace_Interval"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "Atrial_Escape_Interval"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "Atrial_Escape_Interval"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "temporalCounter_i1"\
+      Description  "TemporalCounter"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+  }
+  %return ChartDataElements
+%endfunction

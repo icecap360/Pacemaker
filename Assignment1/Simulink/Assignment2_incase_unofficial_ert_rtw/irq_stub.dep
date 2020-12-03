@@ -1,0 +1,2 @@
+irq_stub.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/irq_stub.c

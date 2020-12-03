@@ -1,0 +1,38 @@
+k64f_ext_svr.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/k64f_ext_svr.c \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/untitled_ert_rtw/rtwtypes.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/untitled_ert_rtw/multiword_types.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/untitled_ert_rtw/rtwtypes.h \
+ C:/Program\ Files/MATLAB/R2020a/simulink/include/rtw_extmode.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_types.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_share.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_test.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_svr_transport.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/updown.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/upsup_public.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/updown_util.h \
+ C:/Program\ Files/MATLAB/R2020a/rtw/c/src/dt_info.h
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/untitled_ert_rtw/rtwtypes.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/untitled_ert_rtw/multiword_types.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/untitled_ert_rtw/rtwtypes.h:
+
+C:/Program\ Files/MATLAB/R2020a/simulink/include/rtw_extmode.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_types.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_share.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_test.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/ext_svr_transport.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/updown.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/upsup_public.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/ext_mode/common/updown_util.h:
+
+C:/Program\ Files/MATLAB/R2020a/rtw/c/src/dt_info.h:

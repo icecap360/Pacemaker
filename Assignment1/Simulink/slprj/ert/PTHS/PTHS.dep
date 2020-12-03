@@ -1,0 +1,26 @@
+PTHS.o: \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS.c \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/_sharedutils/rtwtypes.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_PWM.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_digitalIO.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS_types.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS_private.h
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/_sharedutils/rtwtypes.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_PWM.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_digitalIO.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS_types.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/PTHS_private.h:

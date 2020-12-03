@@ -1,0 +1,11 @@
+rtGetInf.o: \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rtGetInf.c \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rtGetInf.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rtwtypes.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rt_nonfinite.h
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rtGetInf.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rtwtypes.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/Assignment2_ert_rtw/rt_nonfinite.h:

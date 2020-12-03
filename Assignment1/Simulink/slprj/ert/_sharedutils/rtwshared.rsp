@@ -1,0 +1,3 @@
+rtGetInf.o
+rtGetNaN.o
+rt_nonfinite.o
