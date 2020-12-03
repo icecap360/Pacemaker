@@ -239,8 +239,8 @@ def openAOO():
     AtrialPW_L = Label(AOOpage, text = "Atrial Pulse Width (ms)", font =(None,12))
 
     LowRL_V = Label(AOOpage, text = LowRL, font =(None,12))
-    AtrialAmp_V = Label(AOOpage, text = AtrialAmp, font =(None,12))
-    AtrialPW_V = Label(AOOpage, text = AtrialPW, font =(None,12))
+    AtrialAmp_V = Label(AOOpage, text = AtrAmp, font =(None,12))
+    AtrialPW_V = Label(AOOpage, text = AtrPW, font =(None,12))
 
     # Button Functions
     def set_params():
@@ -269,13 +269,13 @@ def openAOO():
     def changeAtrAmp():
         try:
             #check variable range
-            AtrialAmp = float(AtrialAmp_E.get())
-            if (AtrialAmp < 0.5):
+            AtrAmp = float(AtrialAmp_E.get())
+            if (AtrAmp < 0.5):
                 AtrialAmp_V.config(text = "Value too low")
-            elif (AtrialAmp > 7.0):
+            elif (AtrAmp > 7.0):
                 AtrialAmp_V.config(text = "Value too high")
             else:
-                AtrialAmp_V.config(text = AtrialAmp)
+                AtrialAmp_V.config(text = AtrAmp)
                 #write to file
                 AtrAmp = AtrAmp*10
                 set_params()
@@ -285,13 +285,13 @@ def openAOO():
     def changeAtrPW():
         try:
             #check variable range
-            AtrialPW = float(AtrialPW_E.get())
-            if (AtrialPW < 0.05):
+            AtrPW = float(AtrialPW_E.get())
+            if (AtrPW < 0.05):
                 AtrialPW_V.config(text = "Value too low")
-            elif (AtrialPW > 1.9):
+            elif (AtrPW > 1.9):
                 AtrialPW_V.config(text = "Value too high")
             else:
-                AtrialPW_V.config(text = AtrialPW)
+                AtrialPW_V.config(text = AtrPW)
                 #write to file
                 set_params()
         except:
