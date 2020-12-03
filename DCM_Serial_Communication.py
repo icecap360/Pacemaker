@@ -15,7 +15,7 @@ test_code, set_code, echo_code = 10,20,30
 def echo_params():
 	### ECHO_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		params = [1,0,0,35,10,40,35,10,40,0,60,50,200,200,200]
+		params = [1,1,1,25,25,25,25,25,25,1,60,60,100,100,200,120,0,30,8,5]
 		params = struct.pack("<"+"B"*10+"H"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
 		bytes_written = device.write(dat)

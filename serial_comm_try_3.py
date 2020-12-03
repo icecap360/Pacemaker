@@ -6,7 +6,7 @@ port = None
 baudrate = 115200
 num_bytes_sent = 27
 for p in list_ports.comports():
-	if 'JLink' in p.__str__():
+	if 'Link' in p.__str__():
 		port = p
 		break
 port_name = port.device
@@ -67,17 +67,27 @@ def read_params(len_read):
 	#the serial port can send anywhere from 2 to 5 bytes, it is the reponsibility of the 
 	#implementers to not only read the correct number of bytes but also unpack the bytes correctly
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:
-		print('beginning read')
 		bytes_read = device.read(len_read)
 		#bytes_read = struct.unpack("<Bf",bytes_read)
-		bytes_read=struct.unpack("<BH",bytes_read)
-		print('bytes_read')
+		bytes_read=struct.unpack("<BB",bytes_read)
+		data= []
 		for byt in bytes_read:
-			print(byt, end=' ')
+			data.append(byt)
+		return data
 
 set_params()
 echo_params(11)
 read_params(3)
+"""
+echo_params(4)
+fails=0
+for i in range(0,999):
+	data = read_params(2)
+	if (data[0] != 4):
+		fails+=1
+print(fails)
+>>>>>>> e8d79743d0f80c6ece7c8ed2c32224c09179f9e6
+"""
 ###PROBLEMS
 
 #Program gets stuck at device.read()

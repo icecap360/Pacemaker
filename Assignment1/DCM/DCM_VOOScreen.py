@@ -7,8 +7,8 @@ import time
 import serial
 from DCM_Check_Connection import checkConnection
 from DCM_Serial import echo_params
-from DCM_Serial_ju import read_params8
-from DCM_Serial_ju import read_params16
+from DCM_Serial import read_params8
+from DCM_Serial import read_params16
 from serial.tools import list_ports
 import struct
 port = None
@@ -63,7 +63,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==4):
-            VentAmp = data[1]
+            VentAmp = data[1]/20
             r1 = True
 
     #VentPW
@@ -73,7 +73,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]
+            VentPW = data[1]//(100/30)
             r1 = True
 
     #VentSens
@@ -83,7 +83,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==6):
-            VentSens = data[1]
+            VentSens = data[1]/20
             r1 = True
 
     #AtrAmp
@@ -93,7 +93,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==7):
-            AtrAmp = data[1]
+            AtrAmp = data[1]/20
             r1 = True
 
     #AtrPW
@@ -103,7 +103,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]
+            AtrPW = data[1]//(100/30)
             r1 = True
 
     #AtrSens
@@ -113,7 +113,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==9):
-            AtrSens = data[1]
+            AtrSens = data[1]/20
             r1 = True
 
     #Hyst
@@ -235,12 +235,10 @@ def openVOO():
     VOOpageLabel= Label(VOOpage, text="VOO Pacing Mode", font=(None,20,'underline'))
 
     LowRL_L = Label(VOOpage, text = "Lower Rate Limit (ppm)", font =(None,12))
-    UpRL_L = Label(VOOpage, text = "Upper Rate Limit (ppm)", font =(None,12))
     VentAmp_L = Label(VOOpage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(VOOpage, text = "Ventricular Pulse Width (ms)", font =(None,12))
 
     LowRL_V = Label(VOOpage, text = LowRL, font =(None,12))
-    UpRL_V = Label(VOOpage, text = UpRL, font =(None,12))
     VentAmp_V = Label(VOOpage, text = VentAmp, font =(None,12))
     VentPW_V = Label(VOOpage, text = VentPW, font =(None,12))
 
@@ -248,7 +246,7 @@ def openVOO():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [MCP,MCS,MR,VentAmp,VentPW,VentSens,AtrAmp,AtrPW,AtrSens,Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,ModeAd,ReacTime,RespF,RecTime]
+            params = [MCP,MCS,MR,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,ModeAd,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
@@ -286,10 +284,10 @@ def openVOO():
     def changeVentPW():
         try:
             #check variable range
-            VentPW = float(VentPW_E.get())
-            if (VentPW < 0.05):
+            VentPW = int(VentPW_E.get())
+            if (VentPW < 1):
                 VentPW_V.config(text = "Value too low")
-            elif (VentPW > 1.9):
+            elif (VentPW > 30):
                 VentPW_V.config(text = "Value too high")
             else:
                 VentPW_V.config(text = VentPW)

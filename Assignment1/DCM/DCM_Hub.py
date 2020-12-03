@@ -15,6 +15,28 @@ from DCM_Check_Connection import checkConnection
 import threading
 import sys
 import time
+import serial
+from serial.tools import list_ports
+import struct
+port = None
+baudrate = 115200
+num_bytes_sent = 27
+for p in list_ports.comports():
+	if 'Link' in p.__str__():
+		port = p
+		break
+port_name = port.device
+print('port selected as'+port_name)
+test_code, set_code, echo_code = 10,20,30
+
+def set_params():
+	### SET_PARAMS
+	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
+		params = [1,1,1,50,4,50,50,4,50,1,60,60,100,100,200,120,0,30,8,5]
+		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
+		params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
+		dat = serial.to_bytes([test_code, set_code]) + params
+		bytes_written = device.write(dat)
 
 def openHub():
     
@@ -23,6 +45,8 @@ def openHub():
         #Program to pace
 
         return
+
+    set_params()
 
     #create main hub
     mainHub= Toplevel()
