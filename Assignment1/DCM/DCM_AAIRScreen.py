@@ -9,8 +9,8 @@ import time
 import serial
 from DCM_Check_Connection import checkConnection
 from DCM_Serial import echo_params
-from DCM_Serial_ju import read_params8
-from DCM_Serial_ju import read_params16
+from DCM_Serial import read_params8
+from DCM_Serial import read_params16
 from serial.tools import list_ports
 import struct
 port = None
@@ -65,7 +65,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==4):
-            VentAmp = data[1]
+            VentAmp = data[1]/20
             r1 = True
 
     #VentPW
@@ -75,7 +75,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]
+            VentPW = data[1]//(100/30)
             r1 = True
 
     #VentSens
@@ -85,7 +85,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==6):
-            VentSens = data[1]
+            VentSens = data[1]/20
             r1 = True
 
     #AtrAmp
@@ -95,7 +95,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==7):
-            AtrAmp = data[1]
+            AtrAmp = data[1]/20
             r1 = True
 
     #AtrPW
@@ -105,7 +105,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]
+            AtrPW = data[1]//(100/30)
             r1 = True
 
     #AtrSens
@@ -115,7 +115,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==9):
-            AtrSens = data[1]
+            AtrSens = data[1]/20
             r1 = True
 
     #Hyst
@@ -264,7 +264,7 @@ def openAAIR():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [MCP,MCS,MR,VentAmp,VentPW,VentSens,AtrAmp,AtrPW,AtrSens,Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,ModeAd,ReacTime,RespF,RecTime]
+            params = [MCP,MCS,MR,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,ModeAd,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
@@ -302,10 +302,10 @@ def openAAIR():
     def changeAtrPW():
         try:
             #check variable range
-            AtrPW = float(AtrPW_E.get())
-            if (AtrPW < 0.05):
+            AtrPW = int(AtrPW_E.get())
+            if (AtrPW < 1):
                 AtrPW_V.config(text = "Value too low")
-            elif (AtrPW > 1.9):
+            elif (AtrPW > 30):
                 AtrPW_V.config(text = "Value too high")
             else:
                 AtrPW_V.config(text = AtrPW)

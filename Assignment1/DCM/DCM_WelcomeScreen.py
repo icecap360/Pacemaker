@@ -1,6 +1,6 @@
 from tkinter import *
 from DCM_Hub import openHub
-from os import getcwd, chdir, path ; chdir(path.join("Assignment1", "DCM")) ;print(getcwd())
+#from os import getcwd, chdir, path ; chdir(path.join("Assignment1", "DCM")) 
 
 def openWelcome():
 
