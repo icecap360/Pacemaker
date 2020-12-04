@@ -258,6 +258,7 @@ def openDOOR():
     reactTime_L= Label(DOORPage, text="Reaction Time (ms)", font=(None,12))
     respFactor_L= Label(DOORPage, text="Responce Factor ", font=(None,12))
     recoveryTime_L= Label(DOORPage, text="Recovery Time (ms)", font=(None,12))
+    AVDelay_L= Label(DOORPage, text= "AV Delay (ms)", font=(None, 12))
 
     LowRL_V = Label(DOORPage, text = LowRL, font =(None,12))
     AtrialAmp_V = Label(DOORPage, text = AtrAmp, font =(None,12))
@@ -268,6 +269,7 @@ def openDOOR():
     reactTime_V= Label(DOORPage, text=ReacTime, font=(None,12))
     respFactor_V= Label(DOORPage, text=RespF, font=(None,12))
     recoveryTime_V= Label(DOORPage, text=RecTime, font=(None,12))
+    AVDelay_V= Label(DOORPage, text=AVDelay, font=(None, 12))
 
     # Button Functions
     def set_params():
@@ -415,6 +417,21 @@ def openDOOR():
         except:
             recoveryTime_V.config(text = "Invalid Value")
 
+    def changeAVDelay():
+        global AVDelay
+        try:
+            #check variable range
+            AVDelay = int(AVDelay_E.get())
+            if (AVDelay < 70):
+                AVDelay_V.config(text = "Value too low")
+            elif (AVDelay > 300):
+                AVDelay_V.config(text = "Value too high")
+            else:
+                AVDelay_V.config(text = AVDelay)
+                set_params()
+        except:
+            AVDelay_V.config(text = "Invalid Value")
+
     # Create Entries
     LowRL_E = Entry(DOORPage, width=20)
     LowRL_E.insert(0, "Enter New Value")
@@ -443,6 +460,9 @@ def openDOOR():
     recoveryTime_E= Entry(DOORPage, width=20)
     recoveryTime_E.insert(0, "Enter New Value")
 
+    AVDelay_E= Entry(DOORPage, width=20)
+    AVDelay_E.insert(0, "Enter New Value")
+
     # Create Buttons
     LowRL_B = Button(DOORPage, text="Update", command=changeLowRL)
     AtrialAmp_B = Button(DOORPage, text="Update", command=changeAtrAmp)
@@ -453,6 +473,7 @@ def openDOOR():
     reactTime_B= Button(DOORPage, text="Update", command=changereactTime)
     respFactor_B= Button(DOORPage, text="Update", command=changerespFactor)
     recoveryTime_B= Button(DOORPage, text="Update", command=changerecoveryTime)
+    AVDelay_B= Button(DOORPage, text= "Update", command= changeAVDelay)
 
 
     # Organize objects
@@ -502,6 +523,11 @@ def openDOOR():
     recoveryTime_V.grid(row= 10, column= 1)
     recoveryTime_E.grid(row= 10, column= 2)
     recoveryTime_B.grid(row= 10, column= 3)
+
+    AVDelay_L.grid(row= 11, column= 0)
+    AVDelay_V.grid(row= 11, column= 1)
+    AVDelay_E.grid(row= 11, column= 2)
+    AVDelay_B.grid(row= 11, column= 3)
 
     #Statues Bar
  
