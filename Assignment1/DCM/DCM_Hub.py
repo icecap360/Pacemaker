@@ -32,7 +32,7 @@ test_code, set_code, echo_code = 10,20,30
 def set_params():
 	### SET_PARAMS
 	with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-		params = [1,1,1,50,4,50,50,4,50,1,60,60,100,100,200,120,0,30,8,5]
+		params = [1,1,1,50,4,60,50,4,60,1,60,60,100,100,200,120,0,30,8,5]
 		#params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
 		params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
 		dat = serial.to_bytes([test_code, set_code]) + params
