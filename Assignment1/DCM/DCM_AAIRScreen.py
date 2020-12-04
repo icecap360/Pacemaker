@@ -27,6 +27,21 @@ AVDelay=0
 
 def openAAIR():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -264,13 +279,14 @@ def openAAIR():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [1,1,2,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
+            params = [1,1,2,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
     
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -285,21 +301,23 @@ def openAAIR():
             LowRL_V.config(text = "Invalid Value")
         
     def changeAtrAmp():
+        global AtrAmp
         try:
             #check variable range
             AtrAmp = float(AtrAmp_E.get())
             if (AtrAmp < 0.5):
                 AtrAmp_V.config(text = "Value too low")
-            elif (AtrAmp > 7.0):
+            elif (AtrAmp > 5.0):
                 AtrAmp_V.config(text = "Value too high")
             else:
                 AtrAmp_V.config(text = AtrAmp)
-                AtrAmp = AtrAmp*10
+                AtrAmp = AtrAmp
                 set_params()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
+        global AtrPW
         try:
             #check variable range
             AtrPW = int(AtrPW_E.get())
@@ -316,6 +334,7 @@ def openAAIR():
     #Additional Functions
 
     def changeAtrSens():
+        global AtrSens
         try:
             #check variable range
             AtrSens = float(AtrSens_E.get())
@@ -325,12 +344,13 @@ def openAAIR():
                 AtrSens_V.config(text = "Value too high")
             else:
                 AtrSens_V.config(text = AtrSens)
-                AtrSens = AtrSens*10
+                AtrSens = AtrSens
                 set_params()
         except:
             AtrSens_V.config(text = "Invalid Value")
 
     def changeARP():
+        global ARP
         try:
             #check variable range
             ARP = int(ARP_E.get())
@@ -356,6 +376,7 @@ def openAAIR():
             set_params()
         
     def changemaxSensorRate():
+        global MaxSR
         try:
             #check variable range
             MaxSR = int(maxSensorRate_E.get())
@@ -370,6 +391,7 @@ def openAAIR():
             maxSensorRate_V.config(text = "Invalid Value")
     
     def changereactTime():
+        global ReacTime
         try:
             #check variable range
             ReacTime = int(reactTime_E.get())
@@ -384,6 +406,7 @@ def openAAIR():
             reactTime_V.config(text = "Invalid Value")
 
     def changerespFactor():
+        global RespF
         try:
             #check variable range
             RespF = int(respFactor_E.get())
@@ -398,6 +421,7 @@ def openAAIR():
             respFactor_V.config(text = "Invalid Value")
     
     def changerecoveryTime():
+        global RecTime
         try:
             #check variable range
             RecTime = int(recoveryTime_E.get())
