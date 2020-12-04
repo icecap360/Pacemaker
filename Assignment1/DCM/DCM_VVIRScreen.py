@@ -15,7 +15,7 @@ port = None
 baudrate = 115200
 num_bytes_sent = 27
 for p in list_ports.comports():
-    if 'Link' in p.__str__():
+    if 'JLink' in p.__str__():
         port = p
         break
 port_name = port.device
