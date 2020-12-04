@@ -255,9 +255,9 @@ def openAAIR():
     AtrAmp_L = Label(AAIRPage, text = "Atrial Amplitude (V)", font =(None,12))
     AtrPW_L = Label(AAIRPage, text = "Atrial Pulse Width (ms)", font =(None,12))
     maxSensorRate_L= Label(AAIRPage, text="Maximum Sensor Rate (ppm)", font=(None,12))
-    reactTime_L= Label(AAIRPage, text="Reaction Time (s)", font=(None,12))
+    reactTime_L= Label(AAIRPage, text="Reaction Time (ms)", font=(None,12))
     respFactor_L= Label(AAIRPage, text="Responce Factor ", font=(None,12))
-    recoveryTime_L= Label(AAIRPage, text="Recovery Time (min)", font=(None,12))
+    recoveryTime_L= Label(AAIRPage, text="Recovery Time (ms)", font=(None,12))
 
     LowRL_V = Label(AAIRPage, text = LowRL, font =(None,12))
     AtrAmp_V = Label(AAIRPage, text = AtrAmp, font =(None,12))
@@ -395,9 +395,9 @@ def openAAIR():
         try:
             #check variable range
             ReacTime = int(reactTime_E.get())
-            if (ReacTime < 10):
+            if (ReacTime < 0):
                 reactTime_V.config(text = "Value too low")
-            elif (ReacTime > 50):
+            elif (ReacTime > 100):
                 reactTime_V.config(text = "Value too high")
             else:
                 reactTime_V.config(text = ReacTime)
@@ -425,9 +425,9 @@ def openAAIR():
         try:
             #check variable range
             RecTime = int(recoveryTime_E.get())
-            if (RecTime < 2):
+            if (RecTime < 0):
                 recoveryTime_V.config(text = "Value too low")
-            elif (RecTime > 16):
+            elif (RecTime > 100):
                 recoveryTime_V.config(text = "Value too high")
             else:
                 recoveryTime_V.config(text = RecTime)
