@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.517
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 23:04:02 2020
+ * C/C++ source code generated on : Thu Dec  3 23:13:01 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -704,9 +704,9 @@ void Assignment2_4_step(void)
        &Assignment2_4_DW.VRP, &Assignment2_4_DW.ARP,
        &Assignment2_4_DW.Hysterisis_Escape_Interval,
        &Assignment2_4_DW.Max_Sensor_Rate, &Assignment2_4_DW.Mode_Adaptivity,
-       &Assignment2_4_DW.Reaction_Time, &Assignment2_4_DW.Recovery_Time,
-       &Assignment2_4_DW.Smoothed_Acceleration, &Assignment2_4_B.Trigger,
-       &(Assignment2_4_DW.Model1_InstanceData.rtb),
+       &Assignment2_4_DW.Reaction_Time, &Assignment2_4_DW.Response_Factor,
+       &Assignment2_4_DW.Recovery_Time, &Assignment2_4_DW.Smoothed_Acceleration,
+       &Assignment2_4_B.Trigger, &(Assignment2_4_DW.Model1_InstanceData.rtb),
        &(Assignment2_4_DW.Model1_InstanceData.rtdw));
 
   /* DataTypeConversion: '<Root>/Data Type Conversion' incorporates:

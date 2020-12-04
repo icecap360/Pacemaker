@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.14
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 23:06:22 2020
+ * C/C++ source code generated on : Thu Dec  3 23:12:11 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -27,6 +27,7 @@
 #define PTHS_IN_Increasing             ((uint8_T)4U)
 #define PTHS_IN_NO_ACTIVE_CHILD        ((uint8_T)0U)
 #define PTHS_IN_main                   ((uint8_T)5U)
+#define PTHS_IN_start                  ((uint8_T)6U)
 
 /* Named constants for Chart: '<Root>/Chart1' */
 #define IN_Discharging_C21_and_Pace_Int ((uint8_T)7U)
@@ -609,9 +610,9 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
           *rtu_VRP, const uint16_T *rtu_ARP, const uint16_T
           *rtu_Hysterisis_Escape_Interval, const uint8_T
           *rtu_Maximum_Sensor_Rate, const uint8_T *rtu_Mode_Adaptivity, const
-          uint8_T *rtu_Reaction_Time, const uint8_T *rtu_Recovery_Time, const
-          real_T *rtu_Smoother_Acceleration, boolean_T *rty_Trigger, B_PTHS_c_T *
-          localB, DW_PTHS_f_T *localDW)
+          uint8_T *rtu_Reaction_Time, const uint8_T *rtu_Response_Factor, const
+          uint8_T *rtu_Recovery_Time, const real_T *rtu_Smoother_Acceleration,
+          boolean_T *rty_Trigger, B_PTHS_c_T *localB, DW_PTHS_f_T *localDW)
 {
   real_T rtb_Divide1;
   uint16_T DataTypeConversion8;
@@ -627,6 +628,7 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
   rtb_Divide1 = PTHS_P.Constant1_Value / (real_T)*rtu_Lower_Rate_Limit;
 
   /* Chart: '<Root>/Chart' incorporates:
+   *  DataTypeConversion: '<Root>/Data Type Conversion3'
    *  DataTypeConversion: '<Root>/Data Type Conversion4'
    */
   if (localDW->temporalCounter_i1_i < MAX_uint32_T) {
@@ -635,7 +637,9 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
 
   if (localDW->is_active_c1_PTHS == 0U) {
     localDW->is_active_c1_PTHS = 1U;
-    localDW->is_c1_PTHS = PTHS_IN_INITIAL;
+    localDW->is_c1_PTHS = PTHS_IN_start;
+    localDW->RateChange = (real_T)*rtu_Response_Factor / 16.0;
+    localB->LED_BLUE = true;
   } else {
     switch (localDW->is_c1_PTHS) {
      case PTHS_IN_Constant:

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.14
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 23:06:22 2020
+ * C/C++ source code generated on : Thu Dec  3 23:12:11 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -142,9 +142,9 @@ extern void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
                  *rtu_ARP, const uint16_T *rtu_Hysterisis_Escape_Interval, const
                  uint8_T *rtu_Maximum_Sensor_Rate, const uint8_T
                  *rtu_Mode_Adaptivity, const uint8_T *rtu_Reaction_Time, const
-                 uint8_T *rtu_Recovery_Time, const real_T
-                 *rtu_Smoother_Acceleration, boolean_T *rty_Trigger, B_PTHS_c_T *
-                 localB, DW_PTHS_f_T *localDW);
+                 uint8_T *rtu_Response_Factor, const uint8_T *rtu_Recovery_Time,
+                 const real_T *rtu_Smoother_Acceleration, boolean_T *rty_Trigger,
+                 B_PTHS_c_T *localB, DW_PTHS_f_T *localDW);
 extern void PTHS_Term(DW_PTHS_f_T *localDW);
 
 /*-
