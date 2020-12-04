@@ -26,6 +26,21 @@ AVDelay=0
 
 def openAAI():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -74,7 +89,7 @@ def openAAI():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -104,7 +119,7 @@ def openAAI():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
@@ -244,7 +259,7 @@ def openAAI():
     AtrPW_V = Label(AIIpage, text = AtrPW, font =(None,12))
 
     #Additional Labels
-    AtrSens_L = Label(AIIpage, text = "Atrial Sensitivity (mV)", font =(None,12))
+    AtrSens_L = Label(AIIpage, text = "Atrial Sensitivity (V)", font =(None,12))
     ARP_L = Label(AIIpage, text = "Refractory Period (ms)", font =(None,12))
     Hyst_L = Label(AIIpage, text = "Hysteresis", font =(None,12))
 
@@ -255,13 +270,14 @@ def openAAI():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [1,1,2,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,0,ReacTime,RespF,RecTime]
+            params = [1,1,2,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,0,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
                     
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -276,6 +292,7 @@ def openAAI():
             LowRL_V.config(text = "Invalid Value")
         
     def changeAtrAmp():
+        global AtrAmp
         try:
             #check variable range
             AtrAmp = float(AtrAmp_E.get())
@@ -285,12 +302,13 @@ def openAAI():
                 AtrAmp_V.config(text = "Value too high")
             else:
                 AtrAmp_V.config(text = AtrAmp)
-                AtrAmp = AtrAmp*10
+                AtrAmp = AtrAmp
                 set_params()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
+        global AtrPW
         try:
             #check variable range
             AtrPW = int(AtrPW_E.get())
@@ -307,22 +325,24 @@ def openAAI():
     #Additional Functions
 
     def changeAtrSens():
+        global AtrSens
         try:
             #check variable range
             AtrSens = float(AtrSens_E.get())
-            if (AtrSens < 0.25):
+            if (AtrSens < 0):
                 AtrSens_V.config(text = "Value too low")
-            elif (AtrSens > 0.75):
+            elif (AtrSens > 5):
                 AtrSens_V.config(text = "Value too high")
             else:
                 AtrSens_V.config(text = AtrSens)
-                AtrSens = AtrSens*10
+                AtrSens = AtrSens
                 set_params()
                 
         except:
             AtrSens_V.config(text = "Invalid Value")
 
     def changeARP():
+        global ARP
         try:
             #check variable range
             ARP = int(ARP_E.get())
