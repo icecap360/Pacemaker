@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.0
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 10:30:33 2020
+ * C/C++ source code generated on : Thu Dec  3 23:33:16 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -21,20 +21,11 @@
 #include "untitled_private.h"
 #include "untitled_dt.h"
 
-/* Named constants for Chart: '<S1>/Chart' */
-#define untitled_IN_Decreasing         (1U)
-#define untitled_IN_Increasing         (2U)
-#define untitled_IN_main               (3U)
-#define untitled_IN_start              (4U)
-
 /* Block signals (default storage) */
 B_untitled_T untitled_B;
 
 /* Block states (default storage) */
 DW_untitled_T untitled_DW;
-
-/* External outputs (root outports fed by signals with default storage) */
-ExtY_untitled_T untitled_Y;
 
 /* Real-time model */
 RT_MODEL_untitled_T untitled_M_;
@@ -49,12 +40,12 @@ static void matlabCodegenHandle_matlabCod_b(freedomk64f_fxos8700_untitled_T *obj
 static void untitled_SystemCore_release_b5(b_freedomk64f_I2CMasterWrite__T *obj);
 static void untitled_SystemCore_delete_b5(b_freedomk64f_I2CMasterWrite__T *obj);
 static void matlabCodegenHandle_matlabCo_b5(b_freedomk64f_I2CMasterWrite__T *obj);
-static void untitled_SystemCore_release(const freedomk64f_DigitalWrite_unti_T
-  *obj);
-static void untitled_SystemCore_delete(const freedomk64f_DigitalWrite_unti_T
-  *obj);
-static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_unti_T *obj);
-static void untitled_SystemCore_setup(freedomk64f_fxos8700_untitled_T *obj);
+static void untitled_SystemCore_release(dsp_simulink_MovingStandardDe_T *obj);
+static void untitled_SystemCore_delete(dsp_simulink_MovingStandardDe_T *obj);
+static void matlabCodegenHandle_matlabCodeg(dsp_simulink_MovingStandardDe_T *obj);
+static void untitled_SystemCore_setup_b(freedomk64f_fxos8700_untitled_T *obj);
+static void untitled_SystemCore_setup(dsp_simulink_MovingStandardDe_T *obj,
+  g_dsp_private_SlidingWindowVa_T *iobj_0);
 static void untitled_SystemCore_release_b(const freedomk64f_fxos8700_untitled_T *
   obj)
 {
@@ -97,21 +88,25 @@ static void matlabCodegenHandle_matlabCo_b5(b_freedomk64f_I2CMasterWrite__T *obj
   }
 }
 
-static void untitled_SystemCore_release(const freedomk64f_DigitalWrite_unti_T
-  *obj)
+static void untitled_SystemCore_release(dsp_simulink_MovingStandardDe_T *obj)
 {
+  g_dsp_private_SlidingWindowVa_T *obj_0;
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
-    MW_digitalIO_close(obj->MW_DIGITALIO_HANDLE);
+    obj_0 = obj->pStatistic;
+    if (obj_0->isInitialized == 1) {
+      obj_0->isInitialized = 2;
+    }
+
+    obj->NumChannels = -1;
   }
 }
 
-static void untitled_SystemCore_delete(const freedomk64f_DigitalWrite_unti_T
-  *obj)
+static void untitled_SystemCore_delete(dsp_simulink_MovingStandardDe_T *obj)
 {
   untitled_SystemCore_release(obj);
 }
 
-static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_unti_T *obj)
+static void matlabCodegenHandle_matlabCodeg(dsp_simulink_MovingStandardDe_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
@@ -119,7 +114,7 @@ static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_unti_T *obj
   }
 }
 
-static void untitled_SystemCore_setup(freedomk64f_fxos8700_untitled_T *obj)
+static void untitled_SystemCore_setup_b(freedomk64f_fxos8700_untitled_T *obj)
 {
   MW_I2C_Mode_Type ModeType;
   uint32_T i2cname;
@@ -168,6 +163,18 @@ static void untitled_SystemCore_setup(freedomk64f_fxos8700_untitled_T *obj)
   obj->isSetupComplete = true;
 }
 
+static void untitled_SystemCore_setup(dsp_simulink_MovingStandardDe_T *obj,
+  g_dsp_private_SlidingWindowVa_T *iobj_0)
+{
+  obj->isSetupComplete = false;
+  obj->isInitialized = 1;
+  obj->NumChannels = 1;
+  iobj_0->isInitialized = 0;
+  obj->pStatistic = iobj_0;
+  obj->isSetupComplete = true;
+  obj->TunablePropsChanged = false;
+}
+
 /* Model step function */
 void untitled_step(void)
 {
@@ -176,19 +183,25 @@ void untitled_step(void)
   uint8_T output_raw[6];
   uint8_T y[2];
   uint8_T b_x[2];
-  real_T tmp;
+  g_dsp_private_SlidingWindowVa_T *obj;
+  real_T M;
+  real_T counter;
+  real_T Mprev;
+  real_T rtb_SquareRoot1;
+  int32_T i;
 
-  /* MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
-  if (untitled_DW.obj.SampleTime != untitled_P.FXOS87006AxesSensor_SampleTime) {
-    untitled_DW.obj.SampleTime = untitled_P.FXOS87006AxesSensor_SampleTime;
+  /* MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor1' */
+  if (untitled_DW.obj_g.SampleTime != untitled_P.FXOS87006AxesSensor1_SampleTime)
+  {
+    untitled_DW.obj_g.SampleTime = untitled_P.FXOS87006AxesSensor1_SampleTime;
   }
 
   status = 1U;
-  status = MW_I2C_MasterWrite(untitled_DW.obj.i2cobj.MW_I2C_HANDLE, 29U, &status,
-    1U, true, false);
+  status = MW_I2C_MasterWrite(untitled_DW.obj_g.i2cobj.MW_I2C_HANDLE, 29U,
+    &status, 1U, true, false);
   if (0 == status) {
-    MW_I2C_MasterRead(untitled_DW.obj.i2cobj.MW_I2C_HANDLE, 29U, output_raw, 6U,
-                      false, true);
+    MW_I2C_MasterRead(untitled_DW.obj_g.i2cobj.MW_I2C_HANDLE, 29U, output_raw,
+                      6U, false, true);
     memcpy((void *)&b_output[0], (void *)&output_raw[0], (uint32_T)((size_t)3 *
             sizeof(int16_T)));
     memcpy((void *)&y[0], (void *)&b_output[0], (uint32_T)((size_t)2 * sizeof
@@ -215,135 +228,146 @@ void untitled_step(void)
     b_output[2] = 0;
   }
 
-  /* Sum: '<S1>/Sum of Elements' incorporates:
-   *  MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor'
-   */
-  untitled_B.SumofElements = ((real_T)(int16_T)(b_output[0] >> 2) * 0.244 /
-    1000.0 + (real_T)(int16_T)(b_output[1] >> 2) * 0.244 / 1000.0) + (real_T)
-    (int16_T)(b_output[2] >> 2) * 0.244 / 1000.0;
+  counter = (real_T)(int16_T)(b_output[0] >> 2) * 0.244 / 1000.0;
+  Mprev = (real_T)(int16_T)(b_output[1] >> 2) * 0.244 / 1000.0;
+  rtb_SquareRoot1 = (real_T)(int16_T)(b_output[2] >> 2) * 0.244 / 1000.0;
 
-  /* Product: '<S1>/Divide1' incorporates:
-   *  Constant: '<Root>/Constant'
-   *  Constant: '<S1>/msec//minute'
-   *  DataTypeConversion: '<Root>/Data Type Conversion5'
-   */
-  untitled_B.Divide1 = (real_T)untitled_P.Constant_Value_j *
-    untitled_P.msecminute_Value;
+  /* End of MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor1' */
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion4' incorporates:
-   *  Constant: '<Root>/Constant1'
+  /* Sqrt: '<Root>/Square Root1' incorporates:
+   *  Math: '<Root>/Magnitude Square5'
+   *  Sum: '<Root>/Sum of Elements'
+   *
+   * About '<Root>/Magnitude Square5':
+   *  Operator: magnitude^2
    */
-  untitled_B.DataTypeConversion4 = untitled_P.Constant1_Value;
+  rtb_SquareRoot1 = sqrt((counter * counter + Mprev * Mprev) + rtb_SquareRoot1 *
+    rtb_SquareRoot1);
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion3' incorporates:
-   *  Constant: '<Root>/Constant4'
-   */
-  untitled_B.DataTypeConversion3 = untitled_P.Constant4_Value;
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
-   *  Constant: '<Root>/Constant3'
-   */
-  untitled_B.DataTypeConversion2 = untitled_P.Constant3_Value;
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion1' incorporates:
-   *  Constant: '<Root>/Constant5'
-   */
-  untitled_B.DataTypeConversion1 = untitled_P.Constant5_Value;
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion7' incorporates:
-   *  Constant: '<Root>/Constant2'
-   */
-  untitled_B.DataTypeConversion7 = untitled_P.Constant2_Value;
-
-  /* Chart: '<S1>/Chart' */
-  if (untitled_DW.temporalCounter_i1 < MAX_uint32_T) {
-    untitled_DW.temporalCounter_i1++;
+  /* MATLABSystem: '<Root>/Moving Standard Deviation1' */
+  if (untitled_DW.obj.TunablePropsChanged) {
+    untitled_DW.obj.TunablePropsChanged = false;
   }
 
-  if (untitled_DW.is_active_c1_untitled == 0U) {
-    untitled_DW.is_active_c1_untitled = 1U;
-    untitled_DW.is_c1_untitled = untitled_IN_start;
-    untitled_B.LRL = untitled_B.Divide1;
-    untitled_DW.RateChange = untitled_B.DataTypeConversion3 / 16.0;
-    untitled_DW.Threshold = 1.05;
-    untitled_B.Avg = 0.0;
-  } else {
-    switch (untitled_DW.is_c1_untitled) {
-     case untitled_IN_Decreasing:
-      untitled_B.red_led = true;
-      if (untitled_DW.temporalCounter_i1 >= (uint32_T)ceil
-          (untitled_B.DataTypeConversion1)) {
-        untitled_DW.is_c1_untitled = untitled_IN_main;
-        untitled_B.Avg = 0.7 * untitled_B.Avg + 0.3 * untitled_B.SumofElements;
-        untitled_B.red_led = false;
-      }
-      break;
-
-     case untitled_IN_Increasing:
-      untitled_B.red_led = true;
-      if (untitled_DW.temporalCounter_i1 >= (uint32_T)ceil
-          (untitled_B.DataTypeConversion2)) {
-        untitled_DW.is_c1_untitled = untitled_IN_main;
-        untitled_B.Avg = 0.7 * untitled_B.Avg + 0.3 * untitled_B.SumofElements;
-        untitled_B.red_led = false;
-      }
-      break;
-
-     case untitled_IN_main:
-      untitled_B.red_led = false;
-      if (untitled_B.DataTypeConversion7 == 0.0) {
-        untitled_DW.is_c1_untitled = untitled_IN_main;
-        untitled_B.Avg = 0.7 * untitled_B.Avg + 0.3 * untitled_B.SumofElements;
-        untitled_B.red_led = false;
-      } else if ((untitled_B.Avg < untitled_DW.Threshold) && (untitled_B.LRL >
-                  untitled_B.Divide1)) {
-        untitled_DW.is_c1_untitled = untitled_IN_Decreasing;
-        untitled_DW.temporalCounter_i1 = 0U;
-        untitled_B.LRL -= untitled_DW.RateChange;
-        untitled_B.red_led = true;
-      } else {
-        if ((untitled_B.Avg > untitled_DW.Threshold) && (untitled_B.LRL <
-             untitled_B.DataTypeConversion4)) {
-          untitled_DW.is_c1_untitled = untitled_IN_Increasing;
-          untitled_DW.temporalCounter_i1 = 0U;
-          untitled_B.LRL += untitled_DW.RateChange;
-          untitled_B.red_led = true;
-        }
-      }
-      break;
-
-     default:
-      /* case IN_start: */
-      untitled_DW.is_c1_untitled = untitled_IN_main;
-      untitled_B.Avg = 0.7 * untitled_B.Avg + 0.3 * untitled_B.SumofElements;
-      untitled_B.red_led = false;
-      break;
+  obj = untitled_DW.obj.pStatistic;
+  if (obj->isInitialized != 1) {
+    obj->isSetupComplete = false;
+    obj->isInitialized = 1;
+    for (i = 0; i < 5; i++) {
+      obj->pReverseSamples[i] = 0.0;
     }
+
+    for (i = 0; i < 5; i++) {
+      obj->pReverseT[i] = 0.0;
+    }
+
+    for (i = 0; i < 5; i++) {
+      obj->pReverseS[i] = 0.0;
+    }
+
+    obj->pT = 0.0;
+    obj->pS = 0.0;
+    obj->pM = 0.0;
+    obj->pCounter = 0.0;
+    obj->isSetupComplete = true;
+    for (i = 0; i < 5; i++) {
+      obj->pReverseSamples[i] = 0.0;
+    }
+
+    for (i = 0; i < 5; i++) {
+      obj->pReverseT[i] = 0.0;
+    }
+
+    for (i = 0; i < 5; i++) {
+      obj->pReverseS[i] = 0.0;
+    }
+
+    obj->pT = 0.0;
+    obj->pS = 0.0;
+    obj->pM = 0.0;
+    obj->pCounter = 1.0;
   }
 
-  /* End of Chart: '<S1>/Chart' */
+  for (i = 0; i < 5; i++) {
+    untitled_B.reverseSamples[i] = obj->pReverseSamples[i];
+  }
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion6' incorporates:
-   *  Constant: '<S1>/Constant'
-   *  Product: '<S1>/Divide'
-   */
-  tmp = floor(untitled_P.Constant_Value * untitled_B.LRL);
-  if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-    tmp = 0.0;
+  for (i = 0; i < 5; i++) {
+    untitled_B.reverseT[i] = obj->pReverseT[i];
+  }
+
+  for (i = 0; i < 5; i++) {
+    untitled_B.reverseS[i] = obj->pReverseS[i];
+  }
+
+  untitled_B.T = obj->pT;
+  untitled_B.S = obj->pS;
+  M = obj->pM;
+  counter = obj->pCounter;
+  untitled_B.T += rtb_SquareRoot1;
+  Mprev = M;
+  M += 1.0 / counter * (rtb_SquareRoot1 - M);
+  Mprev = rtb_SquareRoot1 - Mprev;
+  untitled_B.S += (counter - 1.0) * Mprev * Mprev / counter;
+  i = (int32_T)(5.0 - counter) - 1;
+  Mprev = (5.0 - counter) / counter * untitled_B.T - untitled_B.reverseT[i];
+  Mprev = (counter / (((5.0 - counter) + counter) * (5.0 - counter)) * (Mprev *
+            Mprev) + (untitled_B.reverseS[i] + untitled_B.S)) / 4.0;
+  untitled_B.reverseSamples[i] = rtb_SquareRoot1;
+  if (counter < 4.0) {
+    counter++;
   } else {
-    tmp = fmod(tmp, 65536.0);
+    counter = 1.0;
+    for (i = 0; i < 5; i++) {
+      untitled_B.reverseT[i] = untitled_B.reverseSamples[i];
+    }
+
+    untitled_B.reverseT[1] += untitled_B.reverseT[0];
+    rtb_SquareRoot1 = 0.0 * untitled_B.reverseSamples[0] *
+      untitled_B.reverseSamples[0];
+    untitled_B.reverseS[0] = rtb_SquareRoot1;
+    untitled_B.reverseT[2] += untitled_B.reverseT[1];
+    untitled_B.S = untitled_B.reverseSamples[1] - untitled_B.reverseSamples[0];
+    untitled_B.T = untitled_B.S * 0.5 + untitled_B.reverseSamples[0];
+    rtb_SquareRoot1 += untitled_B.S * untitled_B.S / 2.0;
+    untitled_B.reverseS[1] = rtb_SquareRoot1;
+    untitled_B.reverseT[3] += untitled_B.reverseT[2];
+    untitled_B.S = untitled_B.T;
+    untitled_B.T += (untitled_B.reverseSamples[2] - untitled_B.T) *
+      0.33333333333333331;
+    untitled_B.S = untitled_B.reverseSamples[2] - untitled_B.S;
+    rtb_SquareRoot1 += untitled_B.S * 2.0 * untitled_B.S / 3.0;
+    untitled_B.reverseS[2] = rtb_SquareRoot1;
+    untitled_B.reverseT[4] += untitled_B.reverseT[3];
+    untitled_B.S = untitled_B.reverseSamples[3] - untitled_B.T;
+    untitled_B.reverseS[3] = untitled_B.S * 3.0 * untitled_B.S / 4.0 +
+      rtb_SquareRoot1;
+    untitled_B.T = 0.0;
+    untitled_B.S = 0.0;
+    M = 0.0;
   }
 
-  untitled_B.DataTypeConversion6 = (uint16_T)(tmp < 0.0 ? (int32_T)(uint16_T)
-    -(int16_T)(uint16_T)-tmp : (int32_T)(uint16_T)tmp);
+  for (i = 0; i < 5; i++) {
+    obj->pReverseSamples[i] = untitled_B.reverseSamples[i];
+  }
 
-  /* End of DataTypeConversion: '<Root>/Data Type Conversion6' */
+  for (i = 0; i < 5; i++) {
+    obj->pReverseT[i] = untitled_B.reverseT[i];
+  }
 
-  /* Outport: '<Root>/Updated_Lower_Rate_Limit' */
-  untitled_Y.Updated_Lower_Rate_Limit = untitled_B.DataTypeConversion6;
+  for (i = 0; i < 5; i++) {
+    obj->pReverseS[i] = untitled_B.reverseS[i];
+  }
 
-  /* MATLABSystem: '<S1>/Digital Write' */
-  MW_digitalIO_write(untitled_DW.obj_b.MW_DIGITALIO_HANDLE, untitled_B.red_led);
+  obj->pT = untitled_B.T;
+  obj->pS = untitled_B.S;
+  obj->pM = M;
+  obj->pCounter = counter;
+
+  /* Gain: '<Root>/Gain' incorporates:
+   *  MATLABSystem: '<Root>/Moving Standard Deviation1'
+   */
+  untitled_B.Gain = untitled_P.Gain_Gain * sqrt(Mprev);
 
   /* External mode */
   rtExtModeUploadCheckTrigger(1);
@@ -379,28 +403,24 @@ void untitled_step(void)
 void untitled_initialize(void)
 {
   /* Registration code */
-
-  /* initialize non-finites */
-  rt_InitInfAndNaN(sizeof(real_T));
   rtmSetTFinal(untitled_M, -1);
   untitled_M->Timing.stepSize0 = 0.001;
 
   /* External mode info */
-  untitled_M->Sizes.checksums[0] = (1938051424U);
-  untitled_M->Sizes.checksums[1] = (1648107530U);
-  untitled_M->Sizes.checksums[2] = (1711736115U);
-  untitled_M->Sizes.checksums[3] = (4256314359U);
+  untitled_M->Sizes.checksums[0] = (3432966678U);
+  untitled_M->Sizes.checksums[1] = (4199491318U);
+  untitled_M->Sizes.checksums[2] = (3635918037U);
+  untitled_M->Sizes.checksums[3] = (775925379U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[4];
+    static const sysRanDType *systemRan[3];
     untitled_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
     systemRan[1] = &rtAlwaysEnabled;
     systemRan[2] = &rtAlwaysEnabled;
-    systemRan[3] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(untitled_M->extModeInfo,
       &untitled_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(untitled_M->extModeInfo, untitled_M->Sizes.checksums);
@@ -413,7 +433,7 @@ void untitled_initialize(void)
     (void) memset((char_T *) &dtInfo, 0,
                   sizeof(dtInfo));
     untitled_M->SpecialInfo.mappingInfo = (&dtInfo);
-    dtInfo.numDataTypes = 16;
+    dtInfo.numDataTypes = 17;
     dtInfo.dataTypeSizes = &rtDataTypeSizes[0];
     dtInfo.dataTypeNames = &rtDataTypeNames[0];
 
@@ -426,41 +446,64 @@ void untitled_initialize(void)
 
   {
     freedomk64f_fxos8700_untitled_T *obj;
-    freedomk64f_DigitalWrite_unti_T *obj_0;
+    g_dsp_private_SlidingWindowVa_T *obj_0;
+    int32_T i;
 
-    /* Start for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
-    untitled_DW.obj.i2cobj.matlabCodegenIsDeleted = true;
-    untitled_DW.obj.matlabCodegenIsDeleted = true;
-    obj = &untitled_DW.obj;
-    untitled_DW.obj.isInitialized = 0;
-    untitled_DW.obj.SampleTime = -1.0;
+    /* Start for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor1' */
+    untitled_DW.obj_g.i2cobj.matlabCodegenIsDeleted = true;
+    untitled_DW.obj_g.matlabCodegenIsDeleted = true;
+    obj = &untitled_DW.obj_g;
+    untitled_DW.obj_g.isInitialized = 0;
+    untitled_DW.obj_g.SampleTime = -1.0;
     obj->i2cobj.isInitialized = 0;
     obj->i2cobj.matlabCodegenIsDeleted = false;
-    untitled_DW.obj.matlabCodegenIsDeleted = false;
-    untitled_DW.obj.SampleTime = untitled_P.FXOS87006AxesSensor_SampleTime;
-    untitled_SystemCore_setup(&untitled_DW.obj);
+    untitled_DW.obj_g.matlabCodegenIsDeleted = false;
+    untitled_DW.objisempty = true;
+    untitled_DW.obj_g.SampleTime = untitled_P.FXOS87006AxesSensor1_SampleTime;
+    untitled_SystemCore_setup_b(&untitled_DW.obj_g);
 
-    /* Start for MATLABSystem: '<S1>/Digital Write' */
-    untitled_DW.obj_b.matlabCodegenIsDeleted = true;
-    untitled_DW.obj_b.isInitialized = 0;
-    untitled_DW.obj_b.matlabCodegenIsDeleted = false;
-    obj_0 = &untitled_DW.obj_b;
-    untitled_DW.obj_b.isSetupComplete = false;
-    untitled_DW.obj_b.isInitialized = 1;
-    obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(42U, 1);
-    untitled_DW.obj_b.isSetupComplete = true;
+    /* Start for MATLABSystem: '<Root>/Moving Standard Deviation1' */
+    untitled_DW.obj.matlabCodegenIsDeleted = true;
+    untitled_DW.obj.isInitialized = 0;
+    untitled_DW.obj.NumChannels = -1;
+    untitled_DW.obj.matlabCodegenIsDeleted = false;
+    untitled_DW.objisempty_g = true;
+    untitled_SystemCore_setup(&untitled_DW.obj, &untitled_DW.gobj_2);
+
+    /* InitializeConditions for MATLABSystem: '<Root>/Moving Standard Deviation1' */
+    obj_0 = untitled_DW.obj.pStatistic;
+    if (obj_0->isInitialized == 1) {
+      for (i = 0; i < 5; i++) {
+        obj_0->pReverseSamples[i] = 0.0;
+      }
+
+      for (i = 0; i < 5; i++) {
+        obj_0->pReverseT[i] = 0.0;
+      }
+
+      for (i = 0; i < 5; i++) {
+        obj_0->pReverseS[i] = 0.0;
+      }
+
+      obj_0->pT = 0.0;
+      obj_0->pS = 0.0;
+      obj_0->pM = 0.0;
+      obj_0->pCounter = 1.0;
+    }
+
+    /* End of InitializeConditions for MATLABSystem: '<Root>/Moving Standard Deviation1' */
   }
 }
 
 /* Model terminate function */
 void untitled_terminate(void)
 {
-  /* Terminate for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
-  matlabCodegenHandle_matlabCod_b(&untitled_DW.obj);
-  matlabCodegenHandle_matlabCo_b5(&untitled_DW.obj.i2cobj);
+  /* Terminate for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor1' */
+  matlabCodegenHandle_matlabCod_b(&untitled_DW.obj_g);
+  matlabCodegenHandle_matlabCo_b5(&untitled_DW.obj_g.i2cobj);
 
-  /* Terminate for MATLABSystem: '<S1>/Digital Write' */
-  matlabCodegenHandle_matlabCodeg(&untitled_DW.obj_b);
+  /* Terminate for MATLABSystem: '<Root>/Moving Standard Deviation1' */
+  matlabCodegenHandle_matlabCodeg(&untitled_DW.obj);
 }
 
 /*

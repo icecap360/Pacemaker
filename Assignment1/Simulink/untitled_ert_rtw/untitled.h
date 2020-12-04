@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.0
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 10:30:33 2020
+ * C/C++ source code generated on : Thu Dec  3 23:33:16 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -30,7 +30,6 @@
 #include "sysran_types.h"
 #include "dt_info.h"
 #include "ext_work.h"
-#include "MW_digitalIO.h"
 #include "MW_I2C.h"
 #endif                                 /* untitled_COMMON_INCLUDES_ */
 
@@ -38,8 +37,6 @@
 
 /* Shared type includes */
 #include "multiword_types.h"
-#include "rt_nonfinite.h"
-#include "rtGetInf.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetFinalTime
@@ -84,63 +81,31 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T SumofElements;                /* '<S1>/Sum of Elements' */
-  real_T Divide1;                      /* '<S1>/Divide1' */
-  real_T DataTypeConversion4;          /* '<Root>/Data Type Conversion4' */
-  real_T DataTypeConversion3;          /* '<Root>/Data Type Conversion3' */
-  real_T DataTypeConversion2;          /* '<Root>/Data Type Conversion2' */
-  real_T DataTypeConversion1;          /* '<Root>/Data Type Conversion1' */
-  real_T DataTypeConversion7;          /* '<Root>/Data Type Conversion7' */
-  real_T LRL;                          /* '<S1>/Chart' */
-  real_T Avg;                          /* '<S1>/Chart' */
-  uint16_T DataTypeConversion6;        /* '<Root>/Data Type Conversion6' */
-  boolean_T red_led;                   /* '<S1>/Chart' */
+  real_T reverseSamples[5];
+  real_T reverseT[5];
+  real_T reverseS[5];
+  real_T Gain;                         /* '<Root>/Gain' */
+  real_T T;
+  real_T S;
 } B_untitled_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  freedomk64f_fxos8700_untitled_T obj; /* '<S1>/FXOS8700 6-Axes Sensor' */
-  freedomk64f_DigitalWrite_unti_T obj_b;/* '<S1>/Digital Write' */
-  real_T RateChange;                   /* '<S1>/Chart' */
-  real_T Threshold;                    /* '<S1>/Chart' */
-  uint32_T is_c1_untitled;             /* '<S1>/Chart' */
-  uint32_T temporalCounter_i1;         /* '<S1>/Chart' */
-  uint8_T is_active_c1_untitled;       /* '<S1>/Chart' */
+  g_dsp_private_SlidingWindowVa_T gobj_1;/* '<Root>/Moving Standard Deviation1' */
+  g_dsp_private_SlidingWindowVa_T gobj_2;/* '<Root>/Moving Standard Deviation1' */
+  dsp_simulink_MovingStandardDe_T obj; /* '<Root>/Moving Standard Deviation1' */
+  freedomk64f_fxos8700_untitled_T obj_g;/* '<Root>/FXOS8700 6-Axes Sensor1' */
+  boolean_T objisempty;                /* '<Root>/FXOS8700 6-Axes Sensor1' */
+  boolean_T objisempty_g;              /* '<Root>/Moving Standard Deviation1' */
 } DW_untitled_T;
-
-/* External outputs (root outports fed by signals with default storage) */
-typedef struct {
-  uint16_T Updated_Lower_Rate_Limit;   /* '<Root>/Updated_Lower_Rate_Limit' */
-} ExtY_untitled_T;
 
 /* Parameters (default storage) */
 struct P_untitled_T_ {
-  real_T FXOS87006AxesSensor_SampleTime;/* Expression: -1
-                                         * Referenced by: '<S1>/FXOS8700 6-Axes Sensor'
-                                         */
-  real_T msecminute_Value;             /* Expression: 60/1000
-                                        * Referenced by: '<S1>/msec//minute'
-                                        */
-  real_T Constant_Value;               /* Expression: 1000/60
-                                        * Referenced by: '<S1>/Constant'
-                                        */
-  uint16_T Constant_Value_j;           /* Computed Parameter: Constant_Value_j
-                                        * Referenced by: '<Root>/Constant'
-                                        */
-  uint8_T Constant1_Value;             /* Computed Parameter: Constant1_Value
-                                        * Referenced by: '<Root>/Constant1'
-                                        */
-  uint8_T Constant4_Value;             /* Computed Parameter: Constant4_Value
-                                        * Referenced by: '<Root>/Constant4'
-                                        */
-  uint8_T Constant3_Value;             /* Computed Parameter: Constant3_Value
-                                        * Referenced by: '<Root>/Constant3'
-                                        */
-  uint8_T Constant5_Value;             /* Computed Parameter: Constant5_Value
-                                        * Referenced by: '<Root>/Constant5'
-                                        */
-  uint8_T Constant2_Value;             /* Computed Parameter: Constant2_Value
-                                        * Referenced by: '<Root>/Constant2'
+  real_T FXOS87006AxesSensor1_SampleTime;/* Expression: -1
+                                          * Referenced by: '<Root>/FXOS8700 6-Axes Sensor1'
+                                          */
+  real_T Gain_Gain;                    /* Expression: 100
+                                        * Referenced by: '<Root>/Gain'
                                         */
 };
 
@@ -191,9 +156,6 @@ extern B_untitled_T untitled_B;
 /* Block states (default storage) */
 extern DW_untitled_T untitled_DW;
 
-/* External outputs (root outports fed by signals with default storage) */
-extern ExtY_untitled_T untitled_Y;
-
 /* Model entry point functions */
 extern void untitled_initialize(void);
 extern void untitled_step(void);
@@ -217,8 +179,6 @@ extern RT_MODEL_untitled_T *const untitled_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'untitled'
- * '<S1>'   : 'untitled/Subsystem'
- * '<S2>'   : 'untitled/Subsystem/Chart'
  */
 #endif                                 /* RTW_HEADER_untitled_h_ */
 

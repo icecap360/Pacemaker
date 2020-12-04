@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'Assignment2_4'. 
 ## 
 ## Makefile     : Assignment2_4.mk
-## Generated on : Thu Dec 03 23:07:00 2020
+## Generated on : Fri Dec 04 00:02:36 2020
 ## MATLAB Coder version: 5.0 (R2020a)
 ## 
 ## Build Info:

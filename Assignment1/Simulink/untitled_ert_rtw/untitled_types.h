@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.0
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 10:30:33 2020
+ * C/C++ source code generated on : Thu Dec  3 23:33:16 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -23,9 +23,34 @@
 #include "multiword_types.h"
 
 /* Model Code Variants */
+#ifndef struct_tag_Y40BP8BIXnZieg7euAkxQE
+#define struct_tag_Y40BP8BIXnZieg7euAkxQE
 
-/* Custom Type definition for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
+struct tag_Y40BP8BIXnZieg7euAkxQE
+{
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T pReverseSamples[5];
+  real_T pReverseT[5];
+  real_T pReverseS[5];
+  real_T pT;
+  real_T pS;
+  real_T pM;
+  real_T pCounter;
+};
+
+#endif                                 /*struct_tag_Y40BP8BIXnZieg7euAkxQE*/
+
+#ifndef typedef_g_dsp_private_SlidingWindowVa_T
+#define typedef_g_dsp_private_SlidingWindowVa_T
+
+typedef struct tag_Y40BP8BIXnZieg7euAkxQE g_dsp_private_SlidingWindowVa_T;
+
+#endif                               /*typedef_g_dsp_private_SlidingWindowVa_T*/
+
+/* Custom Type definition for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor1' */
 #include "MW_SVD.h"
+#include "MW_I2C.h"
 #ifndef struct_tag_bvK2L41g8z1P0jzpdjsJhE
 #define struct_tag_bvK2L41g8z1P0jzpdjsJhE
 
@@ -43,29 +68,6 @@ typedef struct tag_bvK2L41g8z1P0jzpdjsJhE b_freedomk64f_Hardware_untitl_T;
 
 #endif                               /*typedef_b_freedomk64f_Hardware_untitl_T*/
 
-#ifndef struct_tag_62aCTDKRGQaAsT8vVipI2D
-#define struct_tag_62aCTDKRGQaAsT8vVipI2D
-
-struct tag_62aCTDKRGQaAsT8vVipI2D
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_freedomk64f_Hardware_untitl_T Hw;
-  MW_Handle_Type MW_DIGITALIO_HANDLE;
-};
-
-#endif                                 /*struct_tag_62aCTDKRGQaAsT8vVipI2D*/
-
-#ifndef typedef_freedomk64f_DigitalWrite_unti_T
-#define typedef_freedomk64f_DigitalWrite_unti_T
-
-typedef struct tag_62aCTDKRGQaAsT8vVipI2D freedomk64f_DigitalWrite_unti_T;
-
-#endif                               /*typedef_freedomk64f_DigitalWrite_unti_T*/
-
-/* Custom Type definition for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
-#include "MW_I2C.h"
 #ifndef struct_tag_dJFZzmsGU3XebjMxPxDlh
 #define struct_tag_dJFZzmsGU3XebjMxPxDlh
 
@@ -107,6 +109,46 @@ struct tag_IfyqWdTTOITb2iei5A9qmC
 typedef struct tag_IfyqWdTTOITb2iei5A9qmC freedomk64f_fxos8700_untitled_T;
 
 #endif                               /*typedef_freedomk64f_fxos8700_untitled_T*/
+
+#ifndef struct_tag_PMfBDzoakfdM9QAdfx2o6D
+#define struct_tag_PMfBDzoakfdM9QAdfx2o6D
+
+struct tag_PMfBDzoakfdM9QAdfx2o6D
+{
+  uint32_T f1[8];
+};
+
+#endif                                 /*struct_tag_PMfBDzoakfdM9QAdfx2o6D*/
+
+#ifndef typedef_cell_wrap_untitled_T
+#define typedef_cell_wrap_untitled_T
+
+typedef struct tag_PMfBDzoakfdM9QAdfx2o6D cell_wrap_untitled_T;
+
+#endif                                 /*typedef_cell_wrap_untitled_T*/
+
+#ifndef struct_tag_PDYVwBPgJRPLL1l56suwoH
+#define struct_tag_PDYVwBPgJRPLL1l56suwoH
+
+struct tag_PDYVwBPgJRPLL1l56suwoH
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  boolean_T TunablePropsChanged;
+  cell_wrap_untitled_T inputVarSize;
+  g_dsp_private_SlidingWindowVa_T *pStatistic;
+  int32_T NumChannels;
+};
+
+#endif                                 /*struct_tag_PDYVwBPgJRPLL1l56suwoH*/
+
+#ifndef typedef_dsp_simulink_MovingStandardDe_T
+#define typedef_dsp_simulink_MovingStandardDe_T
+
+typedef struct tag_PDYVwBPgJRPLL1l56suwoH dsp_simulink_MovingStandardDe_T;
+
+#endif                               /*typedef_dsp_simulink_MovingStandardDe_T*/
 
 /* Parameters (default storage) */
 typedef struct P_untitled_T_ P_untitled_T;

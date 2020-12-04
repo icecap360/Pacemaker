@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2_4'.
  *
- * Model version                  : 1.517
+ * Model version                  : 1.519
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 23:13:01 2020
+ * C/C++ source code generated on : Thu Dec  3 23:38:23 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -483,7 +483,7 @@ void Assignment2_4_step(void)
    *  Gain: '<S2>/Gain'
    *  MATLABSystem: '<S2>/ATR_SIGNAL'
    */
-  Assignment2_4_B.offset = floor(Assignment2_4_P.Gain_Gain *
+  Assignment2_4_B.offset = floor(Assignment2_4_P.Gain_Gain_i *
     Assignment2_4_B.offset);
   if (rtIsNaN(Assignment2_4_B.offset) || rtIsInf(Assignment2_4_B.offset)) {
     Assignment2_4_B.offset = 0.0;
@@ -783,9 +783,7 @@ void Assignment2_4_step(void)
       Assignment2_4_B.offset + Assignment2_4_B.SquareRoot1 *
       Assignment2_4_B.SquareRoot1) + Assignment2_4_B.T * Assignment2_4_B.T);
 
-    /* MATLABSystem: '<S3>/Moving Standard Deviation1' incorporates:
-     *  DataStoreWrite: '<S3>/Data Store Write21'
-     */
+    /* MATLABSystem: '<S3>/Moving Standard Deviation1' */
     if (Assignment2_4_DW.obj.TunablePropsChanged) {
       Assignment2_4_DW.obj.TunablePropsChanged = false;
     }
@@ -797,15 +795,12 @@ void Assignment2_4_step(void)
       obj->pReverseSamples[0] = 0.0;
       obj->pReverseSamples[1] = 0.0;
       obj->pReverseSamples[2] = 0.0;
-      obj->pReverseSamples[3] = 0.0;
       obj->pReverseT[0] = 0.0;
       obj->pReverseT[1] = 0.0;
       obj->pReverseT[2] = 0.0;
-      obj->pReverseT[3] = 0.0;
       obj->pReverseS[0] = 0.0;
       obj->pReverseS[1] = 0.0;
       obj->pReverseS[2] = 0.0;
-      obj->pReverseS[3] = 0.0;
       obj->pT = 0.0;
       obj->pS = 0.0;
       obj->pM = 0.0;
@@ -814,33 +809,27 @@ void Assignment2_4_step(void)
       obj->pReverseSamples[0] = 0.0;
       obj->pReverseSamples[1] = 0.0;
       obj->pReverseSamples[2] = 0.0;
-      obj->pReverseSamples[3] = 0.0;
       obj->pReverseT[0] = 0.0;
       obj->pReverseT[1] = 0.0;
       obj->pReverseT[2] = 0.0;
-      obj->pReverseT[3] = 0.0;
       obj->pReverseS[0] = 0.0;
       obj->pReverseS[1] = 0.0;
       obj->pReverseS[2] = 0.0;
-      obj->pReverseS[3] = 0.0;
       obj->pT = 0.0;
       obj->pS = 0.0;
       obj->pM = 0.0;
       obj->pCounter = 1.0;
     }
 
-    Assignment2_4_B.reverseSamples[0] = obj->pReverseSamples[0];
-    Assignment2_4_B.reverseSamples[1] = obj->pReverseSamples[1];
-    Assignment2_4_B.reverseSamples[2] = obj->pReverseSamples[2];
-    Assignment2_4_B.reverseSamples[3] = obj->pReverseSamples[3];
+    Assignment2_4_B.MagnitudeSquare5[0] = obj->pReverseSamples[0];
+    Assignment2_4_B.MagnitudeSquare5[1] = obj->pReverseSamples[1];
+    Assignment2_4_B.MagnitudeSquare5[2] = obj->pReverseSamples[2];
     Assignment2_4_B.reverseT[0] = obj->pReverseT[0];
     Assignment2_4_B.reverseT[1] = obj->pReverseT[1];
     Assignment2_4_B.reverseT[2] = obj->pReverseT[2];
-    Assignment2_4_B.reverseT[3] = obj->pReverseT[3];
     Assignment2_4_B.reverseS[0] = obj->pReverseS[0];
     Assignment2_4_B.reverseS[1] = obj->pReverseS[1];
     Assignment2_4_B.reverseS[2] = obj->pReverseS[2];
-    Assignment2_4_B.reverseS[3] = obj->pReverseS[3];
     Assignment2_4_B.T = obj->pT;
     Assignment2_4_B.S = obj->pS;
     Assignment2_4_B.M = obj->pM;
@@ -852,61 +841,56 @@ void Assignment2_4_step(void)
     Assignment2_4_B.Mprev = Assignment2_4_B.SquareRoot1 - Assignment2_4_B.Mprev;
     Assignment2_4_B.S += (Assignment2_4_B.offset - 1.0) * Assignment2_4_B.Mprev *
       Assignment2_4_B.Mprev / Assignment2_4_B.offset;
-    a_tmp = (int32_T)(4.0 - Assignment2_4_B.offset) - 1;
-    Assignment2_4_B.Mprev = (4.0 - Assignment2_4_B.offset) /
+    a_tmp = (int32_T)(3.0 - Assignment2_4_B.offset) - 1;
+    Assignment2_4_B.Mprev = (3.0 - Assignment2_4_B.offset) /
       Assignment2_4_B.offset * Assignment2_4_B.T -
       Assignment2_4_B.reverseT[a_tmp];
-    Assignment2_4_B.Mprev = (Assignment2_4_B.offset / (((4.0 -
-      Assignment2_4_B.offset) + Assignment2_4_B.offset) * (4.0 -
+    Assignment2_4_B.Mprev = (Assignment2_4_B.offset / (((3.0 -
+      Assignment2_4_B.offset) + Assignment2_4_B.offset) * (3.0 -
       Assignment2_4_B.offset)) * (Assignment2_4_B.Mprev * Assignment2_4_B.Mprev)
-      + (Assignment2_4_B.reverseS[a_tmp] + Assignment2_4_B.S)) / 3.0;
-    Assignment2_4_B.reverseSamples[a_tmp] = Assignment2_4_B.SquareRoot1;
-    if (Assignment2_4_B.offset < 3.0) {
+      + (Assignment2_4_B.reverseS[a_tmp] + Assignment2_4_B.S)) / 2.0;
+    Assignment2_4_B.MagnitudeSquare5[a_tmp] = Assignment2_4_B.SquareRoot1;
+    if (Assignment2_4_B.offset < 2.0) {
       Assignment2_4_B.offset++;
     } else {
       Assignment2_4_B.offset = 1.0;
-      Assignment2_4_B.reverseT[0] = Assignment2_4_B.reverseSamples[0];
-      Assignment2_4_B.reverseT[1] = Assignment2_4_B.reverseSamples[0] +
-        Assignment2_4_B.reverseSamples[1];
-      Assignment2_4_B.SquareRoot1 = 0.0 * Assignment2_4_B.reverseSamples[0] *
-        Assignment2_4_B.reverseSamples[0];
+      Assignment2_4_B.reverseT[0] = Assignment2_4_B.MagnitudeSquare5[0];
+      Assignment2_4_B.reverseT[1] = Assignment2_4_B.MagnitudeSquare5[0] +
+        Assignment2_4_B.MagnitudeSquare5[1];
+      Assignment2_4_B.SquareRoot1 = 0.0 * Assignment2_4_B.MagnitudeSquare5[0] *
+        Assignment2_4_B.MagnitudeSquare5[0];
       Assignment2_4_B.reverseS[0] = Assignment2_4_B.SquareRoot1;
       Assignment2_4_B.reverseT[2] = Assignment2_4_B.reverseT[1] +
-        Assignment2_4_B.reverseSamples[2];
-      Assignment2_4_B.T = Assignment2_4_B.reverseSamples[1] -
-        Assignment2_4_B.reverseSamples[0];
-      Assignment2_4_B.SquareRoot1 += Assignment2_4_B.T * Assignment2_4_B.T / 2.0;
-      Assignment2_4_B.reverseS[1] = Assignment2_4_B.SquareRoot1;
-      Assignment2_4_B.reverseT[3] = Assignment2_4_B.reverseT[2] +
-        Assignment2_4_B.reverseSamples[3];
-      Assignment2_4_B.T = Assignment2_4_B.reverseSamples[2] - (Assignment2_4_B.T
-        * 0.5 + Assignment2_4_B.reverseSamples[0]);
-      Assignment2_4_B.reverseS[2] = Assignment2_4_B.T * 2.0 * Assignment2_4_B.T /
-        3.0 + Assignment2_4_B.SquareRoot1;
+        Assignment2_4_B.MagnitudeSquare5[2];
+      Assignment2_4_B.T = Assignment2_4_B.MagnitudeSquare5[1] -
+        Assignment2_4_B.MagnitudeSquare5[0];
+      Assignment2_4_B.reverseS[1] = Assignment2_4_B.T * Assignment2_4_B.T / 2.0
+        + Assignment2_4_B.SquareRoot1;
       Assignment2_4_B.T = 0.0;
       Assignment2_4_B.S = 0.0;
       Assignment2_4_B.M = 0.0;
     }
 
-    obj->pReverseSamples[0] = Assignment2_4_B.reverseSamples[0];
-    obj->pReverseSamples[1] = Assignment2_4_B.reverseSamples[1];
-    obj->pReverseSamples[2] = Assignment2_4_B.reverseSamples[2];
-    obj->pReverseSamples[3] = Assignment2_4_B.reverseSamples[3];
+    obj->pReverseSamples[0] = Assignment2_4_B.MagnitudeSquare5[0];
+    obj->pReverseSamples[1] = Assignment2_4_B.MagnitudeSquare5[1];
+    obj->pReverseSamples[2] = Assignment2_4_B.MagnitudeSquare5[2];
     obj->pReverseT[0] = Assignment2_4_B.reverseT[0];
     obj->pReverseT[1] = Assignment2_4_B.reverseT[1];
     obj->pReverseT[2] = Assignment2_4_B.reverseT[2];
-    obj->pReverseT[3] = Assignment2_4_B.reverseT[3];
     obj->pReverseS[0] = Assignment2_4_B.reverseS[0];
     obj->pReverseS[1] = Assignment2_4_B.reverseS[1];
     obj->pReverseS[2] = Assignment2_4_B.reverseS[2];
-    obj->pReverseS[3] = Assignment2_4_B.reverseS[3];
     obj->pT = Assignment2_4_B.T;
     obj->pS = Assignment2_4_B.S;
     obj->pM = Assignment2_4_B.M;
     obj->pCounter = Assignment2_4_B.offset;
-    Assignment2_4_DW.Smoothed_Acceleration = sqrt(Assignment2_4_B.Mprev);
 
-    /* End of MATLABSystem: '<S3>/Moving Standard Deviation1' */
+    /* Gain: '<S3>/Gain' incorporates:
+     *  DataStoreWrite: '<S3>/Data Store Write21'
+     *  MATLABSystem: '<S3>/Moving Standard Deviation1'
+     */
+    Assignment2_4_DW.Smoothed_Acceleration = Assignment2_4_P.Gain_Gain * sqrt
+      (Assignment2_4_B.Mprev);
 
     /* DataTypeConversion: '<S3>/Data Type Conversion1' incorporates:
      *  DataStoreWrite: '<S3>/Data Store Write10'
@@ -1127,15 +1111,12 @@ void Assignment2_4_initialize(void)
       obj_1->pReverseSamples[0] = 0.0;
       obj_1->pReverseSamples[1] = 0.0;
       obj_1->pReverseSamples[2] = 0.0;
-      obj_1->pReverseSamples[3] = 0.0;
       obj_1->pReverseT[0] = 0.0;
       obj_1->pReverseT[1] = 0.0;
       obj_1->pReverseT[2] = 0.0;
-      obj_1->pReverseT[3] = 0.0;
       obj_1->pReverseS[0] = 0.0;
       obj_1->pReverseS[1] = 0.0;
       obj_1->pReverseS[2] = 0.0;
-      obj_1->pReverseS[3] = 0.0;
       obj_1->pT = 0.0;
       obj_1->pS = 0.0;
       obj_1->pM = 0.0;

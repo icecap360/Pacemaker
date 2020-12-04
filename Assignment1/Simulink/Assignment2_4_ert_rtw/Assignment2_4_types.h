@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2_4'.
  *
- * Model version                  : 1.517
+ * Model version                  : 1.519
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 23:13:01 2020
+ * C/C++ source code generated on : Thu Dec  3 23:38:23 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -108,28 +108,28 @@ typedef struct tag_Wwo3lHKnvPcvz2YX38S3zB freedomk64f_AnalogInput_Assig_T;
 
 #endif                               /*typedef_freedomk64f_AnalogInput_Assig_T*/
 
-#ifndef struct_tag_hlECvDC4pIChfmzM0jr2rF
-#define struct_tag_hlECvDC4pIChfmzM0jr2rF
+#ifndef struct_tag_4zw8axXJHMmpFxQcGTBHhC
+#define struct_tag_4zw8axXJHMmpFxQcGTBHhC
 
-struct tag_hlECvDC4pIChfmzM0jr2rF
+struct tag_4zw8axXJHMmpFxQcGTBHhC
 {
   int32_T isInitialized;
   boolean_T isSetupComplete;
-  real_T pReverseSamples[4];
-  real_T pReverseT[4];
-  real_T pReverseS[4];
+  real_T pReverseSamples[3];
+  real_T pReverseT[3];
+  real_T pReverseS[3];
   real_T pT;
   real_T pS;
   real_T pM;
   real_T pCounter;
 };
 
-#endif                                 /*struct_tag_hlECvDC4pIChfmzM0jr2rF*/
+#endif                                 /*struct_tag_4zw8axXJHMmpFxQcGTBHhC*/
 
 #ifndef typedef_g_dsp_private_SlidingWindowVa_T
 #define typedef_g_dsp_private_SlidingWindowVa_T
 
-typedef struct tag_hlECvDC4pIChfmzM0jr2rF g_dsp_private_SlidingWindowVa_T;
+typedef struct tag_4zw8axXJHMmpFxQcGTBHhC g_dsp_private_SlidingWindowVa_T;
 
 #endif                               /*typedef_g_dsp_private_SlidingWindowVa_T*/
 
@@ -194,10 +194,10 @@ typedef struct tag_PMfBDzoakfdM9QAdfx2o6D cell_wrap_Assignment2_4_T;
 
 #endif                                 /*typedef_cell_wrap_Assignment2_4_T*/
 
-#ifndef struct_tag_GauekVHitgi1z4QAtt985F
-#define struct_tag_GauekVHitgi1z4QAtt985F
+#ifndef struct_tag_FHyJMDqQ43YVdu6xhOg7WF
+#define struct_tag_FHyJMDqQ43YVdu6xhOg7WF
 
-struct tag_GauekVHitgi1z4QAtt985F
+struct tag_FHyJMDqQ43YVdu6xhOg7WF
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
@@ -208,12 +208,12 @@ struct tag_GauekVHitgi1z4QAtt985F
   int32_T NumChannels;
 };
 
-#endif                                 /*struct_tag_GauekVHitgi1z4QAtt985F*/
+#endif                                 /*struct_tag_FHyJMDqQ43YVdu6xhOg7WF*/
 
 #ifndef typedef_dsp_simulink_MovingStandardDe_T
 #define typedef_dsp_simulink_MovingStandardDe_T
 
-typedef struct tag_GauekVHitgi1z4QAtt985F dsp_simulink_MovingStandardDe_T;
+typedef struct tag_FHyJMDqQ43YVdu6xhOg7WF dsp_simulink_MovingStandardDe_T;
 
 #endif                               /*typedef_dsp_simulink_MovingStandardDe_T*/
 

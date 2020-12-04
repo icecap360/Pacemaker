@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2_4'.
  *
- * Model version                  : 1.517
+ * Model version                  : 1.519
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 23:13:01 2020
+ * C/C++ source code generated on : Thu Dec  3 23:38:23 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -53,11 +53,11 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T reverseSamples[4];
-  real_T reverseT[4];
-  real_T reverseS[4];
   uint8_T RxData[27];
   uint8_T RxDataLocChar[27];
+  real_T reverseT[3];
+  real_T reverseS[3];
+  real_T MagnitudeSquare5[3];          /* '<S3>/Magnitude Square5' */
   MW_AnalogIn_TriggerSource_Type trigger_val;
   uint32_T RxPinLoc;
   uint32_T SCIModuleLoc;
@@ -166,7 +166,10 @@ struct P_Assignment2_4_T_ {
   real_T FXOS87006AxesSensor1_SampleTime;/* Expression: -1
                                           * Referenced by: '<S3>/FXOS8700 6-Axes Sensor1'
                                           */
-  real_T Gain_Gain;                    /* Expression: 10000
+  real_T Gain_Gain;                    /* Expression: 100
+                                        * Referenced by: '<S3>/Gain'
+                                        */
+  real_T Gain_Gain_i;                  /* Expression: 10000
                                         * Referenced by: '<S2>/Gain'
                                         */
   real_T Gain1_Gain;                   /* Expression: 10000

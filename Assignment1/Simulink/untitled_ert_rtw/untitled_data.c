@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.0
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 10:30:33 2020
+ * C/C++ source code generated on : Thu Dec  3 23:33:16 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -23,49 +23,14 @@
 /* Block parameters (default storage) */
 P_untitled_T untitled_P = {
   /* Expression: -1
-   * Referenced by: '<S1>/FXOS8700 6-Axes Sensor'
+   * Referenced by: '<Root>/FXOS8700 6-Axes Sensor1'
    */
   -1.0,
 
-  /* Expression: 60/1000
-   * Referenced by: '<S1>/msec//minute'
+  /* Expression: 100
+   * Referenced by: '<Root>/Gain'
    */
-  0.06,
-
-  /* Expression: 1000/60
-   * Referenced by: '<S1>/Constant'
-   */
-  16.666666666666668,
-
-  /* Computed Parameter: Constant_Value_j
-   * Referenced by: '<Root>/Constant'
-   */
-  500U,
-
-  /* Computed Parameter: Constant1_Value
-   * Referenced by: '<Root>/Constant1'
-   */
-  120U,
-
-  /* Computed Parameter: Constant4_Value
-   * Referenced by: '<Root>/Constant4'
-   */
-  8U,
-
-  /* Computed Parameter: Constant3_Value
-   * Referenced by: '<Root>/Constant3'
-   */
-  10U,
-
-  /* Computed Parameter: Constant5_Value
-   * Referenced by: '<Root>/Constant5'
-   */
-  30U,
-
-  /* Computed Parameter: Constant2_Value
-   * Referenced by: '<Root>/Constant2'
-   */
-  1U
+  100.0
 };
 
 /*
