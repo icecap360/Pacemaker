@@ -88,7 +88,7 @@ def openDOOR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -118,7 +118,7 @@ def openDOOR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
@@ -255,9 +255,9 @@ def openDOOR():
     VentAmp_L = Label(DOORPage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(DOORPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
     maxSensorRate_L= Label(DOORPage, text="Max Sensor Rate", font=(None,12))
-    reactTime_L= Label(DOORPage, text="Reaction Time (s)", font=(None,12))
+    reactTime_L= Label(DOORPage, text="Reaction Time (ms)", font=(None,12))
     respFactor_L= Label(DOORPage, text="Responce Factor ", font=(None,12))
-    recoveryTime_L= Label(DOORPage, text="Recovery Time (min)", font=(None,12))
+    recoveryTime_L= Label(DOORPage, text="Recovery Time (ms)", font=(None,12))
 
     LowRL_V = Label(DOORPage, text = LowRL, font =(None,12))
     AtrialAmp_V = Label(DOORPage, text = AtrAmp, font =(None,12))
@@ -298,9 +298,9 @@ def openDOOR():
         try:
             #check variable range
             AtrAmp = float(AtrialAmp_E.get())
-            if (AtrAmp < 0.5):
+            if (AtrAmp < 0):
                 AtrialAmp_V.config(text = "Value too low")
-            elif (AtrAmp > 7.0):
+            elif (AtrAmp > 5.0):
                 AtrialAmp_V.config(text = "Value too high")
             else:
                 AtrialAmp_V.config(text = AtrAmp)
@@ -329,9 +329,9 @@ def openDOOR():
         try:
             #check variable range
             VentAmp = float(VentAmp_E.get())
-            if (VentAmp < 0.5):
+            if (VentAmp < 0):
                 VentAmp_V.config(text = "Value too low")
-            elif (VentAmp > 7.0):
+            elif (VentAmp > 5.0):
                 VentAmp_V.config(text = "Value too high")
             else:
                 VentAmp_V.config(text = VentAmp)
@@ -375,9 +375,9 @@ def openDOOR():
         try:
             #check variable range
             ReacTime = int(reactTime_E.get())
-            if (ReacTime < 10):
+            if (ReacTime < 0):
                 reactTime_V.config(text = "Value too low")
-            elif (ReacTime > 50):
+            elif (ReacTime > 100):
                 reactTime_V.config(text = "Value too high")
             else:
                 reactTime_V.config(text = ReacTime)
@@ -405,9 +405,9 @@ def openDOOR():
         try:
             #check variable range
             RecTime = int(recoveryTime_E.get())
-            if (RecTime < 2):
+            if (RecTime < 0):
                 recoveryTime_V.config(text = "Value too low")
-            elif (RecTime > 16):
+            elif (RecTime > 100):
                 recoveryTime_V.config(text = "Value too high")
             else:
                 recoveryTime_V.config(text = RecTime)
