@@ -25,6 +25,21 @@ AVDelay=0
 
 def openVVIR():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -73,7 +88,7 @@ def openVVIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -103,7 +118,7 @@ def openVVIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
@@ -238,9 +253,9 @@ def openVVIR():
     VentAmp_L = Label(VVIRPage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(VVIRPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
     maxSensorRate_L= Label(VVIRPage, text="Maximum Sensor Rate (ppm)", font=(None,12))
-    reactTime_L= Label(VVIRPage, text="Reaction Time (s)", font=(None,12))
+    reactTime_L= Label(VVIRPage, text="Reaction Time (ms)", font=(None,12))
     respFactor_L= Label(VVIRPage, text="Responce Factor ", font=(None,12))
-    recoveryTime_L= Label(VVIRPage, text="Recovery Time (min)", font=(None,12))
+    recoveryTime_L= Label(VVIRPage, text="Recovery Time (ms)", font=(None,12))
 
     LowRL_V = Label(VVIRPage, text = LowRL, font =(None,12))
     VentAmp_V = Label(VVIRPage, text = VentAmp, font =(None,12))
@@ -251,7 +266,7 @@ def openVVIR():
     recoveryTime_V= Label(VVIRPage, text=RecTime, font=(None,12))
 
     #Additional Labels
-    VentSens_L = Label(VVIRPage, text = "Ventricular Sensitivity (mV)", font =(None,12))
+    VentSens_L = Label(VVIRPage, text = "Ventricular Sensitivity (V)", font =(None,12))
     VRP_L = Label(VVIRPage, text = "Refractory Period (ms)", font =(None,12))
     PVARP_L = Label(VVIRPage, text = "PVA Refractory Period (ms)", font =(None,12))
     RateSmo_L = Label(VVIRPage, text = "Rate Smoothing", font =(None,12))
@@ -264,13 +279,14 @@ def openVVIR():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [2,2,2,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
+            params = [2,2,2,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
             
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -285,21 +301,23 @@ def openVVIR():
             LowRL_V.config(text = "Invalid Value")
         
     def changeVentAmp():
+        global VentAmp
         try:
             #check variable range
             VentAmp = float(VentAmp_E.get())
-            if (VentAmp < 0.5):
+            if (VentAmp < 0):
                 VentAmp_V.config(text = "Value too low")
-            elif (VentAmp > 7.0):
+            elif (VentAmp > 5.0):
                 VentAmp_V.config(text = "Value too high")
             else:
                 VentAmp_V.config(text = VentAmp)
-                VentAmp= VentAmp*10
+                VentAmp= VentAmp
                 set_params()
         except:
             VentAmp_V.config(text = "Invalid Value")
             
     def changeVentPW():
+        global VentPW
         try:
             #check variable range
             VentPW = int(VentPW_E.get())
@@ -316,21 +334,23 @@ def openVVIR():
     #Additional Functions
 
     def changeVentSens():
+        global VentSens
         try:
             #check variable range
             VentSens = float(VentSens_E.get())
-            if (VentSens < 1):
+            if (VentSens < 0):
                 VentSens_V.config(text = "Value too low")
-            elif (VentSens > 10):
+            elif (VentSens > 5):
                 VentSens_V.config(text = "Value too high")
             else:
                 VentSens_V.config(text = VentSens)
-                VentSens = VentSens*10
+                VentSens = VentSens
                 set_params()
         except:
             VentSens_V.config(text = "Invalid Value")
 
     def changeVRP():
+        global VRP
         try:
             #check variable range
             VRP = int(VRP_E.get())
@@ -356,6 +376,7 @@ def openVVIR():
             set_params()
         
     def changemaxSensorRate():
+        global MaxSR
         try:
             #check variable range
             MaxSR = int(maxSensorRate_E.get())
@@ -370,12 +391,13 @@ def openVVIR():
             maxSensorRate_V.config(text = "Invalid Value")
     
     def changereactTime():
+        global ReacTime
         try:
             #check variable range
             ReacTime = int(reactTime_E.get())
-            if (ReacTime < 10):
+            if (ReacTime < 0):
                 reactTime_V.config(text = "Value too low")
-            elif (ReacTime > 50):
+            elif (ReacTime > 100):
                 reactTime_V.config(text = "Value too high")
             else:
                 reactTime_V.config(text = ReacTime)
@@ -384,6 +406,7 @@ def openVVIR():
             reactTime_V.config(text = "Invalid Value")
 
     def changerespFactor():
+        global RespF
         try:
             #check variable range
             RespF = int(respFactor_E.get())
@@ -398,12 +421,13 @@ def openVVIR():
             respFactor_V.config(text = "Invalid Value")
     
     def changerecoveryTime():
+        global RecTime
         try:
             #check variable range
             RecTime = int(recoveryTime_E.get())
-            if (RecTime < 2):
+            if (RecTime < 0):
                 recoveryTime_V.config(text = "Value too low")
-            elif (RecTime > 16):
+            elif (RecTime > 100):
                 recoveryTime_V.config(text = "Value too high")
             else:
                 recoveryTime_V.config(text = RecTime)
