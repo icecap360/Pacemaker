@@ -289,12 +289,12 @@ def openAOO():
             AtrAmp = float(AtrialAmp_E.get())
             if (AtrAmp < 0.5):
                 AtrialAmp_V.config(text = "Value too low")
-            elif (AtrAmp > 7.0):
+            elif (AtrAmp > 5.0):
                 AtrialAmp_V.config(text = "Value too high")
             else:
                 AtrialAmp_V.config(text = AtrAmp)
                 #write to file
-                AtrAmp = AtrAmp*10
+                AtrAmp = AtrAmp
                 set_params()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
