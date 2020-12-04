@@ -1,0 +1,4 @@
+MW_AnalogInput.o
+MW_SCI.o
+Serial_Read.o
+mw_sdk_interface.o

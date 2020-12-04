@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2'.
  *
- * Model version                  : 1.497
+ * Model version                  : 1.504
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:32:06 2020
+ * C/C++ source code generated on : Thu Dec  3 16:57:32 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -26,26 +26,6 @@ P_Assignment2_T Assignment2_P = {
    * Referenced by: '<Root>/Serial Receive'
    */
   -1.0,
-
-  /* Expression: SampleTime
-   * Referenced by: '<S2>/VENT_SIGNAL'
-   */
-  -1.0,
-
-  /* Expression: SampleTime
-   * Referenced by: '<S2>/ATR_SIGNAL'
-   */
-  -1.0,
-
-  /* Expression: 10000
-   * Referenced by: '<S2>/Gain'
-   */
-  10000.0,
-
-  /* Expression: 10000
-   * Referenced by: '<S2>/Gain1'
-   */
-  10000.0,
 
   /* Computed Parameter: DataStoreMemory22_InitialValue
    * Referenced by: '<Root>/Data Store Memory22'

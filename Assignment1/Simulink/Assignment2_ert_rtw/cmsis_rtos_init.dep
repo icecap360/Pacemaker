@@ -6,7 +6,7 @@ cmsis_rtos_init.o: \
  C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/armcortexmbase/cmsis_rtos_rtx/include/mw_semaphore.h \
  C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/armcortexmbase/cmsis_rtos_rtx/include/mw_timer.h \
  C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/armcortexmbase/cmsis_rtos_rtx/include/mw_signal.h \
- C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/MW_target_hardware_resources.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Serial_Read/MW_target_hardware_resources.h \
  C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/board.h \
  C:/Freescale/KSDK_1.2.0/platform/devices/fsl_device_registers.h \
  C:/Freescale/KSDK_1.2.0/platform/devices/MK64F12/include/MK64F12.h \
@@ -41,7 +41,7 @@ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/armc
 
 C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/armcortexmbase/cmsis_rtos_rtx/include/mw_signal.h:
 
-C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/PTHS/MW_target_hardware_resources.h:
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Serial_Read/MW_target_hardware_resources.h:
 
 C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/board.h:
 

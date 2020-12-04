@@ -1,0 +1,23 @@
+Mode_Adaptivity.o: \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity.c \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/_sharedutils/rtwtypes.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_I2C.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity_types.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity_private.h
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/_sharedutils/rtwtypes.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_I2C.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity_types.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+
+C:/Users/iceca/Documents/Pacemaker/Assignment1/Simulink/slprj/ert/Mode_Adaptivity/Mode_Adaptivity_private.h:

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.4
+ * Model version                  : 1.13
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:31:25 2020
+ * C/C++ source code generated on : Thu Dec  3 23:06:22 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -19,17 +19,21 @@
 
 #ifndef RTW_HEADER_PTHS_h_
 #define RTW_HEADER_PTHS_h_
+#include <math.h>
 #ifndef PTHS_COMMON_INCLUDES_
 # define PTHS_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#include "MW_PWM.h"
 #include "MW_digitalIO.h"
+#include "MW_PWM.h"
 #endif                                 /* PTHS_COMMON_INCLUDES_ */
 
 #include "PTHS_types.h"
+#include "rt_nonfinite.h"
+#include "rtGetInf.h"
 
 /* Block signals for model 'PTHS' */
 typedef struct {
+  real_T LRL;                          /* '<Root>/Chart' */
   uint8_T PACING_REF_PWM;              /* '<Root>/Chart1' */
   uint8_T ATR_CMP_REF_PWM;             /* '<Root>/Chart1' */
   uint8_T VENT_CMP_REF_PWM;            /* '<Root>/Chart1' */
@@ -42,56 +46,72 @@ typedef struct {
   boolean_T Z_VENT_CTRL;               /* '<Root>/Chart1' */
   boolean_T VENT_GND_CTRL;             /* '<Root>/Chart1' */
   boolean_T FRONT_END_CTRL;            /* '<Root>/Chart1' */
+  boolean_T LED_RED;                   /* '<Root>/Chart' */
+  boolean_T LED_BLUE;                  /* '<Root>/Chart' */
 } B_PTHS_c_T;
 
 /* Block states (default storage) for model 'PTHS' */
 typedef struct {
-  freedomk64f_DigitalRead_PTHS_T obj;  /* '<S2>/Digital Read' */
-  freedomk64f_DigitalRead_PTHS_T obj_k;/* '<S2>/Digital Read1' */
-  freedomk64f_DigitalWrite_PTHS_T obj_h;/* '<S2>/Digital Write2' */
-  freedomk64f_DigitalWrite_PTHS_T obj_b;/* '<S2>/Digital Write3' */
-  freedomk64f_DigitalWrite_PTHS_T obj_a;/* '<S2>/Digital Write8' */
-  freedomk64f_DigitalWrite_PTHS_T obj_m;/* '<S2>/Digital Write4' */
-  freedomk64f_DigitalWrite_PTHS_T obj_e;/* '<S2>/Digital Write5' */
-  freedomk64f_DigitalWrite_PTHS_T obj_d;/* '<S2>/Digital Write6' */
-  freedomk64f_DigitalWrite_PTHS_T obj_bs;/* '<S2>/Digital Write7' */
-  freedomk64f_DigitalWrite_PTHS_T obj_aq;/* '<S2>/Digital Write9' */
-  freedomk64f_DigitalWrite_PTHS_T obj_p;/* '<S2>/Digital Write1' */
-  freedomk64f_PWMOutput_PTHS_T obj_j;  /* '<S2>/PWM Output1' */
-  freedomk64f_PWMOutput_PTHS_T obj_bg; /* '<S2>/PWM Output2' */
-  freedomk64f_PWMOutput_PTHS_T obj_ds; /* '<S2>/PWM Output3' */
+  freedomk64f_DigitalRead_PTHS_T obj;  /* '<S3>/Digital Read' */
+  freedomk64f_DigitalRead_PTHS_T obj_k;/* '<S3>/Digital Read1' */
+  freedomk64f_DigitalWrite_PTHS_T obj_h;/* '<S3>/Digital Write2' */
+  freedomk64f_DigitalWrite_PTHS_T obj_b;/* '<S3>/Digital Write3' */
+  freedomk64f_DigitalWrite_PTHS_T obj_a;/* '<S3>/Digital Write8' */
+  freedomk64f_DigitalWrite_PTHS_T obj_m;/* '<S3>/Digital Write4' */
+  freedomk64f_DigitalWrite_PTHS_T obj_e;/* '<S3>/Digital Write5' */
+  freedomk64f_DigitalWrite_PTHS_T obj_d;/* '<S3>/Digital Write6' */
+  freedomk64f_DigitalWrite_PTHS_T obj_bs;/* '<S3>/Digital Write7' */
+  freedomk64f_DigitalWrite_PTHS_T obj_aq;/* '<S3>/Digital Write9' */
+  freedomk64f_DigitalWrite_PTHS_T obj_p;/* '<S3>/Digital Write1' */
+  freedomk64f_DigitalWrite_PTHS_T obj_i;/* '<Root>/Digital Write' */
+  freedomk64f_DigitalWrite_PTHS_T obj_ez;/* '<Root>/Digital Write1' */
+  freedomk64f_PWMOutput_PTHS_T obj_j;  /* '<S3>/PWM Output1' */
+  freedomk64f_PWMOutput_PTHS_T obj_bg; /* '<S3>/PWM Output2' */
+  freedomk64f_PWMOutput_PTHS_T obj_ds; /* '<S3>/PWM Output3' */
+  real_T RateChange;                   /* '<Root>/Chart' */
   uint32_T temporalCounter_i1;         /* '<Root>/Chart1' */
+  uint32_T temporalCounter_i1_i;       /* '<Root>/Chart' */
   uint16_T Pace_Interval;              /* '<Root>/Chart1' */
   uint16_T Atrial_Escape_Interval;     /* '<Root>/Chart1' */
   uint8_T is_active_c2_PTHS;           /* '<Root>/Chart1' */
   uint8_T is_c2_PTHS;                  /* '<Root>/Chart1' */
   uint8_T is_DUAL_MODES;               /* '<Root>/Chart1' */
   uint8_T is_NON_DUAL_MODES;           /* '<Root>/Chart1' */
-  boolean_T objisempty;                /* '<S2>/Digital Read' */
-  boolean_T objisempty_d;              /* '<S2>/Digital Read1' */
-  boolean_T objisempty_i;              /* '<S2>/Digital Write2' */
-  boolean_T objisempty_o;              /* '<S2>/Digital Write3' */
-  boolean_T objisempty_j;              /* '<S2>/PWM Output1' */
-  boolean_T objisempty_n;              /* '<S2>/Digital Write8' */
-  boolean_T objisempty_b;              /* '<S2>/Digital Write4' */
-  boolean_T objisempty_g;              /* '<S2>/Digital Write5' */
-  boolean_T objisempty_a;              /* '<S2>/Digital Write6' */
-  boolean_T objisempty_l;              /* '<S2>/Digital Write7' */
-  boolean_T objisempty_dn;             /* '<S2>/Digital Write9' */
-  boolean_T objisempty_be;             /* '<S2>/Digital Write1' */
-  boolean_T objisempty_e;              /* '<S2>/PWM Output2' */
-  boolean_T objisempty_f;              /* '<S2>/PWM Output3' */
+  uint8_T is_active_c1_PTHS;           /* '<Root>/Chart' */
+  uint8_T is_c1_PTHS;                  /* '<Root>/Chart' */
+  boolean_T objisempty;                /* '<S3>/Digital Read' */
+  boolean_T objisempty_d;              /* '<S3>/Digital Read1' */
+  boolean_T objisempty_i;              /* '<S3>/Digital Write2' */
+  boolean_T objisempty_o;              /* '<S3>/Digital Write3' */
+  boolean_T objisempty_j;              /* '<S3>/PWM Output1' */
+  boolean_T objisempty_n;              /* '<S3>/Digital Write8' */
+  boolean_T objisempty_b;              /* '<S3>/Digital Write4' */
+  boolean_T objisempty_g;              /* '<S3>/Digital Write5' */
+  boolean_T objisempty_a;              /* '<S3>/Digital Write6' */
+  boolean_T objisempty_l;              /* '<S3>/Digital Write7' */
+  boolean_T objisempty_dn;             /* '<S3>/Digital Write9' */
+  boolean_T objisempty_be;             /* '<S3>/Digital Write1' */
+  boolean_T objisempty_e;              /* '<S3>/PWM Output2' */
+  boolean_T objisempty_f;              /* '<S3>/PWM Output3' */
   boolean_T HIGH;                      /* '<Root>/Chart1' */
   boolean_T LOW;                       /* '<Root>/Chart1' */
+  boolean_T objisempty_c;              /* '<Root>/Digital Write' */
+  boolean_T objisempty_k;              /* '<Root>/Digital Write1' */
 } DW_PTHS_f_T;
 
 /* Parameters (default storage) */
 struct P_PTHS_T_ {
   real_T DigitalRead1_SampleTime;      /* Expression: SampleTime
-                                        * Referenced by: '<S2>/Digital Read1'
+                                        * Referenced by: '<S3>/Digital Read1'
                                         */
   real_T DigitalRead_SampleTime;       /* Expression: SampleTime
-                                        * Referenced by: '<S2>/Digital Read'
+                                        * Referenced by: '<S3>/Digital Read'
+                                        */
+  real_T Constant1_Value;              /* Expression: 60000
+                                        * Referenced by: '<Root>/Constant1'
+                                        */
+  real_T Constant_Value;               /* Expression: 60000
+                                        * Referenced by: '<Root>/Constant'
                                         */
 };
 
@@ -119,9 +139,12 @@ extern void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
                  const uint8_T *rtu_Atrial_Sensitivity, const uint8_T
                  *rtu_Hysterisis, const uint16_T *rtu_Lower_Rate_Limit, const
                  uint16_T *rtu_AV_Delay, const uint16_T *rtu_VRP, const uint16_T
-                 *rtu_ARP, const uint16_T *rtu_Hysterisis_Escape_Interval,
-                 boolean_T *rty_Trigger, B_PTHS_c_T *localB, DW_PTHS_f_T
-                 *localDW);
+                 *rtu_ARP, const uint16_T *rtu_Hysterisis_Escape_Interval, const
+                 uint8_T *rtu_Maximum_Sensor_Rate, const uint8_T
+                 *rtu_Mode_Adaptivity, const uint8_T *rtu_Reaction_Time, const
+                 uint8_T *rtu_Recovery_Time, const real_T
+                 *rtu_Smoother_Acceleration, boolean_T *rty_Trigger, B_PTHS_c_T *
+                 localB, DW_PTHS_f_T *localDW);
 extern void PTHS_Term(DW_PTHS_f_T *localDW);
 
 /*-
@@ -139,8 +162,9 @@ extern void PTHS_Term(DW_PTHS_f_T *localDW);
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'PTHS'
- * '<S1>'   : 'PTHS/Chart1'
- * '<S2>'   : 'PTHS/Subsystem'
+ * '<S1>'   : 'PTHS/Chart'
+ * '<S2>'   : 'PTHS/Chart1'
+ * '<S3>'   : 'PTHS/Subsystem'
  */
 #endif                                 /* RTW_HEADER_PTHS_h_ */
 

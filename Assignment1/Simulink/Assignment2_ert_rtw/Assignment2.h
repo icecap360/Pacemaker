@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2'.
  *
- * Model version                  : 1.497
+ * Model version                  : 1.504
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:32:06 2020
+ * C/C++ source code generated on : Thu Dec  3 16:57:32 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -20,23 +20,19 @@
 #ifndef RTW_HEADER_Assignment2_h_
 #define RTW_HEADER_Assignment2_h_
 #include <string.h>
-#include <math.h>
 #include <stddef.h>
 #ifndef Assignment2_COMMON_INCLUDES_
 # define Assignment2_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #include "zero_crossing_types.h"
-#include "MW_digitalIO.h"
 #include "MW_SCI.h"
-#include "MW_AnalogIn.h"
 #endif                                 /* Assignment2_COMMON_INCLUDES_ */
 
 #include "Assignment2_types.h"
 
 /* Child system includes */
+#include "Serial_Read.h"
 #include "PTHS.h"
-#include "rt_nonfinite.h"
-#include "rtGetInf.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
@@ -54,23 +50,13 @@
 /* Block signals (default storage) */
 typedef struct {
   uint8_T RxData[27];
-  MW_AnalogIn_TriggerSource_Type trigger_val;
-  uint32_T RxPinLoc;
   uint32_T TxPinLoc;
-  uint16_T DataTypeConversion2;        /* '<S2>/Data Type Conversion2' */
-  uint16_T DataTypeConversion3;        /* '<S2>/Data Type Conversion3' */
+  uint32_T SCIModuleLoc;
   uint16_T Lower_Rate_Limit;           /* '<Root>/Chart' */
   uint16_T AV_Delay;                   /* '<Root>/Chart' */
   uint16_T VRP;                        /* '<Root>/Chart' */
   uint16_T ARP;                        /* '<Root>/Chart' */
   uint16_T Hysterisis_Escape_Interval; /* '<Root>/Chart' */
-  uint8_T BytePack5[2];                /* '<S2>/Byte Pack5' */
-  uint8_T BytePack6[2];                /* '<S2>/Byte Pack6' */
-  uint8_T BytePack1[2];                /* '<S2>/Byte Pack1' */
-  uint8_T BytePack7[2];                /* '<S2>/Byte Pack7' */
-  uint8_T BytePack4[2];                /* '<S2>/Byte Pack4' */
-  uint8_T BytePack30[2];               /* '<S2>/Byte Pack30' */
-  uint8_T BytePack31[2];               /* '<S2>/Byte Pack31' */
   uint8_T Mode_Chamber_Paced;          /* '<Root>/Chart' */
   uint8_T Mode_Chamber_Sensed;         /* '<Root>/Chart' */
   uint8_T Mode_Response;               /* '<Root>/Chart' */
@@ -93,10 +79,6 @@ typedef struct {
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   freedomk64f_SCIRead_Assignmen_T obj; /* '<Root>/Serial Receive' */
-  freedomk64f_AnalogInput_Assig_T obj_i;/* '<S2>/ATR_SIGNAL' */
-  freedomk64f_AnalogInput_Assig_T obj_b;/* '<S2>/VENT_SIGNAL' */
-  freedomk64f_DigitalWrite_Assi_T obj_e;/* '<Root>/Digital Write' */
-  freedomk64f_SCIWrite_Assignme_T obj_m;/* '<S2>/Serial Transmit1' */
   real_T uint16_bytes;                 /* '<Root>/Chart' */
   real_T uint8_bytes;                  /* '<Root>/Chart' */
   uint16_T Lower_Rate_Limit;           /* '<Root>/Data Store Memory22' */
@@ -116,6 +98,7 @@ typedef struct {
   uint8_T Hysterisis;                  /* '<Root>/Data Store Memory34' */
   uint8_T is_active_c8_Assignment2;    /* '<Root>/Chart' */
   uint8_T is_c8_Assignment2;           /* '<Root>/Chart' */
+  MdlrefDW_Serial_Read_T Model2_InstanceData;/* '<Root>/Model2' */
   MdlrefDW_PTHS_T Model1_InstanceData; /* '<Root>/Model1' */
 } DW_Assignment2_T;
 
@@ -128,18 +111,6 @@ typedef struct {
 struct P_Assignment2_T_ {
   real_T SerialReceive_SampleTime;     /* Expression: -1
                                         * Referenced by: '<Root>/Serial Receive'
-                                        */
-  real_T VENT_SIGNAL_SampleTime;       /* Expression: SampleTime
-                                        * Referenced by: '<S2>/VENT_SIGNAL'
-                                        */
-  real_T ATR_SIGNAL_SampleTime;        /* Expression: SampleTime
-                                        * Referenced by: '<S2>/ATR_SIGNAL'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 10000
-                                        * Referenced by: '<S2>/Gain'
-                                        */
-  real_T Gain1_Gain;                   /* Expression: 10000
-                                        * Referenced by: '<S2>/Gain1'
                                         */
   uint16_T DataStoreMemory22_InitialValue;
                            /* Computed Parameter: DataStoreMemory22_InitialValue
@@ -264,8 +235,7 @@ extern RT_MODEL_Assignment2_T *const Assignment2_M;
  *
  * '<Root>' : 'Assignment2'
  * '<S1>'   : 'Assignment2/Chart'
- * '<S2>'   : 'Assignment2/Subsystem1'
- * '<S3>'   : 'Assignment2/Triggered Subsystem'
+ * '<S2>'   : 'Assignment2/Triggered Subsystem'
  */
 #endif                                 /* RTW_HEADER_Assignment2_h_ */
 

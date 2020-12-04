@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'AdaptivePacing'.
  *
- * Model version                  : 1.20
+ * Model version                  : 1.30
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:03:02 2020
+ * C/C++ source code generated on : Thu Dec  3 18:22:55 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -20,40 +20,40 @@
 #include "AdaptivePacing.h"
 #include "AdaptivePacing_private.h"
 
-/* Named constants for Chart: '<S1>/Chart' */
+/* Named constants for Chart: '<Root>/Chart' */
 #define AdaptivePacing_IN_Constant     ((uint8_T)1U)
 #define AdaptivePacing_IN_Decreasing   ((uint8_T)2U)
 #define AdaptivePacing_IN_Increasing   ((uint8_T)3U)
-#define AdaptivePacing_IN_main         ((uint8_T)4U)
-#define AdaptivePacing_IN_start        ((uint8_T)5U)
+#define AdaptivePacing_IN_TESTING      ((uint8_T)4U)
+#define AdaptivePacing_IN_main         ((uint8_T)5U)
 
 P_AdaptivePacing_T AdaptivePacing_P = {
   /* Expression: -1
-   * Referenced by: '<S1>/FXOS8700 6-Axes Sensor'
+   * Referenced by: '<Root>/FXOS8700 6-Axes Sensor'
    */
   -1.0,
 
   /* Expression: 60000
-   * Referenced by: '<S1>/Constant1'
+   * Referenced by: '<Root>/Constant1'
    */
   60000.0,
 
   /* Expression: 60000
-   * Referenced by: '<S1>/Constant'
+   * Referenced by: '<Root>/Constant'
    */
   60000.0
 };
 
 /* Forward declaration for local functions */
 static void AdaptivePacing_SystemCore_setup(freedomk64f_fxos8700_Adaptive_T *obj);
-static void AdaptivePa_SystemCore_release_m(const
+static void AdaptiveP_SystemCore_release_mt(const
   freedomk64f_fxos8700_Adaptive_T *obj);
-static void AdaptivePac_SystemCore_delete_a(const
+static void AdaptivePa_SystemCore_delete_as(const
   freedomk64f_fxos8700_Adaptive_T *obj);
-static void matlabCodegenHandle_matlabCod_g(freedomk64f_fxos8700_Adaptive_T *obj);
-static void AdaptiveP_SystemCore_release_mt(b_freedomk64f_I2CMasterWrite__T *obj);
-static void AdaptivePa_SystemCore_delete_as(b_freedomk64f_I2CMasterWrite__T *obj);
-static void matlabCodegenHandle_matlabCo_go(b_freedomk64f_I2CMasterWrite__T *obj);
+static void matlabCodegenHandle_matlabCo_go(freedomk64f_fxos8700_Adaptive_T *obj);
+static void Adaptive_SystemCore_release_mt2(b_freedomk64f_I2CMasterWrite__T *obj);
+static void AdaptiveP_SystemCore_delete_asm(b_freedomk64f_I2CMasterWrite__T *obj);
+static void matlabCodegenHandle_matlabC_goq(b_freedomk64f_I2CMasterWrite__T *obj);
 static void AdaptivePaci_SystemCore_release(const
   freedomk64f_DigitalWrite_Adap_T *obj);
 static void AdaptivePacin_SystemCore_delete(const
@@ -108,7 +108,7 @@ static void AdaptivePacing_SystemCore_setup(freedomk64f_fxos8700_Adaptive_T *obj
   obj->isSetupComplete = true;
 }
 
-static void AdaptivePa_SystemCore_release_m(const
+static void AdaptiveP_SystemCore_release_mt(const
   freedomk64f_fxos8700_Adaptive_T *obj)
 {
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
@@ -116,37 +116,37 @@ static void AdaptivePa_SystemCore_release_m(const
   }
 }
 
-static void AdaptivePac_SystemCore_delete_a(const
+static void AdaptivePa_SystemCore_delete_as(const
   freedomk64f_fxos8700_Adaptive_T *obj)
 {
-  AdaptivePa_SystemCore_release_m(obj);
+  AdaptiveP_SystemCore_release_mt(obj);
 }
 
-static void matlabCodegenHandle_matlabCod_g(freedomk64f_fxos8700_Adaptive_T *obj)
+static void matlabCodegenHandle_matlabCo_go(freedomk64f_fxos8700_Adaptive_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    AdaptivePac_SystemCore_delete_a(obj);
+    AdaptivePa_SystemCore_delete_as(obj);
   }
 }
 
-static void AdaptiveP_SystemCore_release_mt(b_freedomk64f_I2CMasterWrite__T *obj)
+static void Adaptive_SystemCore_release_mt2(b_freedomk64f_I2CMasterWrite__T *obj)
 {
   if (obj->isInitialized == 1) {
     obj->isInitialized = 2;
   }
 }
 
-static void AdaptivePa_SystemCore_delete_as(b_freedomk64f_I2CMasterWrite__T *obj)
+static void AdaptiveP_SystemCore_delete_asm(b_freedomk64f_I2CMasterWrite__T *obj)
 {
-  AdaptiveP_SystemCore_release_mt(obj);
+  Adaptive_SystemCore_release_mt2(obj);
 }
 
-static void matlabCodegenHandle_matlabCo_go(b_freedomk64f_I2CMasterWrite__T *obj)
+static void matlabCodegenHandle_matlabC_goq(b_freedomk64f_I2CMasterWrite__T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    AdaptivePa_SystemCore_delete_as(obj);
+    AdaptiveP_SystemCore_delete_asm(obj);
   }
 }
 
@@ -178,7 +178,7 @@ void AdaptivePacing_Init(DW_AdaptivePacing_f_T *localDW)
   freedomk64f_fxos8700_Adaptive_T *obj;
   freedomk64f_DigitalWrite_Adap_T *obj_0;
 
-  /* Start for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
+  /* Start for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor' */
   localDW->obj.i2cobj.matlabCodegenIsDeleted = true;
   localDW->obj.matlabCodegenIsDeleted = true;
   obj = &localDW->obj;
@@ -191,25 +191,35 @@ void AdaptivePacing_Init(DW_AdaptivePacing_f_T *localDW)
   localDW->obj.SampleTime = AdaptivePacing_P.FXOS87006AxesSensor_SampleTime;
   AdaptivePacing_SystemCore_setup(&localDW->obj);
 
-  /* Start for MATLABSystem: '<S1>/Digital Write' */
-  localDW->obj_m.matlabCodegenIsDeleted = true;
-  localDW->obj_m.isInitialized = 0;
-  localDW->obj_m.matlabCodegenIsDeleted = false;
-  localDW->objisempty_a = true;
-  obj_0 = &localDW->obj_m;
-  localDW->obj_m.isSetupComplete = false;
-  localDW->obj_m.isInitialized = 1;
+  /* Start for MATLABSystem: '<Root>/Digital Write' */
+  localDW->obj_d.matlabCodegenIsDeleted = true;
+  localDW->obj_d.isInitialized = 0;
+  localDW->obj_d.matlabCodegenIsDeleted = false;
+  localDW->objisempty_e = true;
+  obj_0 = &localDW->obj_d;
+  localDW->obj_d.isSetupComplete = false;
+  localDW->obj_d.isInitialized = 1;
   obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(42U, 1);
-  localDW->obj_m.isSetupComplete = true;
+  localDW->obj_d.isSetupComplete = true;
+
+  /* Start for MATLABSystem: '<Root>/Digital Write1' */
+  localDW->obj_c.matlabCodegenIsDeleted = true;
+  localDW->obj_c.isInitialized = 0;
+  localDW->obj_c.matlabCodegenIsDeleted = false;
+  localDW->objisempty_b = true;
+  obj_0 = &localDW->obj_c;
+  localDW->obj_c.isSetupComplete = false;
+  localDW->obj_c.isInitialized = 1;
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(44U, 1);
+  localDW->obj_c.isSetupComplete = true;
 }
 
 /* Output and update for referenced model: 'AdaptivePacing' */
 void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
                     *rtu_Maximum_Sensor_Rate, const uint8_T *rtu_Mode_Adaptivity,
                     const uint8_T *rtu_Reaction_Time, const uint8_T
-                    *rtu_Response_Factor, const uint8_T *rtu_Recovery_Time,
-                    uint16_T *rty_Update_Lower_Rate_Limit, B_AdaptivePacing_c_T *
-                    localB, DW_AdaptivePacing_f_T *localDW)
+                    *rtu_Recovery_Time, uint16_T *rty_Updated_Lower_Rate_Limit,
+                    B_AdaptivePacing_c_T *localB, DW_AdaptivePacing_f_T *localDW)
 {
   int16_T b_output[3];
   uint8_T status;
@@ -219,7 +229,7 @@ void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
   real_T rtb_Divide1;
   real_T tmp;
 
-  /* MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
+  /* MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor' */
   if (localDW->obj.SampleTime != AdaptivePacing_P.FXOS87006AxesSensor_SampleTime)
   {
     localDW->obj.SampleTime = AdaptivePacing_P.FXOS87006AxesSensor_SampleTime;
@@ -257,40 +267,37 @@ void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
     b_output[2] = 0;
   }
 
-  /* Sum: '<S1>/Sum of Elements' incorporates:
-   *  MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor'
+  /* Sum: '<Root>/Sum of Elements' incorporates:
+   *  MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor'
    */
   tmp = ((real_T)(int16_T)(b_output[0] >> 2) * 0.244 / 1000.0 + (real_T)(int16_T)
          (b_output[1] >> 2) * 0.244 / 1000.0) + (real_T)(int16_T)(b_output[2] >>
     2) * 0.244 / 1000.0;
 
-  /* Product: '<S1>/Divide1' incorporates:
-   *  Constant: '<S1>/Constant1'
+  /* Product: '<Root>/Divide1' incorporates:
+   *  Constant: '<Root>/Constant1'
    *  DataTypeConversion: '<Root>/Data Type Conversion5'
    */
   rtb_Divide1 = AdaptivePacing_P.Constant1_Value / (real_T)*rtu_OLRL;
 
-  /* Chart: '<S1>/Chart' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion3'
+  /* Chart: '<Root>/Chart' incorporates:
    *  DataTypeConversion: '<Root>/Data Type Conversion4'
-   *  Sum: '<S1>/Sum of Elements'
+   *  Sum: '<Root>/Sum of Elements'
    */
   if (localDW->temporalCounter_i1 < MAX_uint32_T) {
     localDW->temporalCounter_i1++;
   }
 
-  if (localDW->is_active_c3_AdaptivePacing == 0U) {
-    localDW->is_active_c3_AdaptivePacing = 1U;
-    localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_start;
+  if (localDW->is_active_c1_AdaptivePacing == 0U) {
+    localDW->is_active_c1_AdaptivePacing = 1U;
+    localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_TESTING;
     localB->LRL = rtb_Divide1;
-    localDW->RateChange = (real_T)*rtu_Response_Factor / 16.0;
-    localDW->Avg = 0.0;
   } else {
-    switch (localDW->is_c3_AdaptivePacing) {
+    switch (localDW->is_c1_AdaptivePacing) {
      case AdaptivePacing_IN_Constant:
-      localB->LED = true;
-      localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_main;
-      localDW->Avg = localDW->Avg * 0.7 + tmp * 0.3;
+      localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_main;
+      localB->LED_BLUE = false;
+      localB->LED_RED = false;
       if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
         localB->LRL = rtb_Divide1;
       }
@@ -302,8 +309,9 @@ void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
 
      case AdaptivePacing_IN_Decreasing:
       if (localDW->temporalCounter_i1 >= *rtu_Recovery_Time) {
-        localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_main;
-        localDW->Avg = localDW->Avg * 0.7 + tmp * 0.3;
+        localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_main;
+        localB->LED_BLUE = false;
+        localB->LED_RED = false;
         if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
           localB->LRL = rtb_Divide1;
         }
@@ -316,8 +324,9 @@ void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
 
      case AdaptivePacing_IN_Increasing:
       if (localDW->temporalCounter_i1 >= *rtu_Reaction_Time) {
-        localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_main;
-        localDW->Avg = localDW->Avg * 0.7 + tmp * 0.3;
+        localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_main;
+        localB->LED_BLUE = false;
+        localB->LED_RED = false;
         if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
           localB->LRL = rtb_Divide1;
         }
@@ -328,49 +337,63 @@ void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
       }
       break;
 
+     case AdaptivePacing_IN_TESTING:
+      localB->LRL = rtb_Divide1;
+      localB->LED_BLUE = false;
+      localB->LED_RED = false;
+      break;
+
      case AdaptivePacing_IN_main:
       if ((*rtu_Mode_Adaptivity == 1) && (tmp < 1.05) && (localB->LRL >
            rtb_Divide1)) {
-        localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_Decreasing;
+        localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_Decreasing;
         localDW->temporalCounter_i1 = 0U;
+        localB->LED_BLUE = true;
+        localB->LED_RED = true;
         localB->LRL -= localDW->RateChange;
       } else if ((*rtu_Mode_Adaptivity == 1) && (tmp > 1.05) && (localB->LRL <
                   *rtu_Maximum_Sensor_Rate)) {
-        localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_Increasing;
+        localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_Increasing;
         localDW->temporalCounter_i1 = 0U;
+        localB->LED_BLUE = true;
+        localB->LED_RED = true;
         localB->LRL += localDW->RateChange;
+      } else if (*rtu_Mode_Adaptivity == 0) {
+        localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_Constant;
+        localB->LRL = rtb_Divide1;
+        localB->LED_BLUE = ((localB->LRL == 400.0) || localB->LED_BLUE);
+        localB->LED_RED = true;
       } else {
-        if (*rtu_Mode_Adaptivity == 0) {
-          localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_Constant;
-          localB->LRL = rtb_Divide1;
-          localB->LED = true;
-        }
+        localDW->Avg = localDW->Avg * 0.7 + tmp * 0.3;
       }
       break;
 
      default:
       /* case IN_start: */
-      localDW->is_c3_AdaptivePacing = AdaptivePacing_IN_main;
-      localDW->Avg = localDW->Avg * 0.7 + tmp * 0.3;
-      if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
+      if ((rtb_Divide1 > 0.0) && (rtb_Divide1 <= 2000.0)) {
         localB->LRL = rtb_Divide1;
-      }
-
-      if (!(localB->LRL < *rtu_Maximum_Sensor_Rate)) {
-        localB->LRL = *rtu_Maximum_Sensor_Rate;
+        localDW->is_c1_AdaptivePacing = AdaptivePacing_IN_main;
+        localB->LED_BLUE = false;
+        localB->LED_RED = false;
+        if (!(localB->LRL < *rtu_Maximum_Sensor_Rate)) {
+          localB->LRL = *rtu_Maximum_Sensor_Rate;
+        }
       }
       break;
     }
   }
 
-  /* End of Chart: '<S1>/Chart' */
+  /* End of Chart: '<Root>/Chart' */
 
-  /* MATLABSystem: '<S1>/Digital Write' */
-  MW_digitalIO_write(localDW->obj_m.MW_DIGITALIO_HANDLE, localB->LED);
+  /* MATLABSystem: '<Root>/Digital Write' */
+  MW_digitalIO_write(localDW->obj_d.MW_DIGITALIO_HANDLE, localB->LED_RED);
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion6' incorporates:
-   *  Constant: '<S1>/Constant'
-   *  Product: '<S1>/Divide'
+  /* MATLABSystem: '<Root>/Digital Write1' */
+  MW_digitalIO_write(localDW->obj_c.MW_DIGITALIO_HANDLE, localB->LED_BLUE);
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion8' incorporates:
+   *  Constant: '<Root>/Constant'
+   *  Product: '<Root>/Divide'
    */
   tmp = floor(AdaptivePacing_P.Constant_Value / localB->LRL);
   if (rtIsNaN(tmp) || rtIsInf(tmp)) {
@@ -379,21 +402,24 @@ void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
     tmp = fmod(tmp, 65536.0);
   }
 
-  *rty_Update_Lower_Rate_Limit = (uint16_T)(tmp < 0.0 ? (int32_T)(uint16_T)
+  *rty_Updated_Lower_Rate_Limit = (uint16_T)(tmp < 0.0 ? (int32_T)(uint16_T)
     -(int16_T)(uint16_T)-tmp : (int32_T)(uint16_T)tmp);
 
-  /* End of DataTypeConversion: '<Root>/Data Type Conversion6' */
+  /* End of DataTypeConversion: '<Root>/Data Type Conversion8' */
 }
 
 /* Termination for referenced model: 'AdaptivePacing' */
 void AdaptivePacing_Term(DW_AdaptivePacing_f_T *localDW)
 {
-  /* Terminate for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
-  matlabCodegenHandle_matlabCod_g(&localDW->obj);
-  matlabCodegenHandle_matlabCo_go(&localDW->obj.i2cobj);
+  /* Terminate for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor' */
+  matlabCodegenHandle_matlabCo_go(&localDW->obj);
+  matlabCodegenHandle_matlabC_goq(&localDW->obj.i2cobj);
 
-  /* Terminate for MATLABSystem: '<S1>/Digital Write' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_m);
+  /* Terminate for MATLABSystem: '<Root>/Digital Write' */
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_d);
+
+  /* Terminate for MATLABSystem: '<Root>/Digital Write1' */
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_c);
 }
 
 /* Model initialize function */

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'AdaptivePacing'.
  *
- * Model version                  : 1.20
+ * Model version                  : 1.30
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:03:02 2020
+ * C/C++ source code generated on : Thu Dec  3 18:22:55 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -23,7 +23,7 @@
 
 /* Model Code Variants */
 
-/* Custom Type definition for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
+/* Custom Type definition for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor' */
 #include "MW_SVD.h"
 #ifndef struct_tag_bvK2L41g8z1P0jzpdjsJhE
 #define struct_tag_bvK2L41g8z1P0jzpdjsJhE
@@ -63,7 +63,7 @@ typedef struct tag_62aCTDKRGQaAsT8vVipI2D freedomk64f_DigitalWrite_Adap_T;
 
 #endif                               /*typedef_freedomk64f_DigitalWrite_Adap_T*/
 
-/* Custom Type definition for MATLABSystem: '<S1>/FXOS8700 6-Axes Sensor' */
+/* Custom Type definition for MATLABSystem: '<Root>/FXOS8700 6-Axes Sensor' */
 #include "MW_I2C.h"
 #ifndef struct_tag_dJFZzmsGU3XebjMxPxDlh
 #define struct_tag_dJFZzmsGU3XebjMxPxDlh

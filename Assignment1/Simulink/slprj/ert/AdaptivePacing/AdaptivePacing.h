@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'AdaptivePacing'.
  *
- * Model version                  : 1.20
+ * Model version                  : 1.30
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:03:02 2020
+ * C/C++ source code generated on : Thu Dec  3 18:22:55 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -34,33 +34,36 @@
 
 /* Block signals for model 'AdaptivePacing' */
 typedef struct {
-  real_T LRL;                          /* '<S1>/Chart' */
-  boolean_T LED;                       /* '<S1>/Chart' */
+  real_T LRL;                          /* '<Root>/Chart' */
+  boolean_T LED_RED;                   /* '<Root>/Chart' */
+  boolean_T LED_BLUE;                  /* '<Root>/Chart' */
 } B_AdaptivePacing_c_T;
 
 /* Block states (default storage) for model 'AdaptivePacing' */
 typedef struct {
-  freedomk64f_fxos8700_Adaptive_T obj; /* '<S1>/FXOS8700 6-Axes Sensor' */
-  freedomk64f_DigitalWrite_Adap_T obj_m;/* '<S1>/Digital Write' */
-  real_T RateChange;                   /* '<S1>/Chart' */
-  real_T Avg;                          /* '<S1>/Chart' */
-  uint32_T temporalCounter_i1;         /* '<S1>/Chart' */
-  uint8_T is_active_c3_AdaptivePacing; /* '<S1>/Chart' */
-  uint8_T is_c3_AdaptivePacing;        /* '<S1>/Chart' */
-  boolean_T objisempty;                /* '<S1>/FXOS8700 6-Axes Sensor' */
-  boolean_T objisempty_a;              /* '<S1>/Digital Write' */
+  freedomk64f_fxos8700_Adaptive_T obj; /* '<Root>/FXOS8700 6-Axes Sensor' */
+  freedomk64f_DigitalWrite_Adap_T obj_d;/* '<Root>/Digital Write' */
+  freedomk64f_DigitalWrite_Adap_T obj_c;/* '<Root>/Digital Write1' */
+  real_T RateChange;                   /* '<Root>/Chart' */
+  real_T Avg;                          /* '<Root>/Chart' */
+  uint32_T temporalCounter_i1;         /* '<Root>/Chart' */
+  uint8_T is_active_c1_AdaptivePacing; /* '<Root>/Chart' */
+  uint8_T is_c1_AdaptivePacing;        /* '<Root>/Chart' */
+  boolean_T objisempty;                /* '<Root>/FXOS8700 6-Axes Sensor' */
+  boolean_T objisempty_e;              /* '<Root>/Digital Write' */
+  boolean_T objisempty_b;              /* '<Root>/Digital Write1' */
 } DW_AdaptivePacing_f_T;
 
 /* Parameters (default storage) */
 struct P_AdaptivePacing_T_ {
   real_T FXOS87006AxesSensor_SampleTime;/* Expression: -1
-                                         * Referenced by: '<S1>/FXOS8700 6-Axes Sensor'
+                                         * Referenced by: '<Root>/FXOS8700 6-Axes Sensor'
                                          */
   real_T Constant1_Value;              /* Expression: 60000
-                                        * Referenced by: '<S1>/Constant1'
+                                        * Referenced by: '<Root>/Constant1'
                                         */
   real_T Constant_Value;               /* Expression: 60000
-                                        * Referenced by: '<S1>/Constant'
+                                        * Referenced by: '<Root>/Constant'
                                         */
 };
 
@@ -81,9 +84,9 @@ extern void AdaptivePacing_initialize(const char_T **rt_errorStatus,
 extern void AdaptivePacing_Init(DW_AdaptivePacing_f_T *localDW);
 extern void AdaptivePacing(const uint16_T *rtu_OLRL, const uint8_T
   *rtu_Maximum_Sensor_Rate, const uint8_T *rtu_Mode_Adaptivity, const uint8_T
-  *rtu_Reaction_Time, const uint8_T *rtu_Response_Factor, const uint8_T
-  *rtu_Recovery_Time, uint16_T *rty_Update_Lower_Rate_Limit,
-  B_AdaptivePacing_c_T *localB, DW_AdaptivePacing_f_T *localDW);
+  *rtu_Reaction_Time, const uint8_T *rtu_Recovery_Time, uint16_T
+  *rty_Updated_Lower_Rate_Limit, B_AdaptivePacing_c_T *localB,
+  DW_AdaptivePacing_f_T *localDW);
 extern void AdaptivePacing_Term(DW_AdaptivePacing_f_T *localDW);
 
 /*-
@@ -101,8 +104,7 @@ extern void AdaptivePacing_Term(DW_AdaptivePacing_f_T *localDW);
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'AdaptivePacing'
- * '<S1>'   : 'AdaptivePacing/Adaptive Pacing'
- * '<S2>'   : 'AdaptivePacing/Adaptive Pacing/Chart'
+ * '<S1>'   : 'AdaptivePacing/Chart'
  */
 #endif                                 /* RTW_HEADER_AdaptivePacing_h_ */
 

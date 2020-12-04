@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2'.
  *
- * Model version                  : 1.497
+ * Model version                  : 1.504
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:32:06 2020
+ * C/C++ source code generated on : Thu Dec  3 16:57:32 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -24,7 +24,7 @@
 
 /* Model Code Variants */
 
-/* Custom Type definition for MATLABSystem: '<S2>/ATR_SIGNAL' */
+/* Custom Type definition for MATLABSystem: '<Root>/Serial Receive' */
 #include "MW_SVD.h"
 #ifndef struct_tag_bvK2L41g8z1P0jzpdjsJhE
 #define struct_tag_bvK2L41g8z1P0jzpdjsJhE
@@ -42,27 +42,6 @@ struct tag_bvK2L41g8z1P0jzpdjsJhE
 typedef struct tag_bvK2L41g8z1P0jzpdjsJhE b_freedomk64f_Hardware_Assign_T;
 
 #endif                               /*typedef_b_freedomk64f_Hardware_Assign_T*/
-
-#ifndef struct_tag_62aCTDKRGQaAsT8vVipI2D
-#define struct_tag_62aCTDKRGQaAsT8vVipI2D
-
-struct tag_62aCTDKRGQaAsT8vVipI2D
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_freedomk64f_Hardware_Assign_T Hw;
-  MW_Handle_Type MW_DIGITALIO_HANDLE;
-};
-
-#endif                                 /*struct_tag_62aCTDKRGQaAsT8vVipI2D*/
-
-#ifndef typedef_freedomk64f_DigitalWrite_Assi_T
-#define typedef_freedomk64f_DigitalWrite_Assi_T
-
-typedef struct tag_62aCTDKRGQaAsT8vVipI2D freedomk64f_DigitalWrite_Assi_T;
-
-#endif                               /*typedef_freedomk64f_DigitalWrite_Assi_T*/
 
 #ifndef struct_tag_79weVYaslRFZRGk3pNTXC
 #define struct_tag_79weVYaslRFZRGk3pNTXC
@@ -85,49 +64,6 @@ struct tag_79weVYaslRFZRGk3pNTXC
 typedef struct tag_79weVYaslRFZRGk3pNTXC freedomk64f_SCIRead_Assignmen_T;
 
 #endif                               /*typedef_freedomk64f_SCIRead_Assignmen_T*/
-
-#ifndef struct_tag_WltE1qT51p3S2KRQQd2Zd
-#define struct_tag_WltE1qT51p3S2KRQQd2Zd
-
-struct tag_WltE1qT51p3S2KRQQd2Zd
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_freedomk64f_Hardware_Assign_T Hw;
-  MW_Handle_Type MW_SCIHANDLE;
-};
-
-#endif                                 /*struct_tag_WltE1qT51p3S2KRQQd2Zd*/
-
-#ifndef typedef_freedomk64f_SCIWrite_Assignme_T
-#define typedef_freedomk64f_SCIWrite_Assignme_T
-
-typedef struct tag_WltE1qT51p3S2KRQQd2Zd freedomk64f_SCIWrite_Assignme_T;
-
-#endif                               /*typedef_freedomk64f_SCIWrite_Assignme_T*/
-
-#ifndef struct_tag_Wwo3lHKnvPcvz2YX38S3zB
-#define struct_tag_Wwo3lHKnvPcvz2YX38S3zB
-
-struct tag_Wwo3lHKnvPcvz2YX38S3zB
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_freedomk64f_Hardware_Assign_T Hw;
-  MW_Handle_Type MW_ANALOGIN_HANDLE;
-  real_T SampleTime;
-};
-
-#endif                                 /*struct_tag_Wwo3lHKnvPcvz2YX38S3zB*/
-
-#ifndef typedef_freedomk64f_AnalogInput_Assig_T
-#define typedef_freedomk64f_AnalogInput_Assig_T
-
-typedef struct tag_Wwo3lHKnvPcvz2YX38S3zB freedomk64f_AnalogInput_Assig_T;
-
-#endif                               /*typedef_freedomk64f_AnalogInput_Assig_T*/
 
 /* Parameters (default storage) */
 typedef struct P_Assignment2_T_ P_Assignment2_T;

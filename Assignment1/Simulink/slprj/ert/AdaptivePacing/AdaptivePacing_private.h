@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'AdaptivePacing'.
  *
- * Model version                  : 1.20
+ * Model version                  : 1.30
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Thu Dec  3 15:03:02 2020
+ * C/C++ source code generated on : Thu Dec  3 18:22:55 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex

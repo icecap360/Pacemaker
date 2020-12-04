@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'PTHS'. 
 ## 
 ## Makefile     : PTHS.mk
-## Generated on : Thu Dec 03 15:31:32 2020
+## Generated on : Thu Dec 03 23:03:13 2020
 ## MATLAB Coder version: 5.0 (R2020a)
 ## 
 ## Build Info:
@@ -231,7 +231,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_PWM.c C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/mw_sdk_interface.c C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_digitalIO.c $(START_DIR)/slprj/ert/PTHS/PTHS.c
+SRCS = C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_digitalIO.c C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/mw_sdk_interface.c C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_PWM.c $(START_DIR)/slprj/ert/PTHS/PTHS.c
 
 ALL_SRCS = $(SRCS)
 
@@ -239,7 +239,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = MW_PWM.o mw_sdk_interface.o MW_digitalIO.o PTHS.o
+OBJS = MW_digitalIO.o mw_sdk_interface.o MW_PWM.o PTHS.o
 
 ALL_OBJS = $(OBJS)
 
@@ -567,7 +567,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-MW_PWM.o : C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_PWM.c
+MW_digitalIO.o : C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_digitalIO.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -575,7 +575,7 @@ mw_sdk_interface.o : C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-MW_digitalIO.o : C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_digitalIO.c
+MW_PWM.o : C:/ProgramData/MATLAB/SupportPackages/R2020a/toolbox/target/supportpackages/freedomk64f/src/MW_PWM.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
