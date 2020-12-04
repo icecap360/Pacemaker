@@ -11,7 +11,7 @@ def checkConnection():
                 port = p
                 break
 
-        if (port == None):
+        if (port.__str__() == None):
             messagebox.showerror("Error","Connection to Pacemaker Lost")
             return "Unconnected"
         else:
