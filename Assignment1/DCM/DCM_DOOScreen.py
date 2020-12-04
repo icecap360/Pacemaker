@@ -254,7 +254,7 @@ def openDOO():
     AtrialPW_L = Label(DOOPage, text = "Atrial Pulse Width (ms)", font =(None,12))
     VentAmp_L = Label(DOOPage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(DOOPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
-    AVDelay_L= LAbel(DOOPage, text= "AV Delay (ms)", font=(None, 12))
+    AVDelay_L= Label(DOOPage, text= "AV Delay (ms)", font=(None, 12))
 
     LowRL_V = Label(DOOPage, text = LowRL, font =(None,12))
     AtrialAmp_V = Label(DOOPage, text = AtrAmp, font =(None,12))
