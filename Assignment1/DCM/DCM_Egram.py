@@ -119,6 +119,9 @@ def openEgram():
             y1.clear()
             y2.clear()
             x.clear()
+            y1.append(0)
+            y2.append(0)
+            x.append(0)
 
         echo_params(22)
         read_params(3)
