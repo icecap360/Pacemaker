@@ -11,7 +11,6 @@ from DCM_Serial import read_params8
 from DCM_Serial import read_params16
 from serial.tools import list_ports
 import struct
-from os import getcwd, chdir, path ; chdir(path.join("Assignment1", "DCM")) 
 
 port = None
 baudrate = 115200
