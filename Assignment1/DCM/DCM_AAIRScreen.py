@@ -90,7 +90,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -120,7 +120,7 @@ def openAAIR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
