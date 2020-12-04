@@ -7,7 +7,7 @@ from serial.tools import list_ports
 def checkConnection():
         port=None
         for p in list_ports.comports():
-            if 'Link' in p.__str__():
+            if 'JLink' in p.__str__():
                 port = p
                 break
 
