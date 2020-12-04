@@ -268,7 +268,7 @@ def openAAIR():
     recoveryTime_V= Label(AAIRPage, text=RecTime, font=(None,12))
 
     #Additional Labels
-    AtrSens_L = Label(AAIRPage, text = "Atrial Sensitivity (mV)", font =(None,12))
+    AtrSens_L = Label(AAIRPage, text = "Atrial Sensitivity (V)", font =(None,12))
     ARP_L = Label(AAIRPage, text = "Refractory Period (ms)", font =(None,12))
     Hyst_L = Label(AAIRPage, text = "Hysteresis", font =(None,12))
 
@@ -338,9 +338,9 @@ def openAAIR():
         try:
             #check variable range
             AtrSens = float(AtrSens_E.get())
-            if (AtrSens < 0.25):
+            if (AtrSens < 0):
                 AtrSens_V.config(text = "Value too low")
-            elif (AtrSens > 0.75):
+            elif (AtrSens > 5):
                 AtrSens_V.config(text = "Value too high")
             else:
                 AtrSens_V.config(text = AtrSens)
