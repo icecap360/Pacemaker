@@ -287,7 +287,7 @@ def openAOO():
         try:
             #check variable range
             AtrAmp = float(AtrialAmp_E.get())
-            if (AtrAmp < 0.5):
+            if (AtrAmp < 0):
                 AtrialAmp_V.config(text = "Value too low")
             elif (AtrAmp > 5.0):
                 AtrialAmp_V.config(text = "Value too high")

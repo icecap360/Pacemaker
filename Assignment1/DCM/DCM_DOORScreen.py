@@ -25,6 +25,21 @@ AVDelay=0
 
 def openDOOR():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -257,13 +272,14 @@ def openDOOR():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [3,0,0,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
+            params = [3,0,0,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
             
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -278,6 +294,7 @@ def openDOOR():
             LowRL_V.config(text = "Invalid Value")
 
     def changeAtrAmp():
+        global AtrAmp
         try:
             #check variable range
             AtrAmp = float(AtrialAmp_E.get())
@@ -287,12 +304,13 @@ def openDOOR():
                 AtrialAmp_V.config(text = "Value too high")
             else:
                 AtrialAmp_V.config(text = AtrAmp)
-                AtrAmp = AtrAmp * 10 
+                AtrAmp = AtrAmp
                 set_params()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
+        global AtrPW
         try:
             #check variable range
             AtrPW = int(AtrialPW_E.get())
@@ -307,6 +325,7 @@ def openDOOR():
             AtrialPW_V.config(text = "Invalid Value")
     
     def changeVentAmp():
+        global VentAmp
         try:
             #check variable range
             VentAmp = float(VentAmp_E.get())
@@ -316,12 +335,13 @@ def openDOOR():
                 VentAmp_V.config(text = "Value too high")
             else:
                 VentAmp_V.config(text = VentAmp)
-                VentAmp = VentAmp * 10
+                VentAmp = VentAmp 
                 set_params()
         except:
             VentAmp_V.config(text = "Invalid Value")
             
     def changeVentPW():
+        global VentPW
         try:
             #check variable range
             VentPW = int(VentPW_E.get())
@@ -336,6 +356,7 @@ def openDOOR():
             VentPW_V.config(text = "Invalid Value")
 
     def changemaxSensorRate():
+        global MaxSR
         try:
             #check variable range
             MaxSR = int(maxSensorRate_E.get())
@@ -350,6 +371,7 @@ def openDOOR():
             maxSensorRate_V.config(text = "Invalid Value")
     
     def changereactTime():
+        global ReacTime
         try:
             #check variable range
             ReacTime = int(reactTime_E.get())
@@ -364,6 +386,7 @@ def openDOOR():
             reactTime_V.config(text = "Invalid Value")
 
     def changerespFactor():
+        global RespF
         try:
             #check variable range
             RespF = int(respFactor_E.get())
@@ -378,6 +401,7 @@ def openDOOR():
             respFactor_V.config(text = "Invalid Value")
     
     def changerecoveryTime():
+        global RecTime
         try:
             #check variable range
             RecTime = int(recoveryTime_E.get())
