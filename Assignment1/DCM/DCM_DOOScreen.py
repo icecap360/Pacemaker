@@ -422,7 +422,7 @@ def openDOO():
     AVDelay_L.grid(row= 11, column= 0)
     AVDelay_V.grid(row= 11, column= 1)
     AVDelay_E.grid(row= 11, column= 2)
-    AVdelay_B.grid(row= 11, column= 3)
+    AVDelay_B.grid(row= 11, column= 3)
 
 
     #Statues Bar
