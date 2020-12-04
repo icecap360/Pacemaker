@@ -32,7 +32,7 @@ def openAOO():
     global AtrPW
     global AtrSens
     global Hyst
-    global LowLR
+    global LowRL
     global VRP
     global ARP
     global HEI
