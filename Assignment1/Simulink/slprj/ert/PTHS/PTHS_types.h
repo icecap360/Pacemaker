@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.33
+ * Model version                  : 1.34
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:38:30 2020
+ * C/C++ source code generated on : Fri Dec  4 11:23:33 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex

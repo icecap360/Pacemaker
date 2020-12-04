@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2_4'.
  *
- * Model version                  : 1.519
+ * Model version                  : 1.525
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:39:21 2020
+ * C/C++ source code generated on : Fri Dec  4 11:26:05 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -101,6 +101,7 @@ typedef struct {
   uint8_T Response_Factor;             /* '<Root>/Chart' */
   uint8_T Recovery_Time;               /* '<Root>/Chart' */
   boolean_T Trigger;                   /* '<Root>/Model1' */
+  boolean_T Trigger_h;                 /* '<Root>/Chart' */
 } B_Assignment2_4_T;
 
 /* Block states (default storage) for system '<Root>' */

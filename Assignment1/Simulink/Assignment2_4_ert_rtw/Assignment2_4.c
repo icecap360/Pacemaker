@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Assignment2_4'.
  *
- * Model version                  : 1.519
+ * Model version                  : 1.525
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:39:21 2020
+ * C/C++ source code generated on : Fri Dec  4 11:26:05 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -312,6 +312,7 @@ void Assignment2_4_step(void)
   uint8_T rtb_TmpSignalConversionAtSerial[3];
   uint8_T rtb_MultiportSwitch1[2];
   int32_T a_tmp;
+  boolean_T guard1 = false;
 
   /* MATLABSystem: '<Root>/Serial Receive' */
   if (Assignment2_4_DW.obj_c.SampleTime !=
@@ -334,20 +335,23 @@ void Assignment2_4_step(void)
     Assignment2_4_DW.uint16_bytes = 2.0;
     Assignment2_4_DW.uint8_bytes = 1.0;
   } else {
+    guard1 = false;
     switch (Assignment2_4_DW.is_c8_Assignment2_4) {
      case Assignment2_4_IN_READ_PARAMS:
       Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WAIT_STATE;
+      Assignment2_4_B.Trigger_h = false;
       break;
 
      case Assignment2_4_IN_START_STATE:
       Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WAIT_STATE;
+      Assignment2_4_B.Trigger_h = false;
       break;
 
      case Assignment2_4_IN_WAIT_STATE:
+      Assignment2_4_B.Trigger_h = false;
       if (status == 0) {
         if (Assignment2_4_B.RxData[0] == 10) {
-          switch (Assignment2_4_B.RxData[1]) {
-           case 20:
+          if (Assignment2_4_B.RxData[1] == 20) {
             Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WRITE_PARAMS;
             Assignment2_4_B.Mode_Chamber_Paced = Assignment2_4_B.RxData[2];
             Assignment2_4_B.Mode_Chamber_Sensed = Assignment2_4_B.RxData
@@ -412,19 +416,15 @@ void Assignment2_4_step(void)
             Assignment2_4_B.offset += Assignment2_4_DW.uint8_bytes;
             Assignment2_4_B.Recovery_Time = Assignment2_4_B.RxData[(int32_T)
               Assignment2_4_B.offset - 1];
-            break;
-
-           case 30:
+          } else if (Assignment2_4_B.RxData[1] == 30) {
             Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_READ_PARAMS;
             Assignment2_4_B.Param_Number = Assignment2_4_B.RxData[2];
-            break;
-
-           default:
-            Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WAIT_STATE;
-            break;
+            Assignment2_4_B.Trigger_h = true;
+          } else {
+            guard1 = true;
           }
         } else {
-          Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WAIT_STATE;
+          guard1 = true;
         }
       }
       break;
@@ -432,7 +432,13 @@ void Assignment2_4_step(void)
      default:
       /* case IN_WRITE_PARAMS: */
       Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WAIT_STATE;
+      Assignment2_4_B.Trigger_h = false;
       break;
+    }
+
+    if (guard1) {
+      Assignment2_4_DW.is_c8_Assignment2_4 = Assignment2_4_IN_WAIT_STATE;
+      Assignment2_4_B.Trigger_h = false;
     }
   }
 

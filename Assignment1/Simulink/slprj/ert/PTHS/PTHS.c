@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.33
+ * Model version                  : 1.34
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:38:30 2020
+ * C/C++ source code generated on : Fri Dec  4 11:23:33 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -621,7 +621,7 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
     switch (localDW->is_c1_PTHS) {
      case PTHS_IN_Constant:
       localDW->is_c1_PTHS = PTHS_IN_main;
-      localDW->RateChange = *rtu_Response_Factor;
+      localDW->RateChange = (real_T)*rtu_Response_Factor / 4.0;
       if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
         localB->LRL = rtb_Divide1;
       }
@@ -634,7 +634,7 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
      case PTHS_IN_Decreasing:
       if (localDW->temporalCounter_i1_i >= *rtu_Recovery_Time) {
         localDW->is_c1_PTHS = PTHS_IN_main;
-        localDW->RateChange = *rtu_Response_Factor;
+        localDW->RateChange = (real_T)*rtu_Response_Factor / 4.0;
         if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
           localB->LRL = rtb_Divide1;
         }
@@ -648,7 +648,7 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
      case PTHS_IN_Increasing:
       if (localDW->temporalCounter_i1_i >= *rtu_Reaction_Time) {
         localDW->is_c1_PTHS = PTHS_IN_main;
-        localDW->RateChange = *rtu_Response_Factor;
+        localDW->RateChange = (real_T)*rtu_Response_Factor / 4.0;
         if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
           localB->LRL = rtb_Divide1;
         }
@@ -660,13 +660,13 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
       break;
 
      case PTHS_IN_main:
-      if ((*rtu_Mode_Adaptivity == 1) && (*rtu_Smoother_Acceleration < 1.5) &&
+      if ((*rtu_Mode_Adaptivity == 1) && (*rtu_Smoother_Acceleration < 2.0) &&
           (localB->LRL > rtb_Divide1)) {
         localDW->is_c1_PTHS = PTHS_IN_Decreasing;
         localDW->temporalCounter_i1_i = 0U;
         localB->LRL -= localDW->RateChange;
       } else if ((*rtu_Mode_Adaptivity == 1) && (*rtu_Smoother_Acceleration >
-                  1.5) && (localB->LRL < *rtu_Maximum_Sensor_Rate)) {
+                  2.0) && (localB->LRL < *rtu_Maximum_Sensor_Rate)) {
         localDW->is_c1_PTHS = PTHS_IN_Increasing;
         localDW->temporalCounter_i1_i = 0U;
         localB->LRL += localDW->RateChange;
@@ -680,10 +680,10 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
 
      default:
       /* case IN_start: */
-      if ((rtb_Divide1 > 0.0) && (rtb_Divide1 <= 2000.0)) {
+      if ((rtb_Divide1 > 0.0) && (rtb_Divide1 <= 2500.0)) {
         localB->LRL = rtb_Divide1;
         localDW->is_c1_PTHS = PTHS_IN_main;
-        localDW->RateChange = *rtu_Response_Factor;
+        localDW->RateChange = (real_T)*rtu_Response_Factor / 4.0;
         if (!(localB->LRL < *rtu_Maximum_Sensor_Rate)) {
           localB->LRL = *rtu_Maximum_Sensor_Rate;
         }
