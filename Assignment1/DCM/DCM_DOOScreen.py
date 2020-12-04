@@ -25,6 +25,21 @@ AVDelay=0
 
 def openDOO():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -73,7 +88,7 @@ def openDOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -103,7 +118,7 @@ def openDOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
@@ -239,23 +254,26 @@ def openDOO():
     AtrialPW_L = Label(DOOPage, text = "Atrial Pulse Width (ms)", font =(None,12))
     VentAmp_L = Label(DOOPage, text = "Ventricular Amplitude (V)", font =(None,12))
     VentPW_L = Label(DOOPage, text = "Ventricular Pulse Width (ms)", font =(None,12))
+    AVDelay_L= LAbel(DOOPage, text= "AV Delay (ms)", font=(None, 12))
 
     LowRL_V = Label(DOOPage, text = LowRL, font =(None,12))
     AtrialAmp_V = Label(DOOPage, text = AtrAmp, font =(None,12))
     AtrialPW_V = Label(DOOPage, text = AtrPW, font =(None,12))
     VentAmp_V = Label(DOOPage, text = VentAmp, font =(None,12))
     VentPW_V = Label(DOOPage, text = VentPW, font =(None,12))
+    AVDelay_V= Label(DOOPage, text=AVDelay, font=(None, 12))
 
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [3,0,0,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,0,ReacTime,RespF,RecTime]
+            params = [3,0,0,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,0,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
             
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -270,21 +288,23 @@ def openDOO():
             LowRL_V.config(text = "Invalid Value")
 
     def changeAtrAmp():
+        global AtrAmp
         try:
             #check variable range
             AtrAmp = float(AtrialAmp_E.get())
-            if (AtrAmp < 0.5):
+            if (AtrAmp < 0):
                 AtrialAmp_V.config(text = "Value too low")
-            elif (AtrAmp > 7.0):
+            elif (AtrAmp > 5.0):
                 AtrialAmp_V.config(text = "Value too high")
             else:
                 AtrialAmp_V.config(text = AtrAmp)
-                AtrAmp = AtrAmp*10
+                AtrAmp = AtrAmp
                 set_params()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
+        global AtrPW
         try:
             #check variable range
             AtrPW = int(AtrialPW_E.get())
@@ -299,21 +319,23 @@ def openDOO():
             AtrialPW_V.config(text = "Invalid Value")
     
     def changeVentAmp():
+        global VentAmp
         try:
             #check variable range
             VentAmp = float(VentAmp_E.get())
-            if (VentAmp < 0.5):
+            if (VentAmp < 0):
                 VentAmp_V.config(text = "Value too low")
-            elif (VentAmp > 7.0):
+            elif (VentAmp > 5.0):
                 VentAmp_V.config(text = "Value too high")
             else:
                 VentAmp_V.config(text = VentAmp)
-                VentAmp = VentAmp*10
+                VentAmp = VentAmp
                 set_params()
         except:
             VentAmp_V.config(text = "Invalid Value")
             
     def changeVentPW():
+        global VentPW
         try:
             #check variable range
             VentPW = int(VentPW_E.get())
@@ -326,6 +348,21 @@ def openDOO():
                 set_params()
         except:
             VentPW_V.config(text = "Invalid Value")
+    
+    def changeAVDelay():
+        global AVDelay
+        try:
+            #check variable range
+            AVDelay = int(AVDelay_E.get())
+            if (AVDelay < 70):
+                AVDelay_V.config(text = "Value too low")
+            elif (AVDelay > 300):
+                AVDelay_V.config(text = "Value too high")
+            else:
+                AVDelay_V.config(text = AVDelay)
+                set_params()
+        except:
+            AVDelay_V.config(text = "Invalid Value")
 
     # Create Entries
     LowRL_E = Entry(DOOPage, width=20)
@@ -343,12 +380,16 @@ def openDOO():
     VentPW_E = Entry(DOOPage, width=20)
     VentPW_E.insert(0, "Enter New Value")
 
+    AVDelay_E= Entry(DOOPage, width=20)
+    AVDelay_E.insert(0, "Enter New Value")
+
     # Create Buttons
     LowRL_B = Button(DOOPage, text="Update", command=changeLowRL)
     AtrialAmp_B = Button(DOOPage, text="Update", command=changeAtrAmp)
     AtrialPW_B = Button(DOOPage, text="Update", command=changeAtrPW)
     VentAmp_B = Button(DOOPage, text="Update", command=changeVentAmp)
     VentPW_B = Button(DOOPage, text="Update", command=changeVentPW)
+     AVDelay_B= Button(DOOPage, text= "Update", command= changeAVDelay)
 
     # Organize objects
     DOOPageLabel.grid(row= 1, column= 1)
@@ -377,6 +418,11 @@ def openDOO():
     VentPW_V.grid(row= 6, column= 1)
     VentPW_E.grid(row= 6, column= 2)
     VentPW_B.grid(row= 6, column= 3)
+
+    AVDelay_L.grid(row= 11, column= 0)
+    AVDelay_V.grid(row= 11, column= 1)
+    AVDelay_E.grid(row= 11, column= 2)
+    AVdelay_B.grid(row= 11, column= 3)
 
 
     #Statues Bar
