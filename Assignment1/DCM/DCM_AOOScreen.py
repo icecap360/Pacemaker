@@ -25,6 +25,21 @@ AVDelay=0
 
 def openAOO():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowLR
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -252,6 +267,7 @@ def openAOO():
             bytes_written = device.write(dat)
             
     def changeLowRL():
+        global LowLR
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -267,6 +283,7 @@ def openAOO():
             LowRL_V.config(text = "Invalid Value")
         
     def changeAtrAmp():
+        global AtrAmp
         try:
             #check variable range
             AtrAmp = float(AtrialAmp_E.get())
@@ -283,6 +300,7 @@ def openAOO():
             AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
+        global AtrPW
         try:
             #check variable range
             AtrPW = int(AtrialPW_E.get())
