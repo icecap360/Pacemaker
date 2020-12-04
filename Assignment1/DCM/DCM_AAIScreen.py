@@ -296,9 +296,9 @@ def openAAI():
         try:
             #check variable range
             AtrAmp = float(AtrAmp_E.get())
-            if (AtrAmp < 0.5):
+            if (AtrAmp < 0):
                 AtrAmp_V.config(text = "Value too low")
-            elif (AtrAmp > 7.0):
+            elif (AtrAmp > 5.0):
                 AtrAmp_V.config(text = "Value too high")
             else:
                 AtrAmp_V.config(text = AtrAmp)

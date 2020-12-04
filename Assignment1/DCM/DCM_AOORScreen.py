@@ -25,6 +25,21 @@ AVDelay=0
 
 def openAOOR():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -73,7 +88,7 @@ def openAOOR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -103,7 +118,7 @@ def openAOOR():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
@@ -238,9 +253,9 @@ def openAOOR():
     AtrialAmp_L = Label(AOORPage, text = "Atrial Amplitude (V)", font =(None,12))
     AtrialPW_L = Label(AOORPage, text = "Atrial Pulse Width (ms)", font =(None,12))
     maxSensorRate_L= Label(AOORPage, text="Maximum Sensor Rate (ppm)", font=(None,12))
-    reactTime_L= Label(AOORPage, text="Reaction Time (s)", font=(None,12))
+    reactTime_L= Label(AOORPage, text="Reaction Time (ms)", font=(None,12))
     respFactor_L= Label(AOORPage, text="Responce Factor ", font=(None,12))
-    recoveryTime_L= Label(AOORPage, text="Recovery Time (min)", font=(None,12))
+    recoveryTime_L= Label(AOORPage, text="Recovery Time (ms)", font=(None,12))
 
     LowRL_V = Label(AOORPage, text = LowRL, font =(None,12))
     AtrialAmp_V = Label(AOORPage, text = AtrAmp, font =(None,12))
@@ -253,13 +268,14 @@ def openAOOR():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [1,0,0,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
+            params = [1,0,0,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,1,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
             
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -275,22 +291,24 @@ def openAOOR():
             LowRL_V.config(text = "Invalid Value")
         
     def changeAtrAmp():
+        global AtrAmp
         try:
             #check variable range
             AtrAmp = float(AtrialAmp_E.get())
-            if (AtrAmp < 0.5):
+            if (AtrAmp < 0):
                 AtrialAmp_V.config(text = "Value too low")
-            elif (AtrAmp > 7.0):
+            elif (AtrAmp > 5.0):
                 AtrialAmp_V.config(text = "Value too high")
             else:
                 AtrialAmp_V.config(text = AtrAmp)
                 #write to file
-                AtrAmp = AtrAmp*10
+                AtrAmp = AtrAmp
                 set_params()
         except:
             AtrialAmp_V.config(text = "Invalid Value")
         
     def changeAtrPW():
+        global AtrPW
         try:
             #check variable range
             AtrPW = int(AtrialPW_E.get())
@@ -306,6 +324,7 @@ def openAOOR():
             AtrialPW_V.config(text = "Invalid Value")
     
     def changemaxSensorRate():
+        global MaxSR
         try:
             #check variable range
             MaxSR = int(maxSensorRate_E.get())
@@ -321,12 +340,13 @@ def openAOOR():
             maxSensorRate_V.config(text = "Invalid Value")
     
     def changereactTime():
+        global ReacTime
         try:
             #check variable range
             ReacTime = int(reactTime_E.get())
-            if (ReacTime < 10):
+            if (ReacTime < 0):
                 reactTime_V.config(text = "Value too low")
-            elif (ReacTime > 50):
+            elif (ReacTime > 100):
                 reactTime_V.config(text = "Value too high")
             else:
                 reactTime_V.config(text = ReacTime)
@@ -336,6 +356,7 @@ def openAOOR():
             reactTime_V.config(text = "Invalid Value")
 
     def changerespFactor():
+        global RespF
         try:
             #check variable range
             RespF = int(respFactor_E.get())
@@ -351,12 +372,13 @@ def openAOOR():
             respFactor_V.config(text = "Invalid Value")
     
     def changerecoveryTime():
+        global RecTime
         try:
             #check variable range
             RecTime = int(recoveryTime_E.get())
-            if (RecTime < 2):
+            if (RecTime < 0):
                 recoveryTime_V.config(text = "Value too low")
-            elif (RecTime > 16):
+            elif (RecTime > 100):
                 recoveryTime_V.config(text = "Value too high")
             else:
                 recoveryTime_V.config(text = RecTime)
