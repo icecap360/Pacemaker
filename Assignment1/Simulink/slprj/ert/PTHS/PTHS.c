@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.32
+ * Model version                  : 1.33
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:33:32 2020
+ * C/C++ source code generated on : Fri Dec  4 00:38:30 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -85,17 +85,18 @@ static void PTHS_NON_DUAL_MODES(const uint16_T *DataTypeConversion8, const
   uint16_T *rtu_VRP, const uint16_T *rtu_ARP, const uint16_T
   *rtu_Hysterisis_Escape_Interval, boolean_T *rty_Trigger, B_PTHS_c_T *localB,
   DW_PTHS_f_T *localDW);
-static void SystemCore_relea_mt2c4ipiyh1ick(const freedomk64f_DigitalRead_PTHS_T
+static void SystemCore_release_mt2c4ipiyh1i(const freedomk64f_DigitalRead_PTHS_T
   *obj);
-static void SystemCore_delet_asmvpfiv4fd5cz(const freedomk64f_DigitalRead_PTHS_T
+static void SystemCore_delete_asmvpfiv4fd5(const freedomk64f_DigitalRead_PTHS_T *
+  obj);
+static void matlabCodegenHandl_goquh1bjkbkt(freedomk64f_DigitalRead_PTHS_T *obj);
+static void PTHS_SystemCore_release_mt(const freedomk64f_DigitalWrite_PTHS_T
   *obj);
-static void matlabCodegenHan_goquh1bjkbktkn(freedomk64f_DigitalRead_PTHS_T *obj);
-static void PTHS_SystemCore_release(const freedomk64f_DigitalWrite_PTHS_T *obj);
-static void PTHS_SystemCore_delete(const freedomk64f_DigitalWrite_PTHS_T *obj);
-static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_PTHS_T *obj);
-static void PTHS_SystemCore_release_mt(const freedomk64f_PWMOutput_PTHS_T *obj);
-static void PTHS_SystemCore_delete_as(const freedomk64f_PWMOutput_PTHS_T *obj);
-static void matlabCodegenHandle_matlabCo_go(freedomk64f_PWMOutput_PTHS_T *obj);
+static void PTHS_SystemCore_delete_as(const freedomk64f_DigitalWrite_PTHS_T *obj);
+static void matlabCodegenHandle_matlabCo_go(freedomk64f_DigitalWrite_PTHS_T *obj);
+static void PTHS_SystemCore_release(const freedomk64f_PWMOutput_PTHS_T *obj);
+static void PTHS_SystemCore_delete(const freedomk64f_PWMOutput_PTHS_T *obj);
+static void matlabCodegenHandle_matlabCodeg(freedomk64f_PWMOutput_PTHS_T *obj);
 
 /* Function for Chart: '<Root>/Chart1' */
 static void PTHS_NON_DUAL_MODES(const uint16_T *DataTypeConversion8, const
@@ -340,7 +341,7 @@ static void PTHS_NON_DUAL_MODES(const uint16_T *DataTypeConversion8, const
   }
 }
 
-static void SystemCore_relea_mt2c4ipiyh1ick(const freedomk64f_DigitalRead_PTHS_T
+static void SystemCore_release_mt2c4ipiyh1i(const freedomk64f_DigitalRead_PTHS_T
   *obj)
 {
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
@@ -348,41 +349,42 @@ static void SystemCore_relea_mt2c4ipiyh1ick(const freedomk64f_DigitalRead_PTHS_T
   }
 }
 
-static void SystemCore_delet_asmvpfiv4fd5cz(const freedomk64f_DigitalRead_PTHS_T
-  *obj)
+static void SystemCore_delete_asmvpfiv4fd5(const freedomk64f_DigitalRead_PTHS_T *
+  obj)
 {
-  SystemCore_relea_mt2c4ipiyh1ick(obj);
+  SystemCore_release_mt2c4ipiyh1i(obj);
 }
 
-static void matlabCodegenHan_goquh1bjkbktkn(freedomk64f_DigitalRead_PTHS_T *obj)
+static void matlabCodegenHandl_goquh1bjkbkt(freedomk64f_DigitalRead_PTHS_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    SystemCore_delet_asmvpfiv4fd5cz(obj);
+    SystemCore_delete_asmvpfiv4fd5(obj);
   }
 }
 
-static void PTHS_SystemCore_release(const freedomk64f_DigitalWrite_PTHS_T *obj)
+static void PTHS_SystemCore_release_mt(const freedomk64f_DigitalWrite_PTHS_T
+  *obj)
 {
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
     MW_digitalIO_close(obj->MW_DIGITALIO_HANDLE);
   }
 }
 
-static void PTHS_SystemCore_delete(const freedomk64f_DigitalWrite_PTHS_T *obj)
+static void PTHS_SystemCore_delete_as(const freedomk64f_DigitalWrite_PTHS_T *obj)
 {
-  PTHS_SystemCore_release(obj);
+  PTHS_SystemCore_release_mt(obj);
 }
 
-static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_PTHS_T *obj)
+static void matlabCodegenHandle_matlabCo_go(freedomk64f_DigitalWrite_PTHS_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    PTHS_SystemCore_delete(obj);
+    PTHS_SystemCore_delete_as(obj);
   }
 }
 
-static void PTHS_SystemCore_release_mt(const freedomk64f_PWMOutput_PTHS_T *obj)
+static void PTHS_SystemCore_release(const freedomk64f_PWMOutput_PTHS_T *obj)
 {
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
     MW_PWM_Stop(obj->MW_PWM_HANDLE);
@@ -390,16 +392,16 @@ static void PTHS_SystemCore_release_mt(const freedomk64f_PWMOutput_PTHS_T *obj)
   }
 }
 
-static void PTHS_SystemCore_delete_as(const freedomk64f_PWMOutput_PTHS_T *obj)
+static void PTHS_SystemCore_delete(const freedomk64f_PWMOutput_PTHS_T *obj)
 {
-  PTHS_SystemCore_release_mt(obj);
+  PTHS_SystemCore_release(obj);
 }
 
-static void matlabCodegenHandle_matlabCo_go(freedomk64f_PWMOutput_PTHS_T *obj)
+static void matlabCodegenHandle_matlabCodeg(freedomk64f_PWMOutput_PTHS_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    PTHS_SystemCore_delete_as(obj);
+    PTHS_SystemCore_delete(obj);
   }
 }
 
@@ -573,28 +575,6 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   obj_1->MW_PWM_HANDLE = MW_PWM_Open(3U, 2000.0, 0.0);
   MW_PWM_Start(localDW->obj_ds.MW_PWM_HANDLE);
   localDW->obj_ds.isSetupComplete = true;
-
-  /* Start for MATLABSystem: '<Root>/Digital Write' */
-  localDW->obj_i.matlabCodegenIsDeleted = true;
-  localDW->obj_i.isInitialized = 0;
-  localDW->obj_i.matlabCodegenIsDeleted = false;
-  localDW->objisempty_c = true;
-  obj_0 = &localDW->obj_i;
-  localDW->obj_i.isSetupComplete = false;
-  localDW->obj_i.isInitialized = 1;
-  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(42U, 1);
-  localDW->obj_i.isSetupComplete = true;
-
-  /* Start for MATLABSystem: '<Root>/Digital Write1' */
-  localDW->obj_ez.matlabCodegenIsDeleted = true;
-  localDW->obj_ez.isInitialized = 0;
-  localDW->obj_ez.matlabCodegenIsDeleted = false;
-  localDW->objisempty_k = true;
-  obj_0 = &localDW->obj_ez;
-  localDW->obj_ez.isSetupComplete = false;
-  localDW->obj_ez.isInitialized = 1;
-  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(44U, 1);
-  localDW->obj_ez.isSetupComplete = true;
 }
 
 /* Output and update for referenced model: 'PTHS' */
@@ -918,64 +898,52 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
   /* MATLABSystem: '<S3>/PWM Output3' */
   MW_PWM_SetDutyCycle(localDW->obj_ds.MW_PWM_HANDLE, (real_T)
                       localB->VENT_CMP_REF_PWM);
-
-  /* MATLABSystem: '<Root>/Digital Write' */
-  MW_digitalIO_write(localDW->obj_i.MW_DIGITALIO_HANDLE, false);
-
-  /* MATLABSystem: '<Root>/Digital Write1' */
-  MW_digitalIO_write(localDW->obj_ez.MW_DIGITALIO_HANDLE, false);
 }
 
 /* Termination for referenced model: 'PTHS' */
 void PTHS_Term(DW_PTHS_f_T *localDW)
 {
   /* Terminate for MATLABSystem: '<S3>/Digital Read' */
-  matlabCodegenHan_goquh1bjkbktkn(&localDW->obj);
+  matlabCodegenHandl_goquh1bjkbkt(&localDW->obj);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Read1' */
-  matlabCodegenHan_goquh1bjkbktkn(&localDW->obj_k);
+  matlabCodegenHandl_goquh1bjkbkt(&localDW->obj_k);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write2' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_h);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_h);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write3' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_b);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_b);
 
   /* Terminate for MATLABSystem: '<S3>/PWM Output1' */
-  matlabCodegenHandle_matlabCo_go(&localDW->obj_j);
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_j);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write8' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_a);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_a);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write4' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_m);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_m);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write5' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_e);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_e);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write6' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_d);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_d);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write7' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_bs);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_bs);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write9' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_aq);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_aq);
 
   /* Terminate for MATLABSystem: '<S3>/Digital Write1' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_p);
+  matlabCodegenHandle_matlabCo_go(&localDW->obj_p);
 
   /* Terminate for MATLABSystem: '<S3>/PWM Output2' */
-  matlabCodegenHandle_matlabCo_go(&localDW->obj_bg);
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_bg);
 
   /* Terminate for MATLABSystem: '<S3>/PWM Output3' */
-  matlabCodegenHandle_matlabCo_go(&localDW->obj_ds);
-
-  /* Terminate for MATLABSystem: '<Root>/Digital Write' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_i);
-
-  /* Terminate for MATLABSystem: '<Root>/Digital Write1' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_ez);
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_ds);
 }
 
 /* Model initialize function */

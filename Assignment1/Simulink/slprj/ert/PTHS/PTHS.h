@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.32
+ * Model version                  : 1.33
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:33:32 2020
+ * C/C++ source code generated on : Fri Dec  4 00:38:30 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -23,8 +23,8 @@
 #ifndef PTHS_COMMON_INCLUDES_
 # define PTHS_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#include "MW_digitalIO.h"
 #include "MW_PWM.h"
+#include "MW_digitalIO.h"
 #endif                                 /* PTHS_COMMON_INCLUDES_ */
 
 #include "PTHS_types.h"
@@ -61,8 +61,6 @@ typedef struct {
   freedomk64f_DigitalWrite_PTHS_T obj_bs;/* '<S3>/Digital Write7' */
   freedomk64f_DigitalWrite_PTHS_T obj_aq;/* '<S3>/Digital Write9' */
   freedomk64f_DigitalWrite_PTHS_T obj_p;/* '<S3>/Digital Write1' */
-  freedomk64f_DigitalWrite_PTHS_T obj_i;/* '<Root>/Digital Write' */
-  freedomk64f_DigitalWrite_PTHS_T obj_ez;/* '<Root>/Digital Write1' */
   freedomk64f_PWMOutput_PTHS_T obj_j;  /* '<S3>/PWM Output1' */
   freedomk64f_PWMOutput_PTHS_T obj_bg; /* '<S3>/PWM Output2' */
   freedomk64f_PWMOutput_PTHS_T obj_ds; /* '<S3>/PWM Output3' */
@@ -93,8 +91,6 @@ typedef struct {
   boolean_T objisempty_f;              /* '<S3>/PWM Output3' */
   boolean_T HIGH;                      /* '<Root>/Chart1' */
   boolean_T LOW;                       /* '<Root>/Chart1' */
-  boolean_T objisempty_c;              /* '<Root>/Digital Write' */
-  boolean_T objisempty_k;              /* '<Root>/Digital Write1' */
 } DW_PTHS_f_T;
 
 /* Parameters (default storage) */

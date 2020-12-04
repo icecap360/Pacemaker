@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.32
+ * Model version                  : 1.33
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:33:32 2020
+ * C/C++ source code generated on : Fri Dec  4 00:38:30 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -42,27 +42,6 @@ typedef struct tag_bvK2L41g8z1P0jzpdjsJhE b_freedomk64f_Hardware_PTHS_T;
 
 #endif                                 /*typedef_b_freedomk64f_Hardware_PTHS_T*/
 
-#ifndef struct_tag_62aCTDKRGQaAsT8vVipI2D
-#define struct_tag_62aCTDKRGQaAsT8vVipI2D
-
-struct tag_62aCTDKRGQaAsT8vVipI2D
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_freedomk64f_Hardware_PTHS_T Hw;
-  MW_Handle_Type MW_DIGITALIO_HANDLE;
-};
-
-#endif                                 /*struct_tag_62aCTDKRGQaAsT8vVipI2D*/
-
-#ifndef typedef_freedomk64f_DigitalWrite_PTHS_T
-#define typedef_freedomk64f_DigitalWrite_PTHS_T
-
-typedef struct tag_62aCTDKRGQaAsT8vVipI2D freedomk64f_DigitalWrite_PTHS_T;
-
-#endif                               /*typedef_freedomk64f_DigitalWrite_PTHS_T*/
-
 #ifndef struct_tag_asB9FwAteE1VObOuq1LwyE
 #define struct_tag_asB9FwAteE1VObOuq1LwyE
 
@@ -83,6 +62,27 @@ struct tag_asB9FwAteE1VObOuq1LwyE
 typedef struct tag_asB9FwAteE1VObOuq1LwyE freedomk64f_PWMOutput_PTHS_T;
 
 #endif                                 /*typedef_freedomk64f_PWMOutput_PTHS_T*/
+
+#ifndef struct_tag_62aCTDKRGQaAsT8vVipI2D
+#define struct_tag_62aCTDKRGQaAsT8vVipI2D
+
+struct tag_62aCTDKRGQaAsT8vVipI2D
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  b_freedomk64f_Hardware_PTHS_T Hw;
+  MW_Handle_Type MW_DIGITALIO_HANDLE;
+};
+
+#endif                                 /*struct_tag_62aCTDKRGQaAsT8vVipI2D*/
+
+#ifndef typedef_freedomk64f_DigitalWrite_PTHS_T
+#define typedef_freedomk64f_DigitalWrite_PTHS_T
+
+typedef struct tag_62aCTDKRGQaAsT8vVipI2D freedomk64f_DigitalWrite_PTHS_T;
+
+#endif                               /*typedef_freedomk64f_DigitalWrite_PTHS_T*/
 
 #ifndef struct_tag_gY1zYXXyNHJpvdqiHJr34G
 #define struct_tag_gY1zYXXyNHJpvdqiHJr34G
