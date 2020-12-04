@@ -389,7 +389,7 @@ def openDOO():
     AtrialPW_B = Button(DOOPage, text="Update", command=changeAtrPW)
     VentAmp_B = Button(DOOPage, text="Update", command=changeVentAmp)
     VentPW_B = Button(DOOPage, text="Update", command=changeVentPW)
-     AVDelay_B= Button(DOOPage, text= "Update", command= changeAVDelay)
+    AVDelay_B= Button(DOOPage, text= "Update", command= changeAVDelay)
 
     # Organize objects
     DOOPageLabel.grid(row= 1, column= 1)
