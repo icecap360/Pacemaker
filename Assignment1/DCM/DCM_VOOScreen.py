@@ -25,6 +25,21 @@ AVDelay=0
 
 def openVOO():
     global AVDelay
+    global VentAmp
+    global VentPW
+    global VentSens
+    global AtrAmp
+    global AtrPW
+    global AtrSens
+    global Hyst
+    global LowRL
+    global VRP
+    global ARP
+    global HEI
+    global MaxSR
+    global ReacTime
+    global RespF
+    global RecTime
     #read all params
     #MCP
     r1 = False
@@ -73,7 +88,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==5):
-            VentPW = data[1]//(100/30)
+            VentPW = data[1]
             r1 = True
 
     #VentSens
@@ -103,7 +118,7 @@ def openVOO():
         read_params8(2)
         data = read_params8(2)
         if (data[0]==8):
-            AtrPW = data[1]//(100/30)
+            AtrPW = data[1]
             r1 = True
 
     #AtrSens
@@ -246,13 +261,14 @@ def openVOO():
     # Button Functions
     def set_params():
         with serial.Serial(port=port_name, baudrate=baudrate) as device:	
-            params = [2,0,0,int(VentAmp*20),int(VentPW*(100/30)),int(VentSens*20),int(AtrAmp*20),int(AtrPW*(100/30)),int(AtrSens*20),Hyst,LowRL,AVDelay,VRP,ARP,HEI,MaxSR,0,ReacTime,RespF,RecTime]
+            params = [2,0,0,int(VentAmp*20),int(VentPW),int(VentSens*20),int(AtrAmp*20),int(AtrPW),int(AtrSens*20),Hyst,60000//LowRL,AVDelay,VRP,ARP,HEI,MaxSR,0,ReacTime,RespF,RecTime]
             #params = struct.pack("<"+"BBB"+"fBf"*2+"B"+"H"*5, *params)
             params = struct.pack("<"+"B"*10+"H"*5+"B"*5, *params)
             dat = serial.to_bytes([test_code, set_code]) + params
             bytes_written = device.write(dat)
             
     def changeLowRL():
+        global LowRL
         try:
             #check variable range
             LowRL = int(LowRL_E.get())
@@ -267,21 +283,23 @@ def openVOO():
             LowRL_V.config(text = "Invalid Value")
         
     def changeVentAmp():
+        global VentAmp
         try:
             #check variable range
             VentAmp = float(VentAmp_E.get())
-            if (VentAmp < 0.5):
+            if (VentAmp < 0):
                 VentAmp_V.config(text = "Value too low")
-            elif (VentAmp > 7.0):
+            elif (VentAmp >5.0):
                 VentAmp_V.config(text = "Value too high")
             else:
                 VentAmp_V.config(text = VentAmp)
-                VentAmp = VentAmp*10
+                VentAmp = VentAmp
                 set_params()
         except:
             VentAmp_V.config(text = "Invalid Value")
             
     def changeVentPW():
+        global VentPW
         try:
             #check variable range
             VentPW = int(VentPW_E.get())
