@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.30
+ * Model version                  : 1.32
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:02:01 2020
+ * C/C++ source code generated on : Fri Dec  4 00:33:32 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -23,11 +23,10 @@
 /* Named constants for Chart: '<Root>/Chart' */
 #define PTHS_IN_Constant               ((uint8_T)1U)
 #define PTHS_IN_Decreasing             ((uint8_T)2U)
-#define PTHS_IN_INITIAL                ((uint8_T)3U)
-#define PTHS_IN_Increasing             ((uint8_T)4U)
+#define PTHS_IN_Increasing             ((uint8_T)3U)
 #define PTHS_IN_NO_ACTIVE_CHILD        ((uint8_T)0U)
-#define PTHS_IN_main                   ((uint8_T)5U)
-#define PTHS_IN_start                  ((uint8_T)6U)
+#define PTHS_IN_main                   ((uint8_T)4U)
+#define PTHS_IN_start                  ((uint8_T)5U)
 
 /* Named constants for Chart: '<Root>/Chart1' */
 #define IN_Discharging_C21_and_Pace_Int ((uint8_T)7U)
@@ -86,14 +85,14 @@ static void PTHS_NON_DUAL_MODES(const uint16_T *DataTypeConversion8, const
   uint16_T *rtu_VRP, const uint16_T *rtu_ARP, const uint16_T
   *rtu_Hysterisis_Escape_Interval, boolean_T *rty_Trigger, B_PTHS_c_T *localB,
   DW_PTHS_f_T *localDW);
-static void PTHS_SystemCore_release(const freedomk64f_DigitalWrite_PTHS_T *obj);
-static void PTHS_SystemCore_delete(const freedomk64f_DigitalWrite_PTHS_T *obj);
-static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_PTHS_T *obj);
 static void SystemCore_relea_mt2c4ipiyh1ick(const freedomk64f_DigitalRead_PTHS_T
   *obj);
 static void SystemCore_delet_asmvpfiv4fd5cz(const freedomk64f_DigitalRead_PTHS_T
   *obj);
 static void matlabCodegenHan_goquh1bjkbktkn(freedomk64f_DigitalRead_PTHS_T *obj);
+static void PTHS_SystemCore_release(const freedomk64f_DigitalWrite_PTHS_T *obj);
+static void PTHS_SystemCore_delete(const freedomk64f_DigitalWrite_PTHS_T *obj);
+static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_PTHS_T *obj);
 static void PTHS_SystemCore_release_mt(const freedomk64f_PWMOutput_PTHS_T *obj);
 static void PTHS_SystemCore_delete_as(const freedomk64f_PWMOutput_PTHS_T *obj);
 static void matlabCodegenHandle_matlabCo_go(freedomk64f_PWMOutput_PTHS_T *obj);
@@ -341,26 +340,6 @@ static void PTHS_NON_DUAL_MODES(const uint16_T *DataTypeConversion8, const
   }
 }
 
-static void PTHS_SystemCore_release(const freedomk64f_DigitalWrite_PTHS_T *obj)
-{
-  if ((obj->isInitialized == 1) && obj->isSetupComplete) {
-    MW_digitalIO_close(obj->MW_DIGITALIO_HANDLE);
-  }
-}
-
-static void PTHS_SystemCore_delete(const freedomk64f_DigitalWrite_PTHS_T *obj)
-{
-  PTHS_SystemCore_release(obj);
-}
-
-static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_PTHS_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-    PTHS_SystemCore_delete(obj);
-  }
-}
-
 static void SystemCore_relea_mt2c4ipiyh1ick(const freedomk64f_DigitalRead_PTHS_T
   *obj)
 {
@@ -380,6 +359,26 @@ static void matlabCodegenHan_goquh1bjkbktkn(freedomk64f_DigitalRead_PTHS_T *obj)
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
     SystemCore_delet_asmvpfiv4fd5cz(obj);
+  }
+}
+
+static void PTHS_SystemCore_release(const freedomk64f_DigitalWrite_PTHS_T *obj)
+{
+  if ((obj->isInitialized == 1) && obj->isSetupComplete) {
+    MW_digitalIO_close(obj->MW_DIGITALIO_HANDLE);
+  }
+}
+
+static void PTHS_SystemCore_delete(const freedomk64f_DigitalWrite_PTHS_T *obj)
+{
+  PTHS_SystemCore_release(obj);
+}
+
+static void matlabCodegenHandle_matlabCodeg(freedomk64f_DigitalWrite_PTHS_T *obj)
+{
+  if (!obj->matlabCodegenIsDeleted) {
+    obj->matlabCodegenIsDeleted = true;
+    PTHS_SystemCore_delete(obj);
   }
 }
 
@@ -407,34 +406,12 @@ static void matlabCodegenHandle_matlabCo_go(freedomk64f_PWMOutput_PTHS_T *obj)
 /* System initialize for referenced model: 'PTHS' */
 void PTHS_Init(DW_PTHS_f_T *localDW)
 {
-  freedomk64f_DigitalWrite_PTHS_T *obj;
-  freedomk64f_DigitalRead_PTHS_T *obj_0;
+  freedomk64f_DigitalRead_PTHS_T *obj;
+  freedomk64f_DigitalWrite_PTHS_T *obj_0;
   freedomk64f_PWMOutput_PTHS_T *obj_1;
 
   /* SystemInitialize for Chart: '<Root>/Chart1' */
   localDW->HIGH = true;
-
-  /* Start for MATLABSystem: '<Root>/Digital Write' */
-  localDW->obj_i.matlabCodegenIsDeleted = true;
-  localDW->obj_i.isInitialized = 0;
-  localDW->obj_i.matlabCodegenIsDeleted = false;
-  localDW->objisempty_c = true;
-  obj = &localDW->obj_i;
-  localDW->obj_i.isSetupComplete = false;
-  localDW->obj_i.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(42U, 1);
-  localDW->obj_i.isSetupComplete = true;
-
-  /* Start for MATLABSystem: '<Root>/Digital Write1' */
-  localDW->obj_ez.matlabCodegenIsDeleted = true;
-  localDW->obj_ez.isInitialized = 0;
-  localDW->obj_ez.matlabCodegenIsDeleted = false;
-  localDW->objisempty_k = true;
-  obj = &localDW->obj_ez;
-  localDW->obj_ez.isSetupComplete = false;
-  localDW->obj_ez.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(44U, 1);
-  localDW->obj_ez.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Read' */
   localDW->obj.matlabCodegenIsDeleted = true;
@@ -443,10 +420,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj.matlabCodegenIsDeleted = false;
   localDW->objisempty = true;
   localDW->obj.SampleTime = PTHS_P.DigitalRead_SampleTime;
-  obj_0 = &localDW->obj;
+  obj = &localDW->obj;
   localDW->obj.isSetupComplete = false;
   localDW->obj.isInitialized = 1;
-  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(0U, 0);
+  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(0U, 0);
   localDW->obj.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Read1' */
@@ -456,10 +433,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_k.matlabCodegenIsDeleted = false;
   localDW->objisempty_d = true;
   localDW->obj_k.SampleTime = PTHS_P.DigitalRead1_SampleTime;
-  obj_0 = &localDW->obj_k;
+  obj = &localDW->obj_k;
   localDW->obj_k.isSetupComplete = false;
   localDW->obj_k.isInitialized = 1;
-  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(1U, 0);
+  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(1U, 0);
   localDW->obj_k.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write2' */
@@ -467,10 +444,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_h.isInitialized = 0;
   localDW->obj_h.matlabCodegenIsDeleted = false;
   localDW->objisempty_i = true;
-  obj = &localDW->obj_h;
+  obj_0 = &localDW->obj_h;
   localDW->obj_h.isSetupComplete = false;
   localDW->obj_h.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(2U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(2U, 1);
   localDW->obj_h.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write3' */
@@ -478,10 +455,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_b.isInitialized = 0;
   localDW->obj_b.matlabCodegenIsDeleted = false;
   localDW->objisempty_o = true;
-  obj = &localDW->obj_b;
+  obj_0 = &localDW->obj_b;
   localDW->obj_b.isSetupComplete = false;
   localDW->obj_b.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(10U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(10U, 1);
   localDW->obj_b.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/PWM Output1' */
@@ -501,10 +478,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_a.isInitialized = 0;
   localDW->obj_a.matlabCodegenIsDeleted = false;
   localDW->objisempty_n = true;
-  obj = &localDW->obj_a;
+  obj_0 = &localDW->obj_a;
   localDW->obj_a.isSetupComplete = false;
   localDW->obj_a.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(9U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(9U, 1);
   localDW->obj_a.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write4' */
@@ -512,10 +489,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_m.isInitialized = 0;
   localDW->obj_m.matlabCodegenIsDeleted = false;
   localDW->objisempty_b = true;
-  obj = &localDW->obj_m;
+  obj_0 = &localDW->obj_m;
   localDW->obj_m.isSetupComplete = false;
   localDW->obj_m.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(8U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(8U, 1);
   localDW->obj_m.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write5' */
@@ -523,10 +500,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_e.isInitialized = 0;
   localDW->obj_e.matlabCodegenIsDeleted = false;
   localDW->objisempty_g = true;
-  obj = &localDW->obj_e;
+  obj_0 = &localDW->obj_e;
   localDW->obj_e.isSetupComplete = false;
   localDW->obj_e.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(11U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(11U, 1);
   localDW->obj_e.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write6' */
@@ -534,10 +511,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_d.isInitialized = 0;
   localDW->obj_d.matlabCodegenIsDeleted = false;
   localDW->objisempty_a = true;
-  obj = &localDW->obj_d;
+  obj_0 = &localDW->obj_d;
   localDW->obj_d.isSetupComplete = false;
   localDW->obj_d.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(4U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(4U, 1);
   localDW->obj_d.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write7' */
@@ -545,10 +522,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_bs.isInitialized = 0;
   localDW->obj_bs.matlabCodegenIsDeleted = false;
   localDW->objisempty_l = true;
-  obj = &localDW->obj_bs;
+  obj_0 = &localDW->obj_bs;
   localDW->obj_bs.isSetupComplete = false;
   localDW->obj_bs.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(7U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(7U, 1);
   localDW->obj_bs.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write9' */
@@ -556,10 +533,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_aq.isInitialized = 0;
   localDW->obj_aq.matlabCodegenIsDeleted = false;
   localDW->objisempty_dn = true;
-  obj = &localDW->obj_aq;
+  obj_0 = &localDW->obj_aq;
   localDW->obj_aq.isSetupComplete = false;
   localDW->obj_aq.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(12U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(12U, 1);
   localDW->obj_aq.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/Digital Write1' */
@@ -567,10 +544,10 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   localDW->obj_p.isInitialized = 0;
   localDW->obj_p.matlabCodegenIsDeleted = false;
   localDW->objisempty_be = true;
-  obj = &localDW->obj_p;
+  obj_0 = &localDW->obj_p;
   localDW->obj_p.isSetupComplete = false;
   localDW->obj_p.isInitialized = 1;
-  obj->MW_DIGITALIO_HANDLE = MW_digitalIO_open(13U, 1);
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(13U, 1);
   localDW->obj_p.isSetupComplete = true;
 
   /* Start for MATLABSystem: '<S3>/PWM Output2' */
@@ -596,6 +573,28 @@ void PTHS_Init(DW_PTHS_f_T *localDW)
   obj_1->MW_PWM_HANDLE = MW_PWM_Open(3U, 2000.0, 0.0);
   MW_PWM_Start(localDW->obj_ds.MW_PWM_HANDLE);
   localDW->obj_ds.isSetupComplete = true;
+
+  /* Start for MATLABSystem: '<Root>/Digital Write' */
+  localDW->obj_i.matlabCodegenIsDeleted = true;
+  localDW->obj_i.isInitialized = 0;
+  localDW->obj_i.matlabCodegenIsDeleted = false;
+  localDW->objisempty_c = true;
+  obj_0 = &localDW->obj_i;
+  localDW->obj_i.isSetupComplete = false;
+  localDW->obj_i.isInitialized = 1;
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(42U, 1);
+  localDW->obj_i.isSetupComplete = true;
+
+  /* Start for MATLABSystem: '<Root>/Digital Write1' */
+  localDW->obj_ez.matlabCodegenIsDeleted = true;
+  localDW->obj_ez.isInitialized = 0;
+  localDW->obj_ez.matlabCodegenIsDeleted = false;
+  localDW->objisempty_k = true;
+  obj_0 = &localDW->obj_ez;
+  localDW->obj_ez.isSetupComplete = false;
+  localDW->obj_ez.isInitialized = 1;
+  obj_0->MW_DIGITALIO_HANDLE = MW_digitalIO_open(44U, 1);
+  localDW->obj_ez.isSetupComplete = true;
 }
 
 /* Output and update for referenced model: 'PTHS' */
@@ -638,19 +637,11 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
   if (localDW->is_active_c1_PTHS == 0U) {
     localDW->is_active_c1_PTHS = 1U;
     localDW->is_c1_PTHS = PTHS_IN_start;
-    localB->LED_BLUE = true;
   } else {
     switch (localDW->is_c1_PTHS) {
      case PTHS_IN_Constant:
       localDW->is_c1_PTHS = PTHS_IN_main;
       localDW->RateChange = *rtu_Response_Factor;
-      localB->LED_BLUE = false;
-      localB->LED_RED = false;
-      if (localB->LRL == 60.0) {
-        localB->LED_BLUE = true;
-        localB->LED_RED = true;
-      }
-
       if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
         localB->LRL = rtb_Divide1;
       }
@@ -664,13 +655,6 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
       if (localDW->temporalCounter_i1_i >= *rtu_Recovery_Time) {
         localDW->is_c1_PTHS = PTHS_IN_main;
         localDW->RateChange = *rtu_Response_Factor;
-        localB->LED_BLUE = false;
-        localB->LED_RED = false;
-        if (localB->LRL == 60.0) {
-          localB->LED_BLUE = true;
-          localB->LED_RED = true;
-        }
-
         if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
           localB->LRL = rtb_Divide1;
         }
@@ -681,23 +665,10 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
       }
       break;
 
-     case PTHS_IN_INITIAL:
-      localB->LRL = rtb_Divide1;
-      localB->LED_BLUE = true;
-      localB->LED_RED = true;
-      break;
-
      case PTHS_IN_Increasing:
       if (localDW->temporalCounter_i1_i >= *rtu_Reaction_Time) {
         localDW->is_c1_PTHS = PTHS_IN_main;
         localDW->RateChange = *rtu_Response_Factor;
-        localB->LED_BLUE = false;
-        localB->LED_RED = false;
-        if (localB->LRL == 60.0) {
-          localB->LED_BLUE = true;
-          localB->LED_RED = true;
-        }
-
         if ((rtb_Divide1 > localB->LRL) || rtIsNaN(localB->LRL)) {
           localB->LRL = rtb_Divide1;
         }
@@ -709,13 +680,13 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
       break;
 
      case PTHS_IN_main:
-      if ((*rtu_Mode_Adaptivity == 1) && (*rtu_Smoother_Acceleration < 1.1) &&
+      if ((*rtu_Mode_Adaptivity == 1) && (*rtu_Smoother_Acceleration < 1.5) &&
           (localB->LRL > rtb_Divide1)) {
         localDW->is_c1_PTHS = PTHS_IN_Decreasing;
         localDW->temporalCounter_i1_i = 0U;
         localB->LRL -= localDW->RateChange;
       } else if ((*rtu_Mode_Adaptivity == 1) && (*rtu_Smoother_Acceleration >
-                  1.1) && (localB->LRL < *rtu_Maximum_Sensor_Rate)) {
+                  1.5) && (localB->LRL < *rtu_Maximum_Sensor_Rate)) {
         localDW->is_c1_PTHS = PTHS_IN_Increasing;
         localDW->temporalCounter_i1_i = 0U;
         localB->LRL += localDW->RateChange;
@@ -723,7 +694,6 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
         if (*rtu_Mode_Adaptivity == 0) {
           localDW->is_c1_PTHS = PTHS_IN_Constant;
           localB->LRL = rtb_Divide1;
-          localB->LED_RED = true;
         }
       }
       break;
@@ -734,13 +704,6 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
         localB->LRL = rtb_Divide1;
         localDW->is_c1_PTHS = PTHS_IN_main;
         localDW->RateChange = *rtu_Response_Factor;
-        localB->LED_BLUE = false;
-        localB->LED_RED = false;
-        if (localB->LRL == 60.0) {
-          localB->LED_BLUE = true;
-          localB->LED_RED = true;
-        }
-
         if (!(localB->LRL < *rtu_Maximum_Sensor_Rate)) {
           localB->LRL = *rtu_Maximum_Sensor_Rate;
         }
@@ -750,12 +713,6 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
   }
 
   /* End of Chart: '<Root>/Chart' */
-
-  /* MATLABSystem: '<Root>/Digital Write' */
-  MW_digitalIO_write(localDW->obj_i.MW_DIGITALIO_HANDLE, localB->LED_RED);
-
-  /* MATLABSystem: '<Root>/Digital Write1' */
-  MW_digitalIO_write(localDW->obj_ez.MW_DIGITALIO_HANDLE, localB->LED_BLUE);
 
   /* DataTypeConversion: '<Root>/Data Type Conversion8' incorporates:
    *  Constant: '<Root>/Constant'
@@ -961,17 +918,17 @@ void PTHS(const uint8_T *rtu_Mode_Chamber_Paced, const uint8_T
   /* MATLABSystem: '<S3>/PWM Output3' */
   MW_PWM_SetDutyCycle(localDW->obj_ds.MW_PWM_HANDLE, (real_T)
                       localB->VENT_CMP_REF_PWM);
+
+  /* MATLABSystem: '<Root>/Digital Write' */
+  MW_digitalIO_write(localDW->obj_i.MW_DIGITALIO_HANDLE, false);
+
+  /* MATLABSystem: '<Root>/Digital Write1' */
+  MW_digitalIO_write(localDW->obj_ez.MW_DIGITALIO_HANDLE, false);
 }
 
 /* Termination for referenced model: 'PTHS' */
 void PTHS_Term(DW_PTHS_f_T *localDW)
 {
-  /* Terminate for MATLABSystem: '<Root>/Digital Write' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_i);
-
-  /* Terminate for MATLABSystem: '<Root>/Digital Write1' */
-  matlabCodegenHandle_matlabCodeg(&localDW->obj_ez);
-
   /* Terminate for MATLABSystem: '<S3>/Digital Read' */
   matlabCodegenHan_goquh1bjkbktkn(&localDW->obj);
 
@@ -1013,6 +970,12 @@ void PTHS_Term(DW_PTHS_f_T *localDW)
 
   /* Terminate for MATLABSystem: '<S3>/PWM Output3' */
   matlabCodegenHandle_matlabCo_go(&localDW->obj_ds);
+
+  /* Terminate for MATLABSystem: '<Root>/Digital Write' */
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_i);
+
+  /* Terminate for MATLABSystem: '<Root>/Digital Write1' */
+  matlabCodegenHandle_matlabCodeg(&localDW->obj_ez);
 }
 
 /* Model initialize function */

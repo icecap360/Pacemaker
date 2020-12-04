@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'PTHS'.
  *
- * Model version                  : 1.30
+ * Model version                  : 1.32
  * Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
- * C/C++ source code generated on : Fri Dec  4 00:02:01 2020
+ * C/C++ source code generated on : Fri Dec  4 00:33:32 2020
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -46,8 +46,6 @@ typedef struct {
   boolean_T Z_VENT_CTRL;               /* '<Root>/Chart1' */
   boolean_T VENT_GND_CTRL;             /* '<Root>/Chart1' */
   boolean_T FRONT_END_CTRL;            /* '<Root>/Chart1' */
-  boolean_T LED_RED;                   /* '<Root>/Chart' */
-  boolean_T LED_BLUE;                  /* '<Root>/Chart' */
 } B_PTHS_c_T;
 
 /* Block states (default storage) for model 'PTHS' */
