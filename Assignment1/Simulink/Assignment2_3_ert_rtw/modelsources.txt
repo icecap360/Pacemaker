@@ -1,2 +1,0 @@
-  Assignment2_3.c
-

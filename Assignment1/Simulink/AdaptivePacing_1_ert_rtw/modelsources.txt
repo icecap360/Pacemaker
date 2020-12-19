@@ -1,2 +1,0 @@
-  AdaptivePacing_1.c
-

@@ -1,2 +1,0 @@
-  Assignment2_4.c
-

@@ -1,5 +1,0 @@
-AdaptivePacing.o
-MW_I2C.o
-MW_digitalIO.o
-i2c_api.o
-mw_sdk_interface.o
