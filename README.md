@@ -10,5 +10,9 @@ As part of the course Software Engineering 3K04.
 
 ### Rate Adaptivity
 ![](GIFs/Rate_Adaptivity.gif)
+
+### Serial Communication
+![](https://j.gifs.com/zvL2K7.gif)
+
 ### User Interface
 ![](https://j.gifs.com/5QOq8Z.gif)
