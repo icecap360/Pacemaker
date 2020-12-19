@@ -6,5 +6,9 @@ As part of the course Software Engineering 3K04.
 ![](GIFs/DOO.gif)
 
 ### Response to Natural Heart Signals
-[![]()](https://www.youtube.com/watch?v=hAwAoqWnrqg)
-https://www.youtube.com/watch?v=hAwAoqWnrqg
+![](https://j.gifs.com/r8zQZw.gif)
+
+### Rate Adaptivity
+![](https://j.gifs.com/jZoGRz.gif)
+### User Interface
+![](https://j.gifs.com/r8zQZw.gif)
