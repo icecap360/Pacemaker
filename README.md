@@ -10,14 +10,6 @@ The pacemaker development station consisted of the FRDM-K64 microcontroller and 
 
 ![](GIFs/DOO.gif)
 
-### Technologies used
-
-* Simulink to develop the embbeded pacemaker software. Specifically simulink stateflows, the FRDM-K64 toolbox, subsystems, submodels and datstores. 
-* Python for the user interface
-* FRDM-K64 microcontroller
-* HeartView testing suite
-* 
-
 ### Rate Adaptivity
 
 Similar to a real heart, physical motion can be detected by the accelerometer and the heart rate is increased appropiately. 
@@ -38,3 +30,12 @@ We have implemented modes that can respond to natural heart paces from the patie
 ### User Interface
 The user interface contains multiple screens, login capability, and other features.
 ![](https://j.gifs.com/5QOq8Z.gif)
+
+### Technologies used
+
+* Simulink to develop the embbeded pacemaker software. Specifically simulink stateflows, the FRDM-K64 toolbox, subsystems, submodels and datstores. 
+* Python for the user interface
+* FRDM-K64 microcontroller
+* HeartView testing suite
+
+Model driven development was the process chosen for this project. Because this is a safety critical system particular importance was placed on software engineering principles, such as modularization, information hiding and formality. 
