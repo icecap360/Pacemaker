@@ -31,11 +31,15 @@ We have implemented modes that can respond to natural heart paces from the patie
 The user interface contains multiple screens, login capability, and other features.
 ![](https://j.gifs.com/5QOq8Z.gif)
 
-### Technologies used
+### Technologies and Design
 
 * Simulink to develop the embbeded pacemaker software. Specifically simulink stateflows, the FRDM-K64 toolbox, subsystems, submodels and datstores. 
 * Python for the user interface
 * FRDM-K64 microcontroller
 * HeartView testing suite
 
-Model driven development was the process chosen for this project. Because this is a safety critical system particular importance was placed on software engineering principles, such as modularization, information hiding and formality. 
+Model driven development was the process chosen for this project. Because this is a safety critical system particular importance was placed on software engineering principles such as modularization, information hiding, hardware hiding and formality. 
+
+![Full picture](GIFs/Full_Model.png)
+![Full picture](GIFs/Timing.png)
+![Full picture](GIFs/Sample_Stateflow.png)
