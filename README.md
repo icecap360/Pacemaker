@@ -11,4 +11,4 @@ As part of the course Software Engineering 3K04.
 ### Rate Adaptivity
 ![](GIFs/Rate_Adaptivity.gif)
 ### User Interface
-![](https://j.gifs.com/r8zQZw.gif)
+![](https://j.gifs.com/5QOq8Z.gif)
